@@ -26,9 +26,9 @@ CREATE DATABASE gruppo38
 DROP TABLE IF EXISTS utente cascade;
 CREATE TABLE utente(
 id serial PRIMARY KEY,
-username varchar(50),
-email varchar(25),
-password varchar(25)
+username varchar(255),
+email varchar(255),
+password varchar(255)
 );
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO www;
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO www;
