@@ -28,12 +28,14 @@ if (darkMode === 'active') {
     enableDarkMode();
 }
 
+//associamo al bottone la funzione per triggerare il reset delle scelte della form
 reset.addEventListener('click', () => {
     for(let i = 0; i < questionari.length; i++) {
         questionari[i].reset();
     }
 });
 
+//associamo al bottone la funzione per triggerare il reset delle scelte della form e segnalare che queste sono state salvate, anche se solo figuralmente
 submit.addEventListener('click', () => {
     for(let i = 0; i < questionari.length; i++) {
         questionari[i].reset();
