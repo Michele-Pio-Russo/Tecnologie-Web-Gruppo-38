@@ -1,6 +1,4 @@
-/* =========================================
-   1. RESET E IMPOSTAZIONI GLOBALI
-   ========================================= */
+/*impostazioni globali per scrollbar e logo della light mode*/
 :root
 {
     --sfondo: url('../imgs/Login/scuro.jpg');
@@ -10,11 +8,15 @@
     --colore-testo: white;
     --immagine-logo: url('../imgs/Logo/LogoViola.png');
 }
+
+/*stile generale*/
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+/*corpo del programma*/
 body
 {
     color:var(--colore-testo);
@@ -33,9 +35,7 @@ body
 
 
 
-/* =========================================
-   2. HEADER
-   ========================================= */
+/*stile per l'header*/
 .header {
     width: clamp(100px, 35vw, 100%);
     display: flex;
@@ -47,6 +47,7 @@ body
     margin-bottom: 50px;
 }
 
+/*stile per scritta e immagine del logo*/
 .logo {
     height: 100%;
     padding-left: 20px;
@@ -59,15 +60,16 @@ body
 }
 .immagine-logo
 {
-    background-image: var(--immagine-logo); /* Usa la variabile! */
+    background-image: var(--immagine-logo); 
     width: clamp(50px, 6vw, 70px); 
     height: clamp(50px, 6vw, 70px);  
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     display: inline-block;
-    /* transition: background-image 0.3s linear; */
 }
+
+/*stile per login, icona e hovering con cursore*/
 .login {
     display: flex;
     align-items: center;
@@ -89,11 +91,7 @@ body
 
 
 
-/* =========================================
-   3. FORM DI LOGIN/REGISTRAZIONE
-   ========================================= */
-
-
+/*stile per il form di login*/
 .login-form {
     text-align: center;
     display: flex;
@@ -112,13 +110,12 @@ body
     margin-bottom: 20px;
 }
 
-/* Modifica questa sezione nel tuo file log.css */
-
+/*stile per gli input del form di login*/
 .input {
-    position: relative; /* FONDAMENTALE: permette all'icona di posizionarsi rispetto a questo div */
+    position: relative; 
     margin-bottom: 15px;
     width: 100%;
-    height: clamp(40px, 6vh, 80px); /* Aumentato leggermente per visibilità */
+    height: clamp(40px, 6vh, 80px); 
     border: 1px solid #ccc;
     border-radius: 25px;
     display: flex;
@@ -126,6 +123,7 @@ body
     
 }
 
+/*stile per il testo all'interno degli input*/
 .input input {
     color:var(--colore-testo);
     width: 100%;
@@ -133,12 +131,13 @@ body
     border: none;
     outline: none;
     border-radius: 25px;
-    padding-left: 20px;     /* Spazio a sinistra per il testo */
-    padding-right: 50px;    /* Spazio a destra per non coprire l'icona */
+    padding-left: 20px;    
+    padding-right: 50px;    
     font-size: clamp(16px, 1.2vw, 24px);
     background: transparent;
 }
 
+/*stile per l'icona all'interno degli input*/
 .input img {
     position: absolute;
     right: 20px;
@@ -147,13 +146,15 @@ body
     width: clamp(20px, 1.7vw, 35px);
     height: auto;
     
-    pointer-events: none; /* Permette di cliccare attraverso l'icona */
+    pointer-events: none;
 }
 .input ::placeholder {
     font-size: clamp(20px, 1.7vw, 40px);
     padding-left: 10px;
     color: var(--colore-testo);
 }
+
+/*stile per il bottone di login*/
 .login-form button {
     width: 100%;
     height: clamp(40px, 6vh, 80px);
@@ -166,6 +167,8 @@ body
     transition: background-color 0.3s ease;
     margin-bottom:15px
 }
+
+/*stile per i link di registrazione e password dimenticata*/
 form a
 {
     text-decoration: none;
@@ -175,6 +178,8 @@ form a
     background: 2px solid transparent;
     border-radius: 25px;
 }
+
+/*hovering sui bottoni e link*/
 .login-form button:hover {
     background-color: #390F61;
 }
@@ -187,9 +192,7 @@ form a:hover {
 }
 
 
-/* =========================================
-   SPECIALE. TEMA CHIARO/SCURO
-   ========================================= */
+/*cambio tema chiaro/scuro*/
 .theme-icon {
     display: flex;
     align-items: center;
@@ -207,6 +210,8 @@ form a:hover {
     margin: 0;
     cursor: pointer;
 }
+
+/*impostazioni globali per scrollbar e logo della dark mode*/
 .dark-mode
 {
     --immagine-logo: url('../imgs/Logo/LogoArancione.png');
@@ -221,7 +226,7 @@ form a:hover {
 }
 }
 
-
+/*stile del cursore*/
 .theme-icon img {
     cursor: pointer;
 }
@@ -230,6 +235,8 @@ form a:hover {
     display: none;
 }
 
+
+/*stile della dark mode*/
 .dark-mode .theme-icon img:first-child {
     display: none;
 }

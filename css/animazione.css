@@ -266,7 +266,7 @@ hr {
     min-width: 60px;
     height: 100vh;
 
-    position: sticky; /* Sidebar fissa mentre scorri */
+    position: sticky; 
     
     top: 0;
     margin-right: 10px;
