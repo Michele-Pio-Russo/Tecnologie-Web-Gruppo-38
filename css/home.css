@@ -450,15 +450,6 @@ hr {
     100% { background-position: 0% 50%; }
 }
 
-/* =========================================
-   8. CLASSI DI UTILITÀ (CONTAINER)
-   ========================================= */
-.container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-}
-
 ::-webkit-scrollbar {
   width: 12px;               /* Larghezza della barra verticale */
   height: 12px;              /* Altezza della barra orizzontale */
