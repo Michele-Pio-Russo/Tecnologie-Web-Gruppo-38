@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>Tera ➔ SignUp</title>
+    <link rel="icon" href="../imgs/Logo/T.png" type="image/x-icon">
+    <meta name="description" content="Pagina di registrazione per nuovi utenti">
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../css/log.css" />
+    <script type="text/javascript" src="../js/sign.js" defer></script>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <div class="immagine-logo"></div>
+            <h1>TERA</h1>
+        </div>
+        <div class="login">
+            <div class="theme-icon" title="Cambia al tema Scuro">
+                <button id="theme-button">
+                    <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Chiaro"/>
+                    <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Scuro"/>
+                </button>
+        </div>
+            <a href="home.php" title="Vai alla pagina principale">
+            <img src="../imgs/Home/Icone/icons8-home-100.png"
+                alt="Immagine Home" class="home-icon" /></a>
+        </div>
+    </div>
+    <div class="login-form">
+        <h2>SIGN UP</h2>
+        <form action="../php/signup.php" method="POST" name="signup-form" onsubmit="return valida(this)">
+            <div class="input">
+                <input type="text" id="nome" name="nome" placeholder="Username" onchange="verifica(this)">
+                <img src="../imgs/Login/person.png" alt="email">
+            </div>
+            <div class="input">
+                <input type="email" id="email" name="email" placeholder="Email" >
+                <img src="../imgs/Login/mail.png" alt="email">
+            </div>
+            <div class="input">
+                <input type="password" id="password" name="password" placeholder="Password" >
+                <img src="../imgs/Login/key.png" alt="password">
+            </div>  
+            <button type="submit">Registrati</button>
+            <div class="question">
+                <p>Sei già registrato? <a href="login.html">Accedi qui</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

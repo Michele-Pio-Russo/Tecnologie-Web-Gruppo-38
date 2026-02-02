@@ -1,0 +1,450 @@
+/* =========================================
+   1. RESET E IMPOSTAZIONI GLOBALI
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(270deg, #5A2E0F, #7A3F16, #D96A1A, #7A3F16,     #5A2E0F);
+    background-size: 200% 100%;
+    animation: hoverEffect 3s ease-in-out infinite;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+/* Link normali nel contenuto */
+.content a{
+    color: #0F2A44 ; 
+}
+
+.content a:hover {
+    color: #2EC4B6;
+}
+
+.content2 a {
+   color: #63CFC7;
+}
+
+.content2 a:hover {
+    color: #9BE5DE; 
+}
+
+/* Link nella sidebar */
+.sidebar a {
+    color: #F2F6F3;
+    text-decoration: none;
+}
+
+/* Link nel footer */
+.footer a {
+    color: #F2F6F3;
+    text-decoration: none;
+}
+
+li {
+    list-style: disc;
+    margin-left: 15px;
+    padding: 3px;
+    font-size: 15px;
+    font-weight: bold;
+    justify-items: center;
+    align-items: center;
+    text-align: left;
+
+}
+
+.sectionlight {
+    background-color: #EDE2DA;
+    color: #1F1F24;
+}
+
+.sectiondark {
+    background-color: #2A160A;
+    color: #F2EDE9;
+}
+
+.figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.content hr {
+    height: 7px;
+    margin: 50px;
+    color: #2A160A;
+    background-color: #2A160A;
+}
+
+.content2 hr {
+    height: 7px;
+    margin: 50px;
+    color: #EDE2DA;
+    background-color: #EDE2DA;
+}
+/* =========================================
+   2. HEADER
+   ========================================= */
+.header {
+    display: flex;
+    background-color: #5A2E0F;
+    color: #fff;
+    padding: 20px 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    padding-left: 20px;
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.login {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-right: 20px;
+}
+
+.login-icon {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.login-icon:hover {
+    transform: scale(1.1);
+}
+
+/* =========================================
+   3. LAYOUT PRINCIPALE (GRID)
+   ========================================= */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr auto; /* Contenuto a sinistra, Sidebar a destra */
+    flex: 1;
+    gap: 20px;
+    align-items: start; /* Necessario per lo sticky */
+}
+
+/* =========================================
+   4. CONTENUTO CENTRALE (ARTICOLI)
+   ========================================= */
+.content {
+    width: 100%;
+    background-color: #EDE2DA;
+    padding-right: 40px;
+    padding-left: 20px;
+    gap: 40px; /* distanza tra blocchi */
+    border-radius: 5px;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    font-size: clamp(20px, 1.7vw, 40px);
+}
+
+.content2 {
+    width: 100%;
+    background-color: #2A160A;
+    padding: 40px 40px 20px 20px; /* più spazio in alto/basso */
+    gap: 40px; /* distanza tra blocchi */
+    border-radius: 5px;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    font-size: clamp(20px, 1.7vw, 40px);
+}
+
+
+/* --- Titoli H2 --- */
+.content h2, .content2 h2 {
+    margin-top: 100px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.content h2, .content2:first-child {
+    margin-top: 0;
+}
+
+/* --- Paragrafi --- */
+.content p, .content2 p {
+    width: 50%;
+}
+
+/* --- Elementi (Blocchi Immagine + Testo) --- */
+.element1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+
+.element2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: right;
+    margin-bottom: 0;
+}
+
+/* --- Immagini Articoli --- */
+.image1 {
+    width: clamp(100px, 25vw, 100%);
+    height: auto;
+    padding: 10px;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(1,1,1,0.5); /* Ombra per profondità */
+}
+
+.image2 {
+    width: clamp(100px, 35vw, 100%);
+    height: auto;
+    padding: 10px;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(1,1,1,0.5); /* Ombra per profondità */
+}
+
+/* =========================================
+   5. SIDEBAR E MENU
+   ========================================= */
+.sidebar {
+    background-color: #7A3F16;
+    color: linear-gradient(45deg, #7A3F16, #5A2E0F);
+    padding: 30px 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    width: auto;
+    min-width: 60px;
+    height: 100vh;
+
+    position: sticky; /* Sidebar fissa mentre scorri */
+    top: 0;
+}
+
+.sidebar:hover .menu {
+    width: 250px;
+    /* Espansione menu */
+}
+
+.sidebar:hover .menu a {
+    opacity: 1;
+    /* Mostra testo link */
+}
+
+/* --- Menu Container --- */
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-evenly;
+
+    width: 50px;
+    overflow: hidden;
+    transition: width 0.2s linear;
+}
+
+/* --- Menu Items --- */
+.menu .menu-itme {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.menu .menu-itme img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+/* --- Menu Links (Testo) --- */
+.menu .menu-itme a {
+    opacity: 0;
+    /* Nascosto di default */
+}
+
+.menu a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: clamp(12px, 2.5vw, 18px);
+    opacity: 0;
+
+    transition: background-color 0.3s ease,
+        color 0.3s ease,
+        border-radius 1s ease,
+        font-size 1s ease,
+        opacity 0.3s linear;
+}
+
+/* Hover sui Link (Effetto Arcobaleno) */
+.menu a:hover {
+    background: linear-gradient(90deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #9400D3, #FF0000);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    border: 1px solid #fff;
+    animation: hoverEffect 3s ease-in-out infinite;
+    border-radius: 30px;
+    font-size: 20px;
+    opacity: 1 !important;
+}
+
+/* =========================================
+   6. FOOTER
+   ========================================= */
+.footer {
+    display: flex;
+    flex-direction: column;
+    background-color: #5A2E0F;
+    box-shadow: 5px 5px 10px 2px #000000;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+}
+
+.footer p {
+    margin: 0;
+    animation: textFadeIn 5s linear forwards;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 20px;
+}
+
+/* --- Contatti Social --- */
+.contacts {
+    margin-top: 10px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 50px;
+}
+
+.contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease;
+}
+
+.footer img:hover {
+    transform: scale(1.1);
+}
+
+.footer a {
+    transition: color 0.5s ease-in-out;
+}
+
+/* Hover colori specifici Social */
+.whatsapp:hover a {
+    color: #25D366;
+}
+
+.instagram:hover a {
+    color: #E1306C;
+}
+
+.facebook:hover a {
+    color: #1877F2;
+}
+
+.telegram:hover a {
+    color: #24A1DE;
+}
+
+.discord:hover a {
+    color: #5865F2;
+}
+
+/* =========================================
+   7. ANIMAZIONI (KEYFRAMES)
+   ========================================= */
+@keyframes textFadeIn {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+
+    to {
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+@keyframes hoverEffect {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* =========================================
+   8. CLASSI DI UTILITÀ (CONTAINER)
+   ========================================= */
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 12px;               /* Larghezza della barra verticale */
+  height: 12px;              /* Altezza della barra orizzontale */
+}
+
+/* Ora i tuoi stili verranno applicati */
+::-webkit-scrollbar-track {
+  background: #5A2E0F; 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #FF7F11;
+  border-radius: 10px;
+}

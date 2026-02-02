@@ -1,0 +1,548 @@
+<?php session_start(); ?>
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <title>Tera ➔ Hip-Hop</title>
+    <!DOCTYPE html>
+    <html lang="it">
+    <link rel="icon" href="../imgs/Logo/T.png" type="image/x-icon">
+    <meta name="description" content="homepage">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/hip-hop.css" />
+    <script type="text/javascript" src="../js/index.js" defer></script>
+</head>
+
+<body>
+
+    <!-- ========================= -->
+    <!-- HEADER -->
+    <!-- ========================= -->
+    <div class="header">
+        <div class="logo">
+            <div class="immagine-logo"></div>
+            <h1>TERA</h1>
+        </div>
+        <div class="login">
+    <div class="theme-icon" title="Cambia al tema Scuro">
+        <button id="theme-button">
+            <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Chiaro" />
+            <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Scuro" />
+        </button>
+    </div>
+    <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
+        <p><?php echo htmlspecialchars($_SESSION['nome_utente']); ?></p>
+        <a href="../php/logout.php" title="Logout">
+            <img src="../imgs/Login/logout.png" alt="User" class="login-icon" />
+        </a>
+    <?php else: ?>
+        <p>Login</p>
+        <a href="login.html" title="Vai alla pagina di accesso">
+            <img src="../imgs/Home/login-logout-white-icon-11642597802btccm3uuci-removebg-preview.png"
+                 alt="Immagine Login" class="login-icon" />
+        </a>
+    <?php endif; ?>
+</div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- MAIN CONTENT -->
+    <!-- ========================= -->
+    <div class="main-content">
+        <div class="content-wrapper">
+            <!-- ========================= -->
+            <!-- CONTENT 1 - SEZIONE LIGHT -->
+            <!-- ========================= -->
+            <div class="content">
+                <div class="sectionlight">
+
+                    <!-- ------------------------- -->
+                    <!-- SEZIONE INTRO -->
+                    <!-- ------------------------- -->
+                    <br><br>
+
+                    <h2>La Voce che Nasce dal Margine</h2>
+
+                    <div class="element1">
+                        <figure>
+                            <img class="image1" src="../imgs/HipHop/hh3.jpg" alt="Errore di caricamento">
+                            <figcaption style="text-align: center;">L'hip-hop nasce per dare voce a chi non ha voce
+                            </figcaption>
+                        </figure>
+                        <p>
+                            È ormai noto che la musica sia una forma d'arte a tutti gli effetti.
+                            Ma cosa accade quando l'arte musicale diventa anche uno strumento di ricerca identitaria,
+                            di affermazione e di conquista del proprio spazio? L'hip-hop assume questo ruolo proprio
+                            perché
+                            nasce
+                            come linguaggio di necessità: una voce che emerge da contesti marginali per raccontare ciò
+                            che
+                            spesso resta invisibile.
+                        </p>
+                    </div>
+
+                    <br><br><br>
+                    <hr><br><br><br>
+
+                    <div class="element2">
+                        <figure>
+                            <img class="image2" src="../imgs/HipHop/hh2.jpg" alt="Errore di caricamento">
+                            <figcaption style="text-align: center;">Un movimento culturale che unisce</figcaption>
+                        </figure>
+                        <br>
+                        <p>
+                            Per comprendere questa forza espressiva è fondamentale chiarire una distinzione chiave:
+                            l'hip-hop non è un genere musicale, ma un movimento culturale. Nato nei quartieri popolari
+                            di
+                            New York negli anni '70,
+                            si sviluppa come un insieme di pratiche artistiche e sociali — DJing, breakdance,
+                            writing e rap — unite da un'esigenza comune: dare forma e dignità a una realtà esclusa dai
+                            canali ufficiali.
+                        </p>
+                    </div>
+
+                    <br><br><br>
+                    <hr><br><br><br>
+
+                    <div class="element1">
+                        <figure>
+                            <img class="image1" src="../imgs/HipHop/ritmoepoesia.jpg" alt="Errore di caricamento">
+                            <figcaption style="text-align: center;">Rap è un acronimo: Rhythm and Poetry</figcaption>
+                        </figure>
+                        <br>
+                        <p>
+                            Il rap, in questo contesto, è il linguaggio musicale dell'hip-hop.
+                            Non è costruito attorno alla melodia, ma alla parola. Ritmo e metrica diventano strumenti
+                            per
+                            rafforzare il messaggio,
+                            trasformando il racconto personale in testimonianza collettiva.
+                            È una musica che parla prima di suonare.
+                        </p>
+                    </div>
+
+                    <br><br><br>
+                    <hr><br><br><br>
+
+                    <div class="element2">
+                        <figure>
+                            <img class="image2" src="../imgs/HipHop/naytMood.jpg" alt="Mood">
+                            <figcaption style="text-align: center;">Mood, album di Nayt è uno dei molteplici esempi
+                            </figcaption>
+                        </figure>
+                        <p>
+                            Nel tempo, l'hip-hop si è trasformato in una costellazione di stili e sottogeneri.
+                            Questa evoluzione non nasce da un semplice gusto estetico, ma come risposta diretta
+                            a
+                            mutamenti
+                            sociali,
+                            culturali e storici. Ogni fase del rap riflette il contesto in cui prende forma:
+                            dalla lotta
+                            per
+                            i diritti civili, alla tensione delle periferie urbane,
+                            fino all'impatto dei media e dell'industria musicale.
+                        </p>
+                    </div>
+
+                    <br><br><br>
+                    <hr><br><br><br>
+
+                    <div class="element1">
+                        <figure>
+                            <img class="image1" src="../imgs/HipHop/hh100.jpg" alt="Errore di caricamento">
+                        </figure>
+                        <p>
+                            L'hip-hop cresce insieme alla sua comunità. Le sue trasformazioni raccontano
+                            aspirazioni,
+                            contraddizioni e condizioni di vita di chi lo produce, rendendolo una cronaca
+                            culturale in
+                            costante aggiornamento.
+                        </p>
+                    </div>
+
+                    <br><br><br>
+                    <br><br><br>
+
+                </div>
+            </div> <!-- END CONTENT 1 -->
+
+            <!-- ------------------------- -->
+            <!-- LE QUATTRO ARTI -->
+            <!-- ------------------------- -->
+            <div class="content2">
+                <div class="sectiondark">
+                    <h2>Le Quattro Discipline dell'Espressione</h2>
+                    <div class="element1">
+                        <figure>
+                            <img class="image1" src="../imgs/HipHop/hh200.jpg" alt="Errore di caricamento">
+                        </figure>
+                        <p>L'hip-hop si struttura come un linguaggio
+                            collettivo composto da quattro arti fondamentali, ognuna con una funzione specifica ma
+                            interconnessa
+                            alle altre.
+                    </div>
+                    </p>
+
+                    <br><br><br>
+                    <hr><br><br><br>
+
+                    <h3 style="text-align: right;">La Parola Ritmica (Rap / MCing)</h3>
+                    <div class="element2">
+                        <figure>
+                            <img class="image2" src="../imgs/HipHop/sara.jpg" alt="Sara Socas">
+                            <figcaption style="text-align: center;">Minuto in freestyle si una freestyler spagnola:
+                                SaraSocas</figcaption>
+                            <a href="https://youtu.be/o-YAFE5NkJU?si=WeVK3mZ4pPWKMdca" target="_blank">
+                                Clicca qui per aprire il video
+                            </a>
+
+                        </figure>
+                        <p>
+                            Il rap è l'arte della parola in movimento. La sua identità risiede nella capacità di dare
+                            voce a
+                            chi spesso non ne ha,
+                            trasformando l'esperienza individuale in racconto condiviso.
+                            Flow, metrica e contenuto non sono semplici tecniche, ma strumenti per rendere il messaggio
+                            centrale e incisivo.
+                        </p>
+                    </div>
+
+                    <br><br><br>
+                    <hr><br><br><br>
+
+                    <h3>L'Architetto del Suono (DJing)</h3>
+                    <div class="element1">
+                        <figure>
+                            <img class="image1" src="../imgs/HipHop/miles.jpg" alt="Young Miles">
+                            <figcaption style="text-align: center;">Young Miles improvvisa un dj set a One Take
+                            </figcaption>
+                            <a href="https://youtu.be/aHuZ99bcaCg?si=_1S34TDY7tVCiB6D" target="_blank">
+                                Clicca qui per aprire il video
+                            </a>
+                        </figure>
+                        <p>
+                            Il DJ rappresenta il cuore sonoro dell'hip-hop. Attraverso scratch, loop, sampling e
+                            mixaggio,
+                            costruisce lo spazio su cui gli altri possono esprimersi.
+                            È colui che trasforma la musica in ambiente, creando un paesaggio emotivo e ritmico che
+                            sostiene
+                            l'intero movimento.
+                        </p>
+                    </div>
+
+                    <br><br><br>
+                    <hr><br><br><br>
+
+                    <h3 style="text-align: right;">Il Corpo come Linguaggio (Breakdance)</h3>
+                    <div class="element2">
+                        <figure>
+                            <img class="image2" src="../imgs/HipHop/bc.jpg" alt="Errore di caricamento">
+                            <figcaption style="text-align: center;">Contest di breakdance targato RedBull </figcaption>
+                            <a href="https://www.youtube.com/live/IsEtCB2UlmM?si=ym82uY0eqOQnDlQN" target="_blank">
+                                Clicca qui per aprire il video
+                            </a>
+                        </figure>
+                        <p>
+                            La breakdance è l'arte del corpo in dialogo con il ritmo. Nata come forma di competizione e
+                            auto-affermazione,
+                            utilizza movimenti, freeze e power moves come un linguaggio non verbale.
+                            È l'espressione fisica dell'identità, della resistenza e dello stile personale.
+                        </p>
+                    </div>
+
+                    <br><br><br>
+                    <hr><br><br><br>
+
+                    <h3>Scrivere per Esistere (Writing)</h3>
+                    <div class="element1">
+                        <figure>
+                            <img class="image2" src="../imgs/HipHop/primo.jpg" alt="Graffito in memoria di Primo">
+                            <figcaption style="text-align: center;">Graffito in memoria di Primo Brown </figcaption>
+                            <a href="https://youtu.be/LDtmpf4LMF0?si=lmquzMvTT7hGainu" target="_blank">
+                                Clicca qui per aprire il video
+                            </a>
+                        </figure>
+                        <p>
+                            Il writing è la dimensione visiva dell'hip-hop. Nasce dal bisogno di lasciare un segno nello
+                            spazio urbano,
+                            di affermare la propria presenza in una città che spesso ignora chi la vive.
+                            Tag, murales e piece diventano atti di rivendicazione e creatività, un dialogo diretto con
+                            il territorio.
+                        </p>
+                    </div>
+
+                    <br><br><br>
+                    <hr><br><br><br>
+
+                    <h3 style="text-align: right;">Lo Spazio Urbano come Messaggio: il Caso Banksy</h3>
+                    <div class="element2">
+                        <figure>
+                            <img class="image2" src="../imgs/HipHop/ban1.jpg" alt="Ragazza con il Palloncino Rosso">
+                            <figcaption style="text-align: center;">Banksy: Ragazza con il Palloncino Rosso</figcaption>
+                        </figure>
+                        <p>
+                            In questa tradizione si inserisce anche Banksy, figura emblematica della street art
+                            contemporanea.
+                            Pur distinguendosi dal writing hip-hop per tecnica e linguaggio, ne eredita la spinta
+                            originaria:
+                            usare lo spazio urbano come mezzo di comunicazione non autorizzata e diretta.
+                        </p>
+                    </div>
+
+                    <br><br><br>
+                    <hr><br><br><br>
+
+                    <div class="element1">
+                        <figure>
+                            <img class="image2" src="../imgs/HipHop/ban2.png" alt="Il Lanciatore di Fiori">
+                            <figcaption style="text-align: center;">Banksy: Rabbia, il Lanciatore di Fiori</figcaption>
+                        </figure>
+                        <P>
+                            A differenza del writing classico, dove il nome dell'autore è centrale,
+                            Banksy sceglie l'anonimato. Non afferma l'ego, ma il messaggio. Il gesto, però,
+                            resta lo stesso: occupare lo spazio pubblico per rompere il silenzio e sovvertire l'ordine
+                            visivo imposto.
+
+                        </P>
+                    </div>
+
+                    <br><br><br>
+                    <hr><br><br><br>
+
+                    <h3 style="text-align: right;">Beatbox (la "quinta arte")</h3>
+                    <div class="element2">
+                        <figure>
+                            <img class="image2" src="../imgs/HipHop/bbox.jpg" alt="Battke di beatbox">
+                            <figcaption style="text-align: center;">Battle di beatbox</figcaption>
+                            <a href="https://youtu.be/5cGbMr7EBlE?si=pe1tT2Kq27J_ojz3" target="_blank">
+                                Clicca qui per aprire il video
+                            </a>
+                        </figure>
+                        <p>
+                            Accanto alle quattro arti storiche, il beatbox viene spesso considerato la
+                            "quinta arte" dell'hip-hop. È la forma più essenziale del movimento:
+                            nessuno strumento, solo il corpo come macchina sonora.
+                        </p>
+                    </div>
+
+                    <br><br><br>
+                    <hr><br><br><br>
+
+                    <div class="element1">
+                        <img class="image2" src="../imgs/HipHop/bb2.jpg" alt="Errore di caricamento">
+                        <P>
+                            Ritmo, imitazione delle percussioni e
+                            improvvisazione rendono il beatbox una dimostrazione pura del principio hip-hop:
+                            l'arte nasce dal talento e dalla presenza, non dalle risorse materiali.
+                        </P>
+                    </div>
+
+                    <br><br><br>
+                    <br><br><br>
+
+                </div>
+            </div> <!-- END CONTENT2 -->
+
+            <!-- ------------------------- -->
+            <!-- VESTIRE IDENTITÀ -->
+            <!-- ------------------------- -->
+            <div class="content">
+                <div class="sectionlight">
+                    <h2>Vestire un'Identità</h2>
+                    <div class="element1">
+                        <img class="image1" src="../imgs/HipHop/hh10.jpg" alt="Errore di caricamento">
+                        <p>
+                            L'hip-hop non comunica solo attraverso musica e movimento,
+                            ma anche tramite l'immagine. Il vestiario diventa un linguaggio non verbale,
+                            una dichiarazione di appartenenza e posizione sociale.
+                        </p>
+                    </div>
+
+                    <br><br><br>
+                    <hr><br><br><br>
+
+                    <div class="element2">
+                        <img class="image1" src="../imgs/HipHop/hh1.jpg" alt="Errore di caricamento">
+                        <P>
+                            Capi oversize, felpe con cappuccio, sneakers, jeans larghi, cappellini e accessori
+                            vistosi nascono da esigenze pratiche e dalla cultura di strada,
+                            ma assumono un valore simbolico. Il look hip-hop rende visibile una presenza spesso
+                            ignorata, comunicando forza, autonomia e creatività.
+                        </P>
+                    </div>
+
+                    <br><br><br>
+                    <hr><br><br><br>
+
+                    <h3>Quando l'Hip-Hop Diventa Linguaggio Totale</h3>
+                    <div class="element1">
+                        <figure>
+                            <img class="image1" src="../imgs/HipHop/Salmo.jpg" alt="Sparare alla Luna">
+                            <figcaption style="text-align: center;">Salmo & Coez: Sparare alla luna</figcaption>
+                            <a href="https://youtu.be/6H4j8svFD-A?si=tk08t1BtJPuJLRNa" target="_blank"
+                                style="text-align: center;">
+                                Clicca qui per aprire il video
+                            </a>
+                        </figure>
+
+                        <p>
+                            L'hip-hop è una cultura espansiva, capace di intrecciarsi con cinema, letteratura,
+                            illustrazione e performance.
+                            Nel cinema diventa narrazione visiva e testimonianza sociale; nei videoclip evolve
+                            in
+                            forma cinematografica,
+                            come dimostrano le produzioni di artisti come Salmo, capaci di fondere musica, regia
+                            e
+                            storytelling.
+                        </p>
+                    </div>
+
+                    <br><br><br>
+                    <hr><br><br><br>
+
+                    <div class="element2">
+                        <figure>
+                            <img class="image2" src="../imgs/HipHop/hh13.jpg" alt="Habitat Live">
+                            <figcaption style="text-align: center;">Nayt: Habitat Live</figcaption>
+                        </figure>
+                        <p>
+                            Nella scrittura, il rap dialoga con poesia e letteratura. In Italia, artisti come
+                            Murubutu,
+                            Rancore, Nayt e Mezzosangue utilizzano il testo rap come strumento narrativo,
+                            esplorando
+                            memoria, identità e conflitto interiore.
+                        </p>
+                    </div>
+
+                    <br><br><br>
+                    <hr><br><br><br>
+
+                    <div class="element1">
+                        <figure>
+                            <img class="image2" src="../imgs/HipHop/tyson.jpg" alt="Mic Tyson">
+                            <figcaption style="text-align: center;">Mic Tyson: "La champions league del freestyle"
+                            </figcaption>
+                        </figure>
+                        <p>
+                            Quando la produzione si estende a live complessi, serie, animazioni o eventi
+                            competitivi,
+                            l'hip-hop si afferma come linguaggio totale: un'esperienza che unisce suono,
+                            parola,
+                            immagine e
+                            corpo in un'unica forma espressiva.
+                        </p>
+                    </div>
+
+                    <br><br><br>
+                    <hr><br><br><br>
+
+                    <h3 style="text-align: right;">Ribellione come atto di esistenza</h3>
+                    <div class="element2">
+                        <img class="image2" src="../imgs/HipHop/hh00.jpg" alt="Errore di caricamento">
+                        <br>
+                        <p> L'hip-hop nasce come risposta diretta a condizioni di esclusione e marginalità.
+                            Non è solo musica, ma protesta e visibilità. Nei quartieri popolari di New York
+                            degli
+                            anni '70,
+                            diventa uno strumento per raccontare una realtà segnata da povertà,
+                            discriminazione
+                            e
+                            assenza di opportunità.
+                        </p>
+                    </div>
+
+                    <br><br><br>
+                    <hr><br><br><br>
+
+                    <div class="element1">
+                        <img class="image1" src="../imgs/HipHop/hh6.jpg" alt="Errore di caricamento">
+                        <br>
+                        <p>
+                            Il rap, in particolare, assume il ruolo di denuncia senza filtri. È una
+                            ribellione
+                            che
+                            non si limita all'estetica, ma si fa politica:
+                            rivendicare il diritto di esistere, di raccontarsi e di costruire un'identità,
+                            anche
+                            quando il sistema tenta di cancellarla.
+                        </p>
+                    </div>
+
+                    <br><br><br>
+
+                </div>
+            </div> <!-- END CONTENT 3 -->
+
+        </div> <!-- END CONTENT-WRAPPER -->
+
+        <!-- ========================= -->
+        <!-- SIDEBAR -->
+        <!-- ========================= -->
+        <div class="sidebar">
+            <nav class="menu">
+                <!-- voci menu -->
+                <div class="menu-itme">
+                    <img src="../imgs/Home/Icone/icons8-home-100.png" alt="home icon">
+                    <a href="home.php">HOME</a>
+                </div>
+                <div class="menu-itme">
+                    <img src="../imgs/Home/Icone/icons8-pencil-100.png" alt="animazione">
+                    <a href="animazione.php">ANIMAZIONE & DISEGNO</a>
+                </div>
+                <div class="menu-itme">
+                    <img src="../imgs/Home/Icone/icons8-controller-100.png" alt="videogiochi">
+                    <a href="videogiochi.php">VIDEOGIOCHI</a>
+                </div>
+                <div class="menu-itme">
+                    <img src="../imgs/Home/Icone/icons8-headphones-100.png" alt="hip-hop">
+                    <a href="hip-hop.php">HIP-HOP</a>
+                </div>
+                <div class="menu-itme">
+                    <img src="../imgs/Home/Icone/icons8-clapperboard-100 (1).png" alt="cinema">
+                    <a href="cinema.php">CINEMA</a>
+                </div>
+                <div class="menu-itme">
+                    <img src="../imgs/Home/Icone/icons8-other-100.png" alt="menzioni">
+                    <a href="menzioni.php">MENZIONI ONOREVOLI</a>
+                </div>
+                <div class="menu-itme">
+                    <img src="../imgs/Home/Icone/icons8-forum-100.png" alt="forum">
+                    <a href="forum.php">FORUM</a>
+                </div>
+            </nav>
+        </div> <!-- END SIDEBAR -->
+
+    </div> <!-- END MAIN CONTENT -->
+
+    <!-- ========================= -->
+    <!-- FOOTER -->
+    <!-- ========================= -->
+    <div class="footer">
+        <div class="contacts">
+            <div class="contact whatsapp">
+                <img src="../imgs/Home/Footer/icons8-whatsapp-100 (1).png" alt="Whatsapp">
+                <a href="#">Whatsapp</a>
+            </div>
+            <div class="contact instagram">
+                <img src="../imgs/Home/Footer/icons8-instagram-100.png" alt="Instagram">
+                <a href="#">Instagram</a>
+            </div>
+            <div class="contact facebook">
+                <img src="../imgs/Home/Footer/icons8-facebook-nuovo-100.png" alt="Facebook">
+                <a href="#">Facebook</a>
+            </div>
+            <div class="contact telegram">
+                <img src="../imgs/Home/Footer/icons8-telegramma-100.png" alt="Telegram">
+                <a href="#">Telegram</a>
+            </div>
+            <div class="contact discord">
+                <img src="../imgs/Home/Footer/icons8-logo-discord-100.png" alt="Discord">
+                <a href="#">Discord</a>
+            </div>
+        </div>
+        <p>© 2026 TERA. All rights reserved.</p>
+    </div>
+
+</body>
+
+</html>

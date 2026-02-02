@@ -1,0 +1,253 @@
+/* =========================================
+   1. RESET E IMPOSTAZIONI GLOBALI
+   ========================================= */
+:root
+{
+    --sfondo: url('../imgs/Login/scuro.jpg');
+    --colore-bottone:#440085;
+    --colore-link:#8A95FF ;
+    --colore-link-hover:#E6E6EB;
+    --colore-testo: white;
+    --immagine-logo: url('../imgs/Logo/LogoViola.png');
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body
+{
+    color:var(--colore-testo);
+    font-size: clamp(16px, 1.2vw, 24px);
+    background: var(--sfondo) no-repeat center center fixed;
+    background-position: center;
+    background-size: cover;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    backdrop-filter: blur(30px);
+}
+
+
+
+/* =========================================
+   2. HEADER
+   ========================================= */
+.header {
+    width: clamp(100px, 35vw, 100%);
+    display: flex;
+    background-color: #390F61;
+    padding: 20px 10px;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 25px;
+    margin-bottom: 50px;
+}
+
+.logo {
+    height: 100%;
+    padding-left: 20px;
+    font-weight: 700;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.immagine-logo
+{
+    background-image: var(--immagine-logo); /* Usa la variabile! */
+    width: clamp(50px, 6vw, 70px); 
+    height: clamp(50px, 6vw, 70px);  
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    /* transition: background-image 0.3s linear; */
+}
+.login {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-right: 20px;
+}
+
+.home-icon {
+    width: 40px;
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+.home-icon:hover {
+    transform: scale(1.1);
+}
+
+
+
+
+
+/* =========================================
+   3. FORM DI LOGIN/REGISTRAZIONE
+   ========================================= */
+
+
+.login-form {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    width: clamp(100px, 35vw, 100%);
+    height: auto;
+    background-color:transparent;
+
+    border: 1px solid #ccc;
+    padding: 30px 40px;
+    border-radius: 10px;
+}
+
+.login-form h2 {
+    margin-bottom: 20px;
+}
+
+/* Modifica questa sezione nel tuo file log.css */
+
+.input {
+    position: relative; /* FONDAMENTALE: permette all'icona di posizionarsi rispetto a questo div */
+    margin-bottom: 15px;
+    width: 100%;
+    height: clamp(40px, 6vh, 80px); /* Aumentato leggermente per visibilità */
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    
+}
+
+.input input {
+    color:var(--colore-testo);
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    padding-left: 20px;     /* Spazio a sinistra per il testo */
+    padding-right: 50px;    /* Spazio a destra per non coprire l'icona */
+    font-size: clamp(16px, 1.2vw, 24px);
+    background: transparent;
+}
+
+.input img {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(20px, 1.7vw, 35px);
+    height: auto;
+    
+    pointer-events: none; /* Permette di cliccare attraverso l'icona */
+}
+.input ::placeholder {
+    font-size: clamp(20px, 1.7vw, 40px);
+    padding-left: 10px;
+    color: var(--colore-testo);
+}
+.login-form button {
+    width: 100%;
+    height: clamp(40px, 6vh, 80px);
+    border: none;
+    border-radius: 25px;
+    background-color: var(--colore-bottone);
+    color: var(--colore-testo);
+    font-size: clamp(20px, 1.7vw, 40px);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom:15px
+}
+form a
+{
+    text-decoration: none;
+    color: var(--colore-link);
+    font-weight: bold;
+    padding: 5px 10px;
+    background: 2px solid transparent;
+    border-radius: 25px;
+}
+.login-form button:hover {
+    background-color: #390F61;
+}
+
+form a:hover {
+    background-color: var(--colore-link-hover);
+}
+.question {
+    margin-top: 10px;
+}
+
+
+/* =========================================
+   SPECIALE. TEMA CHIARO/SCURO
+   ========================================= */
+.theme-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--colore-bottone);
+    width: 60px;
+    height: 60px;
+}
+
+.theme-icon button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+.dark-mode
+{
+    --immagine-logo: url('../imgs/Logo/LogoArancione.png');
+    --sfondo: url('../imgs/Login/chiaro.jpg');
+    --colore-bottone:#7A3F16;
+    --colore-link:#26998d ;
+    --colore-link-hover:#494949;
+    --colore-testo: white;
+    --immagine-logo: url('../imgs/Logo/LogoArancione.png');
+    .login-form button:hover {
+    background-color: #ad5b20;
+}
+}
+
+
+.theme-icon img {
+    cursor: pointer;
+}
+
+.theme-icon img:last-child {
+    display: none;
+}
+
+.dark-mode .theme-icon img:first-child {
+    display: none;
+}
+
+.dark-mode .theme-icon img:last-child {
+    display: block;
+}
+
+
+.dark-mode .content hr {
+    height: 7px;
+    margin: 50px;
+    color: #2A160A;
+    background-color: #2A160A;
+}
+
+.dark-mode .header {
+    background-color: #5A2E0F;
+    color: #fff;
+}
+
