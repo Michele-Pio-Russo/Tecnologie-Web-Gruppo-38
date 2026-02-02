@@ -4,7 +4,7 @@ session_start();
 //ci colleghiamo al database
 include "./connection.php";
 
-//prendiamo le informazioni che provengono dall form di signup
+//prendiamo le informazioni che provengono dall form di signin
 if (isset($_POST['email']) && isset($_POST['password'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];

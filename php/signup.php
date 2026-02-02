@@ -3,7 +3,7 @@
 session_start();
 //ci colleghiamo al database
 include "./connection.php";
-//prendiamo le informazioni che provengono dall form
+//prendiamo le informazioni che provengono dall form di signup
 $username = $_POST['nome'];
 $email    = $_POST['email'];
 $password = $_POST['password'];
