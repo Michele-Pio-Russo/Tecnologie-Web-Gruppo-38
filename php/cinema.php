@@ -36,7 +36,7 @@
         </a>
     <?php else: ?>
         <p>Login</p>
-        <a href="login.html" title="Vai alla pagina di accesso">
+        <a href="../html/login.html" title="Vai alla pagina di accesso">
             <img src="../imgs/Home/login-logout-white-icon-11642597802btccm3uuci-removebg-preview.png"
                  alt="Immagine Login" class="login-icon" />
         </a>
