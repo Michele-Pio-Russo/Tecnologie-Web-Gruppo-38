@@ -197,10 +197,12 @@
                     <img src="../imgs/Home/Icone/icons8-other-100.png" alt="menzioni">
                     <a href="menzioni.php">MENZIONI ONOREVOLI</a>
                 </div>
+                <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
                 <div class="menu-itme">
                     <img src="../imgs/Home/Icone/icons8-forum-100.png" alt="forum">
                     <a href="forum.php">FORUM</a>
                 </div>
+                <?php endif; ?>
             </nav>
         </div>
     </div>
@@ -222,12 +224,10 @@
                 <img src="../imgs/Home/Footer/icons8-telegramma-100.png" alt="Telegram">
                 <a href="#">Telegram</a>
             </div>
-            <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
-                <div class="menu-itme">
-                    <img src="../imgs/Home/Icone/icons8-forum-100.png" alt="forum">
-                    <a href="forum.php">FORUM</a>
-                </div>
-            <?php endif; ?>
+            <div class="contact discord">
+                <img src="../imgs/Home/Footer/icons8-logo-discord-100.png" alt="Discord">
+                <a href="#">Discord</a>
+            </div>
         </div>
         <p>© 2026 TERA. All rights reserved.</p>
     </div>
