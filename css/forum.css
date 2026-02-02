@@ -5,6 +5,8 @@
     --immagine-logo: url('../imgs/Logo/LogoViola.png');   
     --radio: #8F24F2;
     --checkbox: #8F24F2;
+    --colore-bottone:#440085;
+    --colore-testo: white;
 }
 
 /*impostazioni globali per scrollbar e logo della dark mode*/
@@ -12,6 +14,10 @@
     --scrollbar-track: #5A2E0F;
     --scrollbar-thumb: #FF7F11;
     --immagine-logo: url('../imgs/Logo/LogoArancione.png');
+    --colore-bottone:#7A3F16;
+    .element1 button:hover {
+    background-color: #ad5b20;
+    }
 }
 
 /*stile generale*/
@@ -248,12 +254,29 @@ hr {
 
 /*stile dei vari sottoparagrafi*/
 .element1 {
+    margin-top:10px;
     display: flex;
     align-items: center; 
-    justify-content: space-between;
-    flex-direction: row-reverse; 
+    gap:80px;
+    button
+    {
+        padding: 10px;
+        width:auto;
+        height: clamp(30px, 5vh, 60px);
+        border: none;
+        border-radius: 25px;
+        background-color: var(--colore-bottone);
+        color: var(--colore-testo);
+        font-size: clamp(20px, 1.7vw, 40px);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-bottom:15px
+    }
 }
-
+/*hovering sui bottoni e link*/
+.element1 button:hover {
+    background-color: #390F61;
+}
 .element2 {
     display: flex;
     align-items: center; 

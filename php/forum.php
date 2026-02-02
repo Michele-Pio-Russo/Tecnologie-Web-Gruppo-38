@@ -156,8 +156,8 @@
                         <p>5 <input type="radio" name="votomenzioni" /></p>
                     </form>
                     <div class="element1">
-                        <input type="reset" id="reset">
-                        <input type="submit" id="submit">
+                        <button id="submit" >Conferma</button>
+                        <button id="reset" >Reimposta</button>
                     </div>
                     </div>
             </div>
