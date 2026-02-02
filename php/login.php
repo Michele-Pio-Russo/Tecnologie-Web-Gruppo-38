@@ -18,7 +18,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             $_SESSION['autorizzato'] = true;
             $_SESSION['nome_utente'] = $username; 
 
-            header("Location: ../html/home.php"); 
+            header("Location: ../php/home.php"); 
             exit;
         } else {
             $errore = "Password errata. <a href='login.html'>Riprova</a>";

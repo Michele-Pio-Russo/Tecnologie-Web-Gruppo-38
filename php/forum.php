@@ -1,136 +1,224 @@
-<?php
-session_start();
-?>
-<!DOCTYPE html>
-<html lang="it"> 
-    <head>
-        <title>Tera ➔ Forum</title>
-        <link rel="icon" href="..\..\imgs\Home\homeIcon.ico" type="image/x-icon">
-        <meta name="description" content="Forum di Tera">  
-        <meta charset="UTF-8"/>
-        <link rel="stylesheet" href="..\..\css\home.css"/>
-        <script type="text/javascript" src="..\..\js\index.js" defer></script>
-    </head>
+<?php session_start(); ?>
+<html>
 
-    <body>
-        <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
-        <div class="header">
+<head>
+    <title>Tera ➔ Forum</title>
+    <link rel="icon" href="../imgs/Logo/T.png" type="image/x-icon">
+    <meta name="description" content="homepage">
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../css/forum.css" />
+    <script type="text/javascript" src="../js/index.js" defer></script>
+</head>
+
+<body class="">
+    <div class="header">
         <div class="logo">
             <div class="immagine-logo"></div>
             <h1>TERA</h1>
         </div>
         <div class="login">
-            <div class="theme-icon" title="Cambia al tema Scuro">
-            <button id="theme-button">
-                <img src="/imgs/Tema/light_mode.png" alt="Immagine Tema Chiaro" />
-                <img src="/imgs/Tema/dark_mode.png" alt="Immagine Tema Scuro" />
-            </button>
+    <div class="theme-icon" title="Cambia al tema Scuro">
+        <button id="theme-button">
+            <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Chiaro" />
+            <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Scuro" />
+        </button>
+    </div>
+    <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
+        <p><?php echo htmlspecialchars($_SESSION['nome_utente']); ?></p>
+        <a href="../php/logout.php" title="Logout">
+            <img src="../imgs/Login/logout.png" alt="User" class="login-icon" />
+        </a>
+    <?php else: ?>
+        <p>Login</p>
+        <a href="login.html" title="Vai alla pagina di accesso">
+            <img src="../imgs/Login/login1.png"
+                 alt="Immagine Login" class="login-icon" />
+        </a>
+    <?php endif; ?>
+</div>
+    </div>
+    <div class="main-content">
+        <div class="content">
+            <h2 style="text-align: center;">Forum</h2>
+            <div class="element3">
+                <p>In questa sezione è presente una tabella che indica, per ogni categoria, l'innovazione
+                    principale che ha segnato per sempre il loro sviluppo.
+                </p>
+            </div>
+            <hr>
+            <table class="tabella">
+                <tr>
+                    <th>Categoria</th>
+                    <th>Rivoluzione Chiave</th>
+                    <th>Impatto Nel Mondo</th>
+                </tr>
+                <tr>
+                    <th>Animazione</th>
+                    <td>L'era della CGI (Toy Story, 1995)</td>
+                    <td>Ha segnato il passaggio dal disegno a mano alla modellazione 3D digitale, cambiando per sempre
+                        il cinema d'animazione.</td>
+                </tr>
+                <tr>
+                    <th>Videogiochi</th>
+                    <td>Il 3D e lo Z-Targeting (Ocarina of Time, 1998)</td>
+                    <td>Ha definito lo standard per l'esplorazione e il combattimento negli spazi tridimensionali,
+                        influenzando ogni open-world moderno.</td>
+                </tr>
+                <tr>
+                    <th>Cinema</th>
+                    <td>L'avvento del Sonoro (1927)</td>
+                    <td>Ha trasformato il cinema da un'arte puramente visiva e mimica in un'esperienza multisensoriale
+                        completa.</td>
+                </tr>
+                <tr>
+                    <th>Hip-Hop</th>
+                    <td>Il "Breakbeat" (DJ Kool Herc, 1973)</td>
+                    <td>Isolando le parti ritmiche dei dischi per far ballare i "B-Boys", ha dato vita a una cultura
+                        globale che unisce musica, danza e arte.</td>
+                </tr>
+                <tr>
+                    <th>Carte</th>
+                    <td>Il formato TCG (Magic: The Gathering, 1993)</td>
+                    <td>Ha inventato il concetto di "gioco di carte collezionabili", trasformando semplici mazzi di
+                        carte in asset di valore e mondi narrativi complessi.</td>
+                </tr>
+                <tr>
+                    <th>Fotografia</th>
+                    <td>La Digitalizzazione (Sensore CCD)</td>
+                    <td>Ha reso la fotografia istantanea e accessibile a chiunque, eliminando la necessità dello
+                        sviluppo chimico e portando alla nascita dei social media visivi.</td>
+                </tr>
+                <tr>
+                    <th>Cucina</th>
+                    <td>La Brigata di Cucina (Auguste Escoffier)</td>
+                    <td>Ha introdotto una gerarchia militare e una divisione dei compiti scientifica, permettendo alla
+                        ristorazione di diventare veloce, efficiente e professionale.</td>
+                </tr>
+            </table>
+            <h2 style="text-align: center;">Questionario di Valutazione</h2>
+            <div class="element3">
+                <p>Chi ha fatto l'accesso al nostro sito può compilare un breve questionario, aiutandoci
+                    a capire quali sezioni migliorare.
+                </p>
+            </div>
+            <hr>
+            <div>
+                <img src="../imgs/Form/Ringraziamenti.jpg" alt="forum image" width="1000" align="right">
+                <h3>Quali sezioni hai preferito di più?</h2>
+                    <form>
+                        <p>Animazione e Disegno <input type="checkbox" /></p>
+                        <p>Videogiochi <input type="checkbox" /></p>
+                        <p>Hip-Hop <input type="checkbox" /></p>
+                        <p>Cinema <input type="checkbox" /></p>
+                        <p>Menzioni Onorevoli <input type="checkbox" /></p>
+                    </form>
+                    <br>
+                    <h3>Dai un voto alle varie sezioni</h3>
+                    <h4>Animazione e Disegno:</h4>
+                    <form class="questionario">
+                        <p>1 <input type="radio" name="votoanimazione" /></p>
+                        <p>2 <input type="radio" name="votoanimazione" /></p>
+                        <p>3 <input type="radio" name="votoanimazione" /></p>
+                        <p>4 <input type="radio" name="votoanimazione" /></p>
+                        <p>5 <input type="radio" name="votoanimazione" /></p>
+                    </form>
+                    <h4>Videogiochi:</h4>
+                    <form class="questionario">
+                        <p>1 <input type="radio" name="votogiochi" /></p>
+                        <p>2 <input type="radio" name="votogiochi" /></p>
+                        <p>3 <input type="radio" name="votogiochi" /></p>
+                        <p>4 <input type="radio" name="votogiochi" /></p>
+                        <p>5 <input type="radio" name="votogiochi" /></p>
+                    </form>
+                    <h4>Hip-Hop:</h4>
+                    <form class="questionario">
+                        <p>1 <input type="radio" name="votohiphop" /></p>
+                        <p>2 <input type="radio" name="votohiphop" /></p>
+                        <p>3 <input type="radio" name="votohiphop" /></p>
+                        <p>4 <input type="radio" name="votohiphop" /></p>
+                        <p>5 <input type="radio" name="votohiphop" /></p>
+                    </form>
+                    <h4>Cinema:</h4>
+                    <form class="questionario">
+                        <p>1 <input type="radio" name="votocinema" /></p>
+                        <p>2 <input type="radio" name="votocinema" /></p>
+                        <p>3 <input type="radio" name="votocinema" /></p>
+                        <p>4 <input type="radio" name="votocinema" /></p>
+                        <p>5 <input type="radio" name="votocinema" /></p>
+                    </form>
+                    <h4>Menzioni Onorevoli:</h4>
+                    <form class="questionario">
+                        <p>1 <input type="radio" name="votomenzioni" /></p>
+                        <p>2 <input type="radio" name="votomenzioni" /></p>
+                        <p>3 <input type="radio" name="votomenzioni" /></p>
+                        <p>4 <input type="radio" name="votomenzioni" /></p>
+                        <p>5 <input type="radio" name="votomenzioni" /></p>
+                    </form>
+                    <div class="element1">
+                        <input type="reset">
+                        <input type="submit">
+                    </div>
+            </div>
         </div>
-            <p>Login</p>
-            <a href="/html/login.html" title="Vai alla pagina di accesso">
-                <img src="/imgs/Home/login-logout-white-icon-11642597802btccm3uuci-removebg-preview.png"
-                    alt="Immagine Login" class="login-icon" /></a>
+        <div class="sidebar">
+            <nav class="menu">
+                <div class="menu-itme">
+                    <img src="../imgs/Home/Icone/icons8-home-100.png" alt="home icon">
+                    <a href="home.php">HOME</a>
+                </div>
+                <div class="menu-itme">
+                    <img src="../imgs/Home/Icone/icons8-pencil-100.png" alt="animazione">
+                    <a href="animazione.php">ANIMAZIONE & DISEGNO</a>
+                </div>
+                <div class="menu-itme">
+                    <img src="../imgs/Home/Icone/icons8-controller-100.png" alt="videogiochi">
+                    <a href="videogiochi.php">VIDEOGIOCHI</a>
+                </div>
+                <div class="menu-itme">
+                    <img src="../imgs/Home/Icone/icons8-headphones-100.png" alt="hip-hop">
+                    <a href="hip-hop.php">HIP-HOP</a>
+                </div>
+                <div class="menu-itme">
+                    <img src="../imgs/Home/Icone/icons8-clapperboard-100 (1).png" alt="cinema">
+                    <a href="cinema.php">CINEMA</a>
+                </div>
+                <div class="menu-itme">
+                    <img src="../imgs/Home/Icone/icons8-other-100.png" alt="menzioni">
+                    <a href="menzioni.php">MENZIONI ONOREVOLI</a>
+                </div>
+                <div class="menu-itme">
+                    <img src="../imgs/Home/Icone/icons8-forum-100.png" alt="forum">
+                    <a href="forum.php">FORUM</a>
+                </div>
+            </nav>
         </div>
     </div>
-        <div class="main-content">
-            <div class="content">
-                <h2>Chi siamo?</h2>
-                <div class="element1">
-                <img class="image1" src="/imgs/Home/steven.jpg" alt="stefano">
-                <p>Siamo tre ragazzi con un’idea: creare una community per chi, come noi, va oltre la superficie. 
-                    Persone che non si accontentano di consumare contenuti in un periodo storico predominato da passività, 
-                    ma vogliono capire il messaggio, l’intento e il valore artistico dietro ogni forma di espressione 
-                    e partecipare in modo attivo al progetto. Da questa necessità nasce Tera.</p>
-                </div>
-                <h2>Perché dovresti prendere parte al nostro progetto?</h2>
-                <div class="element2">
-                <img class="image2" src="/imgs/Home/steven.jpg" alt="stefano">
-                <p>Partecipare attivamente al nostro progetto vuol dire portare, proprio come abbiamo fatto noi, 
-                    la propria visione su ciò che più gli appassiona. Ognuno di noi ha una propria visione, e Tera è fatto per concretizzarla. 
-                    Si tratta di raccontare perché qualcosa ti colpisce, di confrontarsi senza paura di essere giudicati e di costruire un dialogo 
-                    autentico attorno alle proprie passioni.</p>
-                </div>
-                <h2>Cosa trovi su Tera.</h2>
-                <div class="element1">
-                <img class="image1" src="/imgs/Home/steven.jpg" alt="stefano">
-                <p>Tera non è un semplice sito web: è un progetto che vuole crescere, creare community e far scoprire nuove prospettive. 
-                    Qui puoi leggere analisi, scoprire contenuti, confrontarti con altri e approfondire tutto ciò che riguarda arte, 
-                    cultura e creatività, in modo accessibile ma profondo.</p>
-                </div>
-                <h2>Regolamento</h2>
-                <div class="element2">
-                <img class="image2" src="/imgs/Home/steven.jpg" alt="stefano">
-                <ul>
-                    <li>Essere rispettosi nei confronti dei creatori del sito e degli altri utenti.</li>
-                    <li>Usare un linguaggio corretto e costruttivo.</li>
-                    <li>Divertirsi e partecipare con entusiasmo.</li>
-                </ul>
-                </div>
+    <div class="footer">
+        <div class="contacts">
+            <div class="contact whatsapp">
+                <img src="../imgs/Home/Footer/icons8-whatsapp-100 (1).png" alt="Whatsapp">
+                <a href="#">Whatsapp</a>
             </div>
-            <div class="sidebar">
-                <nav class="menu">
-                    <div class="menu-itme">
-                        <img src="/imgs/Home/Icone/icons8-home-100.png" alt="home icon">
-                        <a href="/html/home.html">HOME</a>
-                    </div>
-                    <div class="menu-itme">
-                        <img src="/imgs/Home/Icone/icons8-pencil-100.png" alt="animazione">
-                        <a href="/html/animazione.html">ANIMAZIONE & DISEGNO</a>
-                    </div>
-                    <div class="menu-itme">
-                        <img src="/imgs/Home/Icone/icons8-controller-100.png" alt="videogiochi">
-                        <a href="/html/videogiochi.html">VIDEOGIOCHI</a>
-                    </div>
-                    <div class="menu-itme">
-                        <img src="/imgs/Home/Icone/icons8-headphones-100.png" alt="hip-hop">
-                        <a href="/html/hip-hop.html">HIP-HOP</a>
-                    </div>
-                    <div class="menu-itme">
-                        <img src="/imgs/Home/Icone/icons8-clapperboard-100 (1).png" alt="cinema">
-                        <a href="/html/cinema.html">CINEMA</a>
-                    </div>
-                    <div class="menu-itme">
-                        <img src="/imgs/Home/Icone/icons8-other-100.png" alt="menzioni">
-                        <a href="/html/menzioni.html">MENZIONI ONOREVOLI</a>
-                    </div>
-                    <div class="menu-itme">
-                        <img src="/imgs/Home/Icone/icons8-forum-100.png" alt="forum">
-                        <a href="/html/forum.html">FORUM</a>
-                    </div>
-                </nav>
+            <div class="contact instagram">
+                <img src="../imgs/Home/Footer/icons8-instagram-100.png" alt="Instagram">
+                <a href="#">Instagram</a>
+            </div>
+            <div class="contact facebook">
+                <img src="../imgs/Home/Footer/icons8-facebook-nuovo-100.png" alt="Facebook">
+                <a href="#">Facebook</a>
+            </div>
+            <div class="contact telegram">
+                <img src="../imgs/Home/Footer/icons8-telegramma-100.png" alt="Telegram">
+                <a href="#">Telegram</a>
+            </div>
+            <div class="contact discord">
+                <img src="../imgs/Home/Footer/icons8-logo-discord-100.png" alt="Discord">
+                <a href="#">Discord</a>
             </div>
         </div>
-        <div class="footer">
-            <div class="contacts">
-                <div class="contact whatsapp">
-                    <img src="/imgs/Home/Footer/icons8-whatsapp-100 (1).png" alt="Whatsapp">
-                    <a href="#">Whatsapp</a>
-                </div>
-                <div class="contact instagram">
-                    <img src="/imgs/Home/Footer/icons8-instagram-100.png" alt="Instagram">
-                    <a href="#">Instagram</a>
-            </div>
-                <div class="contact facebook">
-                    <img src="/imgs/Home/Footer/icons8-facebook-nuovo-100.png" alt="Facebook">
-                    <a href="#">Facebook</a>
-                </div>
-                <div class="contact telegram">
-                    <img src="/imgs/Home/Footer/icons8-telegramma-100.png" alt="Telegram">
-                    <a href="#">Telegram</a>
-                </div>
-                <div class="contact discord">
-                    <img src="/imgs/Home/Footer/icons8-logo-discord-100.png" alt="Discord">
-                    <a href="#">Discord</a>
-                </div>
-            </div>
-            <p>© 2026 TERA. All rights reserved.</p>
-        </div>
-    </body>
-    <?php else: ?>
+        <p>© 2026 TERA. All rights reserved.</p>
+    </div>
+</body>
 
-    <h1>Accesso Negato</h1>
-    <p>Per favore, <a href="login.html">autenticati</a> per visualizzare questa pagina.</p>
-
-    <?php endif; ?>
 
 </html>

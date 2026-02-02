@@ -227,10 +227,12 @@
                     <img src="../imgs/Home/Icone/icons8-other-100.png" alt="menzioni">
                     <a href="menzioni.php">MENZIONI ONOREVOLI</a>
                 </div>
+                <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
                 <div class="menu-itme">
                     <img src="../imgs/Home/Icone/icons8-forum-100.png" alt="forum">
                     <a href="forum.php">FORUM</a>
                 </div>
+                <?php endif; ?>
             </nav>
         </div>
     </div>
