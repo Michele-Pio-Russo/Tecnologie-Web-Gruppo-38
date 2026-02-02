@@ -7,7 +7,7 @@
     <meta name="description" content="homepage">
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../css/forum.css" />
-    <script type="text/javascript" src="../js/index.js" defer></script>
+    <script type="text/javascript" src="../js/forum.js" defer></script>
 </head>
 
 <body class="">
@@ -103,7 +103,7 @@
             </div>
             <hr>
             <div>
-                <img src="../imgs/Form/Ringraziamenti.jpg" alt="forum image" width="1000" align="right">
+                <img src="../imgs/Form/Ringraziamenti.jpg" alt="forum image" width="1000" align="right" class="image1">
                 <h3>Quali sezioni hai preferito di più?</h2>
                     <form>
                         <p>Animazione e Disegno <input type="checkbox" /></p>
@@ -115,6 +115,7 @@
                     <br>
                     <h3>Dai un voto alle varie sezioni</h3>
                     <h4>Animazione e Disegno:</h4>
+                    <div class="domande">
                     <form class="questionario">
                         <p>1 <input type="radio" name="votoanimazione" /></p>
                         <p>2 <input type="radio" name="votoanimazione" /></p>
@@ -155,8 +156,9 @@
                         <p>5 <input type="radio" name="votomenzioni" /></p>
                     </form>
                     <div class="element1">
-                        <input type="reset">
-                        <input type="submit">
+                        <input type="reset" id="reset">
+                        <input type="submit" id="submit">
+                    </div>
                     </div>
             </div>
         </div>

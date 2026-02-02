@@ -514,3 +514,13 @@ input[type="checkbox"] {
   background-color: var(--scrollbar-thumb);
   border-radius: 10px;
 }
+
+.domande
+{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    width:50%;
+    height:auto;
+}
