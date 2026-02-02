@@ -266,7 +266,7 @@
                 <a href="#">Discord</a>
             </div>
         </div>
-        <p>© 2026 TERA. All rights reserved.</p>
+        <p>© <?php echo date('Y')?> TERA. All rights reserved.</p>
     </div>
 </body>
 
