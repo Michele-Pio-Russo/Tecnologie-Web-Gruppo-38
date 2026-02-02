@@ -56,6 +56,15 @@
             <!-- ========================= -->
             <div class="content">
                 <div class="sectionlight">
+                    <h2 style="text-align: center;">Hip-Hop</h2>
+                    <div class="element3">
+                        <p>l'Hip-Hop ha preso pezzi di musica che già esistevano e li ha montati insieme come un
+                            collage, creando qualcosa di totalmente nuovo. È un'arte che nasce dalla strada e che
+                            insegna che non ti servono strumenti costosi per creare, ma bastano creatività, ritmo e
+                            voglia di dire la propria.
+                        </p>
+                    </div>
+                    <hr>
 
                     <!-- ------------------------- -->
                     <!-- SEZIONE INTRO -->

@@ -17,30 +17,36 @@
             <h1>TERA</h1>
         </div>
         <div class="login">
-    <div class="theme-icon" title="Cambia al tema Chiaro">
-        <button id="theme-button">
-            <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Chiaro" />
-            <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Scuro" />
-        </button>
-    </div>
-    <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
-        <p><?php echo htmlspecialchars($_SESSION['nome_utente']); ?></p>
-        <a href="../php/logout.php" title="Logout">
-            <img src="../imgs/Login/logout.png" alt="User" class="login-icon" />
-        </a>
-    <?php else: ?>
-        <p>Login</p>
-        <a href="../html/login.html" title="Vai alla pagina di accesso">
-            <img src="../imgs/Login/login1.png"
-                 alt="Immagine Login" class="login-icon" />
-        </a>
-    <?php endif; ?>
-</div>
+            <div class="theme-icon" title="Cambia al tema Chiaro">
+                <button id="theme-button">
+                    <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Chiaro" />
+                    <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Scuro" />
+                </button>
+            </div>
+            <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
+                <p><?php echo htmlspecialchars($_SESSION['nome_utente']); ?></p>
+                <a href="../php/logout.php" title="Logout">
+                    <img src="../imgs/Login/logout.png" alt="User" class="login-icon" />
+                </a>
+            <?php else: ?>
+                <p>Login</p>
+                <a href="../html/login.html" title="Vai alla pagina di accesso">
+                    <img src="../imgs/Login/login1.png" alt="Immagine Login" class="login-icon" />
+                </a>
+            <?php endif; ?>
+        </div>
     </div>
 
     <div class="main-content">
         <div class="content">
-
+            <h2 style="text-align: center;">Animazione</h2>
+            <div class="element3">
+                <p>I cartoni animati ci hanno accompagnato fin da quando
+                    eravamo bambini, ovviamente i designer hanno sempre optato per scelte stilistiche importanti
+                    che ci tenevano incollati allo schermo, in questa sezione parliamo proprio di questo.
+                </p>
+            </div>
+            <hr>
             <h2>Il Caos Cinetico Moderno</h2>
             <div class="element1">
                 <img class="image1" src="../imgs/Animazione/DANDADAN.jpg" alt="Dandadan Okarun">
@@ -228,10 +234,10 @@
                     <a href="menzioni.php">MENZIONI ONOREVOLI</a>
                 </div>
                 <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
-                <div class="menu-itme">
-                    <img src="../imgs/Home/Icone/icons8-forum-100.png" alt="forum">
-                    <a href="forum.php">FORUM</a>
-                </div>
+                    <div class="menu-itme">
+                        <img src="../imgs/Home/Icone/icons8-forum-100.png" alt="forum">
+                        <a href="forum.php">FORUM</a>
+                    </div>
                 <?php endif; ?>
             </nav>
         </div>

@@ -31,7 +31,7 @@ body {
     min-height: 100vh;
 }
 
-/*stili per tag a e li*/
+/*stili per tag a, li e hr*/
 a {
     text-decoration: none;
     color: #F2F6F3;
@@ -45,6 +45,13 @@ li {
     font-weight: bold;
     justify-items: center;
     align-items: center;
+}
+
+hr {
+    height: 7px;
+    margin: 50px;
+    color: #51025f;
+    background-color: #51025f;
 }
 
 /*stile per l'header*/
@@ -226,6 +233,14 @@ li {
     margin-bottom: 0;
 }
 
+.element3 {
+    display: grid;
+    place-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+/*stile per le immagini*/
 .image1,
 .image2 {
     width: clamp(100px, 25vw, 100%);
@@ -235,9 +250,7 @@ li {
     box-shadow: 0 4px 8px rgba(1, 1, 1, 0.5);
 }
 
-/* =========================================
-   5. SIDEBAR E MENU
-   ========================================= */
+/*stile per la sidebar*/
 .sidebar {
     background-color: #440085;
     color: linear-gradient(45deg, #390F61, #440085);
@@ -253,23 +266,21 @@ li {
     min-width: 60px;
     height: 100vh;
 
-    position: sticky;
-    /* Sidebar fissa mentre scorri */
+    position: sticky; /* Sidebar fissa mentre scorri */
+    
     top: 0;
     margin-right: 10px;
 }
 
 .sidebar:hover .menu {
     width: 250px;
-    /* Espansione menu */
 }
 
 .sidebar:hover .menu a {
     opacity: 1;
-    /* Mostra testo link */
 }
 
-/* --- Menu Container --- */
+/*classe che gestisce il contenuto della sidebar (testo, immagini, link)*/
 .menu {
     display: flex;
     flex-direction: column;
@@ -282,7 +293,6 @@ li {
     transition: width 0.2s linear;
 }
 
-/* --- Menu Items --- */
 .menu .menu-itme {
     padding: 10px;
     display: flex;
@@ -298,10 +308,8 @@ li {
     flex-shrink: 0;
 }
 
-/* --- Menu Links (Testo) --- */
 .menu .menu-itme a {
     opacity: 0;
-    /* Nascosto di default */
 }
 
 .menu a {
@@ -324,8 +332,8 @@ li {
 .menu a:hover {
     background: linear-gradient(90deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #9400D3, #FF0000);
     background-size: 200% 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text; /*lo sfondo si adatta al testo*/
+    -webkit-text-fill-color: transparent; /*rende il testo trasparente*/
     background-clip: text;
     border: 1px solid #fff;
     animation: hoverEffect 3s ease-in-out infinite;
@@ -334,9 +342,7 @@ li {
     opacity: 1 !important;
 }
 
-/* =========================================
-   6. FOOTER
-   ========================================= */
+/*stile del footer*/
 .footer {
     display: flex;
     flex-direction: column;
@@ -358,7 +364,7 @@ li {
     padding: 20px;
 }
 
-/* --- Contatti Social --- */
+/*gestione delle icone del footer*/
 .contacts {
     margin-top: 10px;
     font-size: 14px;
@@ -411,9 +417,7 @@ li {
     color: #5865F2;
 }
 
-/* =========================================
-   7. ANIMAZIONI (KEYFRAMES)
-   ========================================= */
+/*animazione per la comparsa del testo del footer*/
 @keyframes textFadeIn {
     from {
         width: 0;
@@ -426,6 +430,7 @@ li {
     }
 }
 
+/*animazione per il colore delle scritte della sidebar*/
 @keyframes hoverEffect {
     0% {
         background-position: 0% 50%;
@@ -440,21 +445,12 @@ li {
     }
 }
 
-/* =========================================
-   8. CLASSI DI UTILITÀ (CONTAINER)
-   ========================================= */
-.container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-}
-
+/*stile della scrollbar*/
 ::-webkit-scrollbar {
-  width: 12px;               /* Larghezza della barra verticale */
-  height: 12px;              /* Altezza della barra orizzontale */
+  width: 12px;               
+  height: 12px;              
 }
 
-/* Ora i tuoi stili verranno applicati */
 ::-webkit-scrollbar-track {
   background: var(--scrollbar-track);
 }

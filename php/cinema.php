@@ -56,7 +56,15 @@
             <!-- ========================= -->
             <div class="content">
                 <div class="sectionlight">
-
+                    <h2 style="text-align: center;">Cinema</h2>
+                    <div class="element3">
+                        <p>Il cinema è stato rivoluzionario: ha preso la fotografia e le ha dato
+                            movimento e parola. È quell'arte che riesce a farti vivere mille vite diverse
+                            stando seduto al buio, unendo immagini, musica e storie per farti emozionare come
+                            nient'altro sa fare.
+                        </p>
+                    </div>
+                    <hr>
                     <h2>Il Cinema come Linguaggio Totale</h2>
 
                     <div class="element1">
