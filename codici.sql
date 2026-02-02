@@ -36,4 +36,4 @@ GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO www;
 -- INSERIMENTO TABELLA
 
 INSERT INTO utente (username, email, password)
-VALUES (Michele, michelepio44@gmail.com, password_hash(pass, PASSWORD_DEFAULT));
+VALUES (Michele, michelepio44@gmail.com, $2y$10$rCvNW1/ZIFfP6eoIbZq15.4bJZ60hDg6QpSUQb9XMLm5/tLbqhHkG); --1234
