@@ -1,23 +1,25 @@
-/* =========================================
-   1. RESET E IMPOSTAZIONI GLOBALI
-   ========================================= */
+/*impostazioni globali per scrollbar e logo della light mode*/
 :root {
     --scrollbar-track: #390F61;
     --scrollbar-thumb: #8F24F2;
     --immagine-logo: url('../imgs/Logo/LogoViola.png');   
 }
 
+/*impostazioni globali per scrollbar e logo della dark mode*/
 .dark-mode {
     --scrollbar-track: #5A2E0F;
     --scrollbar-thumb: #FF7F11;
     --immagine-logo: url('../imgs/Logo/LogoArancione.png');
 }
+
+/*stile generale*/
    * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/*corpo del programma*/
 body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #390F61;
@@ -29,6 +31,7 @@ body {
     min-height: 100vh;
 }
 
+/*stili per tag a, li, figure e hr*/
 a {
     text-decoration: none;
     color: #F2F6F3;
@@ -60,9 +63,7 @@ hr {
     background-color: #51025f;
 }
 
-/* =========================================
-   2. HEADER
-   ========================================= */
+/*stile per l'header*/
 .header {
     display: flex;
     background-color: #390F61;
@@ -73,6 +74,7 @@ hr {
     font-size: clamp(10px,2vw,30px);
 }
 
+/*stile per scritta e immagine del logo*/
 .logo {
     height: 100%;
     padding-left: 20px;
@@ -85,16 +87,16 @@ hr {
 }
 .immagine-logo
 {
-    background-image: var(--immagine-logo); /* Usa la variabile! */
+    background-image: var(--immagine-logo);
     width: clamp(70px, 7vw, 80px); 
     height: clamp(70px, 7vw, 80px); 
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     display: inline-block;
-    /* transition: background-image 0.3s linear; */
 }
 
+/*stile per login, icona e hovering con cursore*/
 .login {
     display: flex;
     align-items: center;
@@ -111,9 +113,8 @@ hr {
 .login-icon:hover {
     transform: scale(1.1);
 }
-/* =========================================
-   SPECIALE. TEMA CHIARO/SCURO
-   ========================================= */
+
+/*gestione dell'icona per il cambio di tema, sia per il tema chiaro che per quello scuro*/
 .theme-icon {
     display: flex;
     align-items: center;
@@ -150,6 +151,7 @@ hr {
     display: block;
 }
 
+/*stile del tema scuro*/
 .dark-mode {
     background-color: #5A2E0F;
 }
@@ -184,20 +186,17 @@ hr {
 .dark-mode .theme-icon {
     background-color: #7A3F16;
 }
-/* =========================================
-   3. LAYOUT PRINCIPALE (GRID)
-   ========================================= */
+
+/*stile della classe main content, include quasi tutto il body sidebar inclusa*/
 .main-content {
     display: grid;
-    grid-template-columns: 1fr auto; /* Contenuto a sinistra, Sidebar a destra */
+    grid-template-columns: 1fr auto;
     flex: 1;
     gap: 20px;
-    align-items: start; /* Necessario per lo sticky */
+    align-items: start;
 }
 
-/* =========================================
-   4. CONTENUTO CENTRALE (ARTICOLI)
-   ========================================= */
+/*stile della classe content, sidebar esclusa*/
 .content {
     width: 100%;
     background-color: #E6E6EB;
@@ -208,40 +207,39 @@ hr {
     flex-direction: column;
     justify-content: center;
     
-    /* Font size reattivo */
     font-size: clamp(30px,2vw,60px);
 }
 
-/* --- Titoli H2 --- */
+/*gestione del tag h2 nel div di classe content*/
 .content h2 {
-    margin-top: 100px;   /* Spazio abbondante sopra ogni nuova sezione */
-    margin-bottom: 20px; /* Piccolo spazio sotto il titolo */
+    margin-top: 100px;  
+    margin-bottom: 20px; 
     line-height: 1.2;
 }
 
 .content h2:first-child {
-    margin-top: 0; /* Il primo titolo non ha bisogno di spazio sopra */
+    margin-top: 0; 
 }
 
-/* --- Paragrafi --- */
+/*gestione del tag p nel div di classe content*/
 .content p {
-    width: 50%; /* Larghezza colonna testo */
+    width: 50%; 
 }
 
-/* --- Elementi (Blocchi Immagine + Testo) --- */
+/*stile dei vari sottoparagrafi*/
 .element1 {
     display: flex;
-    align-items: center; /* Centra verticalmente testo e immagine */
+    align-items: center;
     justify-content: space-between;
-    flex-direction: row-reverse; /* Immagine a DX, Testo a SX */
+    flex-direction: row-reverse;
 }
 
 .element2 {
     display: flex;
-    align-items: center; /* Centra verticalmente testo e immagine */
+    align-items: center;
     justify-content: space-between;
-    text-align: right;   /* Testo allineato a destra */
-    margin-bottom: 0;    /* Corretto errore (era 'px') */
+    text-align: right;  
+    margin-bottom: 0;   
 }
 
 .element3 {
@@ -251,19 +249,17 @@ hr {
     width: 100%;
 }
 
-/* --- Immagini Articoli --- */
+/*stile per le immagini*/
 .image1,
 .image2 {
     width: clamp(100px, 25vw, 100%);
     height: auto;
     padding: 10px;
     border-radius: 25px;
-    box-shadow: 0 4px 8px rgba(1,1,1,0.5); /* Ombra per profondità */
+    box-shadow: 0 4px 8px rgba(1,1,1,0.5);
 }
 
-/* =========================================
-   5. SIDEBAR E MENU
-   ========================================= */
+/*stile per la sidebar*/
 .sidebar {
     background-color: #440085;
     color: linear-gradient(45deg, #390F61, #440085);
@@ -285,14 +281,14 @@ hr {
 }
 
 .sidebar:hover .menu {
-    width: 250px; /* Espansione menu */
+    width: 250px; 
 }
 
 .sidebar:hover .menu a {
-    opacity: 1; /* Mostra testo link */
+    opacity: 1; 
 }
 
-/* --- Menu Container --- */
+/*classe che gestisce il contenuto della sidebar (testo, immagini, link)*/
 .menu {
     display: flex;
     flex-direction: column;
@@ -305,7 +301,6 @@ hr {
     transition: width 0.2s linear;
 }
 
-/* --- Menu Items --- */
 .menu .menu-itme {
     padding: 10px;
     display: flex;
@@ -321,9 +316,8 @@ hr {
     flex-shrink: 0;
 }
 
-/* --- Menu Links (Testo) --- */
 .menu .menu-itme a {
-    opacity: 0; /* Nascosto di default */
+    opacity: 0; 
 }
 
 .menu a {
@@ -336,18 +330,18 @@ hr {
     opacity: 0;
 
     transition: background-color 0.3s ease,
-                color 0.3s ease,
-                border-radius 1s ease,
-                font-size 1s ease,
-                opacity 0.3s linear;
+        color 0.3s ease,
+        border-radius 1s ease,
+        font-size 1s ease,
+        opacity 0.3s linear;
 }
 
 /* Hover sui Link (Effetto Arcobaleno) */
 .menu a:hover {
     background: linear-gradient(90deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #9400D3, #FF0000);
     background-size: 200% 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text; /*lo sfondo si adatta al testo*/
+    -webkit-text-fill-color: transparent; /*rende il testo trasparente*/
     background-clip: text;
     border: 1px solid #fff;
     animation: hoverEffect 3s ease-in-out infinite;
@@ -356,9 +350,7 @@ hr {
     opacity: 1 !important;
 }
 
-/* =========================================
-   6. FOOTER
-   ========================================= */
+/*stile del footer*/
 .footer {
     display: flex;
     flex-direction: column;
@@ -380,7 +372,7 @@ hr {
     padding: 20px;
 }
 
-/* --- Contatti Social --- */
+/*gestione delle icone del footer*/
 .contacts {
     margin-top: 10px;
     font-size: 14px;
@@ -419,9 +411,7 @@ hr {
 .telegram:hover a { color: #24A1DE; }
 .discord:hover a { color: #5865F2; }
 
-/* =========================================
-   7. ANIMAZIONI (KEYFRAMES)
-   ========================================= */
+/*animazione per la comparsa del testo del footer*/
 @keyframes textFadeIn {
     from {
         width: 0;
@@ -439,21 +429,12 @@ hr {
     100% { background-position: 0% 50%; }
 }
 
-/* =========================================
-   8. CLASSI DI UTILITÀ (CONTAINER)
-   ========================================= */
-.container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-}
-
+/*stile della scrollbar*/
 ::-webkit-scrollbar {
-  width: 12px;               /* Larghezza della barra verticale */
-  height: 12px;              /* Altezza della barra orizzontale */
+  width: 12px;              
+  height: 12px;             
 }
 
-/* Ora i tuoi stili verranno applicati */
 ::-webkit-scrollbar-track {
   background: var(--scrollbar-track);
 }
