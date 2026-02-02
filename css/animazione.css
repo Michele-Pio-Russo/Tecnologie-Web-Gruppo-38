@@ -1,34 +1,33 @@
-/* =========================================
-   1. RESET E IMPOSTAZIONI GLOBALI
-   ========================================= */
+/*impostazioni globali per scrollbar e logo della light mode*/
 :root {
     --scrollbar-track: #390F61;
     --scrollbar-thumb: #8F24F2;
     --immagine-logo: url('../imgs/Logo/LogoViola.png');   
 }
-
+/*impostazioni globali per scrollbar e logo della dark mode*/
 .dark-mode {
     --scrollbar-track: #5A2E0F;
     --scrollbar-thumb: #FF7F11;
     --immagine-logo: url('../imgs/Logo/LogoArancione.png');
 }
+/*stile generale*/
    * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
+/*corpo del programma*/
 body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #390F61;
     background-size: 200% 100%;
     color: #333;
-    line-height: 1.6;
+    line-height: 1.6; /*spazio verticale tra le righe di un paragrafo*/
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
-
+/*stili per tag a e li*/
 a {
     text-decoration: none;
     color: #F2F6F3;
