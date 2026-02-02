@@ -35,7 +35,5 @@ GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO www;
 
 -- INSERIMENTO TABELLA
 
-INSERT INTO Customers (CustomerName, ContactName, Address,
-City, PostalCode, Country)
-VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen
-21', 'Stavanger', '4006', 'Norway’);
+INSERT INTO utente (username, email, password)
+VALUES (Michele, michelepio44@gmail.com, password_hash(pass, PASSWORD_DEFAULT));
