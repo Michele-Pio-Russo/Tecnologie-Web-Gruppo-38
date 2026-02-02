@@ -85,6 +85,7 @@ hr {
     justify-content: center;
     gap: 10px;
 }
+
 .immagine-logo
 {
     background-image: var(--immagine-logo);
@@ -132,8 +133,6 @@ hr {
     margin: 0;
     cursor: pointer;
 }
-
-
 
 .theme-icon img {
     cursor: pointer;
@@ -435,6 +434,7 @@ hr {
   height: 12px;             
 }
 
+/* Ora i tuoi stili verranno applicati */
 ::-webkit-scrollbar-track {
   background: var(--scrollbar-track);
 }
