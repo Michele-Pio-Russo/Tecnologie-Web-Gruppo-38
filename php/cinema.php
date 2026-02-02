@@ -23,7 +23,7 @@
             <h1>TERA</h1>
         </div>
         <div class="login">
-    <div class="theme-icon" title="Cambia al tema Scuro">
+    <div class="theme-icon" title="Cambia al tema Chiaro">
         <button id="theme-button">
             <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Chiaro" />
             <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Scuro" />

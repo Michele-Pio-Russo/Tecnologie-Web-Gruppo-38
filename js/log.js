@@ -3,13 +3,13 @@ let darkMode = localStorage.getItem('darkMode');
 const themeToggleButton = document.getElementById('theme-button');
 
 const enableDarkMode = () => {
-    title.item(0).setAttribute("title", "Cambia al tema Chiaro");
+    title.item(0).setAttribute("title", "Cambia al tema Scuro");
     document.body.classList.add('dark-mode');
     localStorage.setItem('darkMode', 'active');
 }
 
 const disableDarkMode = () => {
-    title.item(0).setAttribute("title", "Cambia al tema Scuro");
+    title.item(0).setAttribute("title", "Cambia al tema Chiaro");
     document.body.classList.remove('dark-mode');
     localStorage.setItem('darkMode', null);
 }
