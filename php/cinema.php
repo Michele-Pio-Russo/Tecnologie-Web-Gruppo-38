@@ -25,8 +25,8 @@
         <div class="login">
     <div class="theme-icon" title="Cambia al tema Chiaro">
         <button id="theme-button">
-            <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Chiaro" />
-            <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Scuro" />
+            <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Solare" />
+            <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Lunare" />
         </button>
     </div>
     <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
