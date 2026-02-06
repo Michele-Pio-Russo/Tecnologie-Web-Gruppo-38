@@ -439,7 +439,7 @@ figure {
 }
 .sidebar .menu .menu-itme:nth-of-type(4) img {
     padding: 5px;
-    border: 1px solid white;
+    border: 3px solid white;
     border-radius: 20px;
 }
 
