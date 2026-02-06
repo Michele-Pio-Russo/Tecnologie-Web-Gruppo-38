@@ -13,14 +13,14 @@ const submit = document.getElementById("submit");
 
 //funzione per abilitare il tema scuro
 const enableDarkMode = () => {
-    title.item(0).setAttribute("title", "Cambia al tema Scuro");
+    title.item(0).setAttribute("title", "Cambia al tema Lunare");
     document.body.classList.add('dark-mode');
     localStorage.setItem('darkMode', 'active');
 }
 
 //funzione per disabilitare il tema scuro
 const disableDarkMode = () => {
-    title.item(0).setAttribute("title", "Cambia al tema Chiaro");
+    title.item(0).setAttribute("title", "Cambia al tema Solare");
     document.body.classList.remove('dark-mode');
     localStorage.setItem('darkMode', null);
 }
