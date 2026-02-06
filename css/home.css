@@ -314,6 +314,12 @@ hr {
     
 }
 
+.sidebar .menu .menu-itme:nth-of-type(1) img {
+    padding: 5px;
+    border: 1px solid white;
+    border-radius: 20px;
+}
+
 .menu .menu-itme {
     padding: 10px;
     display: flex;
@@ -328,6 +334,8 @@ hr {
     margin-right: 10px;
     flex-shrink: 0;
 }
+
+
 
 .menu .menu-itme a {
     opacity: 0;

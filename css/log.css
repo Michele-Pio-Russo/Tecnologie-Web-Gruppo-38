@@ -138,15 +138,18 @@ body
 }
 
 /*stile per l'icona all'interno degli input*/
-.input img {
+.input img{
     position: absolute;
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
     width: clamp(20px, 1.7vw, 35px);
     height: auto;
-    
     pointer-events: none;
+}
+.input #password + img {
+    pointer-events: all;
+    cursor: pointer;
 }
 .input ::placeholder {
     font-size: clamp(20px, 1.7vw, 40px);
@@ -187,6 +190,7 @@ form a
 form a:hover {
     background-color: var(--colore-link-hover);
 }
+
 .question {
     margin-top: 10px;
 }

@@ -4,6 +4,13 @@ let title = document.getElementsByClassName("theme-icon");
 let darkMode = localStorage.getItem('darkMode');
 //prendiamo il bottone che usiamo per triggerare il cambiamento tra tema chiaro e tema scuro
 const themeToggleButton = document.getElementById('theme-button');
+//prendiamo l'icona del campo password
+const passIco = document.getElementById("PassIcon");
+//prendiamo l'input field della nostra form
+const passFiled = document.getElementById("password");
+
+
+
 //funzione per abilitare il tema scuro
 const enableDarkMode = () => {
     title.item(0).setAttribute("title", "Cambia al tema Scuro");
@@ -44,4 +51,19 @@ themeToggleButton.addEventListener('click', () => {
         disableDarkMode();
     }
 });
+
+
+//associamo all'immagine per cambiare l'icona della password, per renderela visibile o meno
+passIco.addEventListener('click', () => {
+     if (passIco.src.includes("pass_yes.png")) {
+        passIco.src = "../imgs/Login/pass_no.png";
+    } else {
+        passIco.src = "../imgs/Login/pass_yes.png";
+    }
+    if(passFiled.type=="password")
+        passFiled.type="text"
+    else
+        passFiled.type="password"
+});
+
 

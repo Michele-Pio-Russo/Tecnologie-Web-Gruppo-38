@@ -321,6 +321,11 @@ hr {
     margin-right: 10px;
     flex-shrink: 0;
 }
+.sidebar .menu .menu-itme:nth-of-type(3) img {
+    padding: 5px;
+    border: 1px solid white;
+    border-radius: 20px;
+}
 
 .menu .menu-itme a {
     opacity: 0;

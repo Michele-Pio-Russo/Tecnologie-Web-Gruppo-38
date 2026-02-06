@@ -280,6 +280,7 @@ hr {
     opacity: 1;
 }
 
+
 /*classe che gestisce il contenuto della sidebar (testo, immagini, link)*/
 .menu {
     display: flex;
@@ -306,6 +307,11 @@ hr {
     height: 70px;
     margin-right: 10px;
     flex-shrink: 0;
+}
+.sidebar .menu .menu-itme:nth-of-type(2) img {
+    padding: 5px;
+    border: 1px solid white;
+    border-radius: 20px;
 }
 
 .menu .menu-itme a {
