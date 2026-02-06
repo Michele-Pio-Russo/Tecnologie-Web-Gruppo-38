@@ -20,7 +20,6 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         if (password_verify($password, $hash)) {
             $_SESSION['autorizzato'] = true;
             $_SESSION['nome_utente'] = $username; 
-
             header("Location: ../php/home.php"); 
             exit;
         } else {
