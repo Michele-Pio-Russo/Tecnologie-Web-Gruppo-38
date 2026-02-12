@@ -30,17 +30,20 @@
         <h2>SIGN UP</h2>
         <form action="../php/signup.php" method="POST" name="signup-form" onsubmit="return valida(this)">
             <div class="input">
-                <input type="text" id="nome" name="nome" placeholder="Username" onchange="verifica(this)">
+                <input type="text" id="nome" name="nome" placeholder="Username" > <!--onchange="verifica(this)"-->
                 <img src="../imgs/Login/person.png" alt="email">
             </div>
             <div class="input">
-                <input type="email" id="email" name="email" placeholder="Email" onchange="controllaEmail(this)">
+                <input type="email" id="email" name="email" placeholder="Email" > <!--onchange="controllaEmail(this)"-->
                 <img src="../imgs/Login/mail.png" alt="email">
             </div>
             <div class="input">
-                <input type="password" id="password" name="password" placeholder="Password" onchange="controllaPass(this)">
+                <input type="password" id="password" name="password" placeholder="Password" > <!--onchange="controllaPass(this)"-->
                 <img src="../imgs/Login/pass_yes.png" alt="password" id="PassIcon">
-            </div>  
+            </div>
+            <div class="input">
+                <input type="password" id="password1" name="password1" placeholder="Conferma Password" >
+            </div>
             <button type="submit">Registrati</button>
             <div class="question">
                 <p>Sei già registrato? <a href="login.html">Accedi qui</a></p>

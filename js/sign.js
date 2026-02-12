@@ -8,17 +8,18 @@ const themeToggleButton = document.getElementById('theme-button');
 const passIco = document.getElementById("PassIcon");
 //prendiamo l'input field della nostra form
 const passFiled = document.getElementById("password");
+const passFiled1 = document.getElementById("password1");
 
 
 //funzione per abilitare il tema scuro
 const enableDarkMode = () => {
-    title.item(0).setAttribute("title", "Cambia al tema Lunare");
+    title.item(0).setAttribute("title", "Cambia al tema Scuro");
     document.body.classList.add('dark-mode');
     localStorage.setItem('darkMode', 'active');
 }
 //funzione per disabilitare il tema scuro
 const disableDarkMode = () => {
-    title.item(0).setAttribute("title", "Cambia al tema Solare");
+    title.item(0).setAttribute("title", "Cambia al tema Chiaro");
     document.body.classList.remove('dark-mode');
     localStorage.setItem('darkMode', null);
 }
@@ -28,23 +29,42 @@ if (darkMode === 'active') {
 //funzione per controllare le informazioni inserite nella form
 function valida(nomeModulo)
 {
+verifica(nomeModulo.nome);
+controllaPass(nomeModulo.password);
+controllaEmail(nomeModulo.email);
+
 if (nomeModulo.email.value == "") {
 alert("Devi inserire una mail");
 nomeModulo.email.focus();
 return false;
 }
+
+
 if (nomeModulo.nome.value == "") {
 alert("Devi inserire un nome");
 nomeModulo.nome.focus();
 return false;
 }
+
+
 if (nomeModulo.password.value == "") {
 alert("Devi inserire una password");
 nomeModulo.password.focus();
 return false;
 }
+
+
+if (nomeModulo.password.value != nomeModulo.password1.value ) {
+alert("Devi inserire la stessa password");
+nomeModulo.password.focus();
+return false;
+}
+
+
 return true
 }
+
+
 function verifica(nomeInput) {
 nome = nomeInput.value;
 atPos = nome.indexOf("@",0);
@@ -63,8 +83,8 @@ function controllaPass(inputPassword) {
     const password = inputPassword.value;
     let errore = "";
 
-    if (password.length < 4) {
-        errore = "La password deve essere di almeno 4 caratteri.";
+    if (password.length < 8) {
+        errore = "La password deve essere di almeno 8 caratteri.";
     } else if (!/[a-z]/.test(password)) {
         errore = "La password deve contenere almeno una lettera minuscola.";
     } else if (!/[A-Z]/.test(password)) {
@@ -119,9 +139,11 @@ passIco.addEventListener('click', () => {
     } else {
         passIco.src = "../imgs/Login/pass_yes.png";
     }
-    if(passFiled.type=="password")
+    if(passFiled.type=="password"){
         passFiled.type="text"
-    else
+        passFiled1.type="text"}
+    else{
         passFiled.type="password"
+        passFiled1.type="password"}
 });
 
