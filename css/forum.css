@@ -7,6 +7,7 @@
     --checkbox: #8F24F2;
     --colore-bottone:#440085;
     --colore-testo: white;
+    --freccia:  url('../imgs/Logo/vio.png')
 }
 
 /*impostazioni globali per scrollbar e logo della dark mode*/
@@ -17,6 +18,8 @@
     --colore-bottone:#7A3F16;
     .element1 button:hover {
     background-color: #ad5b20;
+    --freccia:  url('../imgs/Logo/aran.png')
+
     }
 }
 
@@ -212,6 +215,8 @@ hr {
 .dark-mode input[type="checkbox"] {
     accent-color: #FF7F11;
 }
+
+.dark-mode 
 
 /*stile della classe main content, include quasi tutto il body sidebar inclusa*/
 .main-content {
@@ -447,6 +452,23 @@ input[type="checkbox"] {
     font-size: 20px;
     opacity: 1 !important;
 }
+
+.commento {
+
+}
+
+.tendina {
+
+}
+
+.tendina:active {
+
+}
+
+.option {
+
+}
+
 
 /*stile del footer*/
 .footer {

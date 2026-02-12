@@ -17,25 +17,24 @@
             <h1>TERA</h1>
         </div>
         <div class="login">
-    <div class="theme-icon" title="Cambia al tema Chiaro">
-        <button id="theme-button">
-            <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Solare" />
-            <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Lunare" />
-        </button>
-    </div>
-    <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
-        <p><?php echo htmlspecialchars($_SESSION['nome_utente']); ?></p>
-        <a href="../php/logout.php" title="Logout">
-            <img src="../imgs/Login/logout.png" alt="User" class="login-icon" />
-        </a>
-    <?php else: ?>
-        <p>Login</p>
-        <a href="login.php" title="Vai alla pagina di accesso">
-            <img src="../imgs/Login/login1.png"
-                 alt="Immagine Login" class="login-icon" />
-        </a>
-    <?php endif; ?>
-</div>
+            <div class="theme-icon" title="Cambia al tema Chiaro">
+                <button id="theme-button">
+                    <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Solare" />
+                    <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Lunare" />
+                </button>
+            </div>
+            <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
+                <p><?php echo htmlspecialchars($_SESSION['nome_utente']); ?></p>
+                <a href="../php/logout.php" title="Logout">
+                    <img src="../imgs/Login/logout.png" alt="User" class="login-icon" />
+                </a>
+            <?php else: ?>
+                <p>Login</p>
+                <a href="login.php" title="Vai alla pagina di accesso">
+                    <img src="../imgs/Login/login1.png" alt="Immagine Login" class="login-icon" />
+                </a>
+            <?php endif; ?>
+        </div>
     </div>
     <div class="main-content">
         <div class="content">
@@ -116,51 +115,126 @@
                     <h3>Dai un voto alle varie sezioni</h3>
                     <h4>Animazione e Disegno:</h4>
                     <div class="domande">
-                    <form class="questionario">
-                        <p>1 <input type="radio" name="votoanimazione" /></p>
-                        <p>2 <input type="radio" name="votoanimazione" /></p>
-                        <p>3 <input type="radio" name="votoanimazione" /></p>
-                        <p>4 <input type="radio" name="votoanimazione" /></p>
-                        <p>5 <input type="radio" name="votoanimazione" /></p>
-                    </form>
-                    <h4>Videogiochi:</h4>
-                    <form class="questionario">
-                        <p>1 <input type="radio" name="votogiochi" /></p>
-                        <p>2 <input type="radio" name="votogiochi" /></p>
-                        <p>3 <input type="radio" name="votogiochi" /></p>
-                        <p>4 <input type="radio" name="votogiochi" /></p>
-                        <p>5 <input type="radio" name="votogiochi" /></p>
-                    </form>
-                    <h4>Hip-Hop:</h4>
-                    <form class="questionario">
-                        <p>1 <input type="radio" name="votohiphop" /></p>
-                        <p>2 <input type="radio" name="votohiphop" /></p>
-                        <p>3 <input type="radio" name="votohiphop" /></p>
-                        <p>4 <input type="radio" name="votohiphop" /></p>
-                        <p>5 <input type="radio" name="votohiphop" /></p>
-                    </form>
-                    <h4>Cinema:</h4>
-                    <form class="questionario">
-                        <p>1 <input type="radio" name="votocinema" /></p>
-                        <p>2 <input type="radio" name="votocinema" /></p>
-                        <p>3 <input type="radio" name="votocinema" /></p>
-                        <p>4 <input type="radio" name="votocinema" /></p>
-                        <p>5 <input type="radio" name="votocinema" /></p>
-                    </form>
-                    <h4>Menzioni Onorevoli:</h4>
-                    <form class="questionario">
-                        <p>1 <input type="radio" name="votomenzioni" /></p>
-                        <p>2 <input type="radio" name="votomenzioni" /></p>
-                        <p>3 <input type="radio" name="votomenzioni" /></p>
-                        <p>4 <input type="radio" name="votomenzioni" /></p>
-                        <p>5 <input type="radio" name="votomenzioni" /></p>
-                    </form>
-                    <div class="element1">
-                        <button id="submit" >Conferma</button>
-                        <button id="reset" >Reimposta</button>
-                    </div>
+                        <form class="questionario">
+                            <p>1 <input type="radio" name="votoanimazione" /></p>
+                            <p>2 <input type="radio" name="votoanimazione" /></p>
+                            <p>3 <input type="radio" name="votoanimazione" /></p>
+                            <p>4 <input type="radio" name="votoanimazione" /></p>
+                            <p>5 <input type="radio" name="votoanimazione" /></p>
+                        </form>
+                        <h4>Videogiochi:</h4>
+                        <form class="questionario">
+                            <p>1 <input type="radio" name="votogiochi" /></p>
+                            <p>2 <input type="radio" name="votogiochi" /></p>
+                            <p>3 <input type="radio" name="votogiochi" /></p>
+                            <p>4 <input type="radio" name="votogiochi" /></p>
+                            <p>5 <input type="radio" name="votogiochi" /></p>
+                        </form>
+                        <h4>Hip-Hop:</h4>
+                        <form class="questionario">
+                            <p>1 <input type="radio" name="votohiphop" /></p>
+                            <p>2 <input type="radio" name="votohiphop" /></p>
+                            <p>3 <input type="radio" name="votohiphop" /></p>
+                            <p>4 <input type="radio" name="votohiphop" /></p>
+                            <p>5 <input type="radio" name="votohiphop" /></p>
+                        </form>
+                        <h4>Cinema:</h4>
+                        <form class="questionario">
+                            <p>1 <input type="radio" name="votocinema" /></p>
+                            <p>2 <input type="radio" name="votocinema" /></p>
+                            <p>3 <input type="radio" name="votocinema" /></p>
+                            <p>4 <input type="radio" name="votocinema" /></p>
+                            <p>5 <input type="radio" name="votocinema" /></p>
+                        </form>
+                        <h4>Menzioni Onorevoli:</h4>
+                        <form class="questionario">
+                            <p>1 <input type="radio" name="votomenzioni" /></p>
+                            <p>2 <input type="radio" name="votomenzioni" /></p>
+                            <p>3 <input type="radio" name="votomenzioni" /></p>
+                            <p>4 <input type="radio" name="votomenzioni" /></p>
+                            <p>5 <input type="radio" name="votomenzioni" /></p>
+                        </form>
+                        <div class="element1">
+                            <button id="submit">Conferma</button>
+                            <button id="reset">Reimposta</button>
+                        </div>
                     </div>
             </div>
+            <h3>Se desideri, lascia un commento per il sito</h2>
+                <form class="commento">
+                    <div class="option">
+                        <div class="tendina">
+                            Home
+                            <img scr="#" alt="none">
+                        </div>
+                        <textarea name="commento" id="commento" cols="30" rows="10"
+                            placeholder="Scrivi qui il tuo commento..."></textarea>
+                    </div>
+
+                    <div class="option">
+                        <div class="tendina">
+                            Home
+                            <img scr="#" alt="none">
+                        </div>
+                        <textarea name="commento" id="commento" cols="30" rows="10"
+                            placeholder="Scrivi qui il tuo commento..."></textarea>
+                    </div>
+
+                    <div class="option">
+                        <div class="tendina">
+                            Home
+                            <img scr="#" alt="none">
+                        </div>
+                        <textarea name="commento" id="commento" cols="30" rows="10"
+                            placeholder="Scrivi qui il tuo commento..."></textarea>
+                    </div>
+
+                    <div class="option">
+                        <div class="tendina">
+                            Home
+                            <img scr="#" alt="none">
+                        </div>
+                        <textarea name="commento" id="commento" cols="30" rows="10"
+                            placeholder="Scrivi qui il tuo commento..."></textarea>
+                    </div>
+                    
+                    <div class="option">
+                        <div class="tendina">
+                            Home
+                            <img scr="#" alt="none">
+                        </div>
+                        <textarea name="commento" id="commento" cols="30" rows="10"
+                            placeholder="Scrivi qui il tuo commento..."></textarea>
+                    </div>
+
+                    <div class="option">
+                        <div class="tendina">
+                            Home
+                            <img scr="#" alt="none">
+                        </div>
+                        <textarea name="commento" id="commento" cols="30" rows="10"
+                            placeholder="Scrivi qui il tuo commento..."></textarea>
+                    </div>
+
+                    <div class="option">
+                        <div class="tendina">
+                            Home
+                            <img scr="#" alt="none">
+                        </div>
+                        <textarea name="commento" id="commento" cols="30" rows="10"
+                            placeholder="Scrivi qui il tuo commento..."></textarea>
+                    </div>
+
+
+
+                    <textarea name="commento" id="commento" cols="30" rows="10"
+                        placeholder="Scrivi qui il tuo commento..."></textarea>
+                    <img src="../imgs/Form/Ringraziamenti.jpg" alt="forum image" width="1000" align="right"
+                        class="image2">
+
+                    <div>
+
+                    </div>
         </div>
         <div class="sidebar">
             <nav class="menu">
@@ -199,7 +273,7 @@
         <div class="contacts">
             <div class="contact whatsapp">
                 <img src="../imgs/Home/Footer/icons8-whatsapp-100 (1).png" alt="Whatsapp">
-                <a href="#">Whatsapp</a>
+                <a href="https://chat.whatsapp.com/DgrzEMnL7RWJKGSAYlQZ47?mode=gi_t">Whatsapp</a>
             </div>
             <div class="contact instagram">
                 <img src="../imgs/Home/Footer/icons8-instagram-100.png" alt="Instagram">
@@ -207,7 +281,7 @@
             </div>
             <div class="contact facebook">
                 <img src="../imgs/Home/Footer/icons8-facebook-nuovo-100.png" alt="Facebook">
-                <a href="#">Facebook</a>
+                <a href="https://www.facebook.com/groups/1338264634726723/">Facebook</a>
             </div>
             <div class="contact telegram">
                 <img src="../imgs/Home/Footer/icons8-telegramma-100.png" alt="Telegram">
@@ -218,7 +292,7 @@
                 <a href="#">Discord</a>
             </div>
         </div>
-        <p>© <?php echo date('Y')?> TERA. All rights reserved.</p>
+        <p>© <?php echo date('Y') ?> TERA. All rights reserved.</p>
     </div>
 </body>
 

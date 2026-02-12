@@ -205,7 +205,7 @@
         <div class="contacts">
             <div class="contact whatsapp">
                 <img src="../imgs/Home/Footer/icons8-whatsapp-100 (1).png" alt="Whatsapp">
-                <a href="#">Whatsapp</a>
+                <a href="https://chat.whatsapp.com/DgrzEMnL7RWJKGSAYlQZ47?mode=gi_t">Whatsapp</a>
             </div>
             <div class="contact instagram">
                 <img src="../imgs/Home/Footer/icons8-instagram-100.png" alt="Instagram">
@@ -213,7 +213,7 @@
             </div>
             <div class="contact facebook">
                 <img src="../imgs/Home/Footer/icons8-facebook-nuovo-100.png" alt="Facebook">
-                <a href="#">Facebook</a>
+                <a href="https://www.facebook.com/groups/1338264634726723/">Facebook</a>
             </div>
             <div class="contact telegram">
                 <img src="../imgs/Home/Footer/icons8-telegramma-100.png" alt="Telegram">
