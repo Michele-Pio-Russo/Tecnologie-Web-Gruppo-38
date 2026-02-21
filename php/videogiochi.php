@@ -21,7 +21,7 @@
     <button type="button" id="get-pos-btn" >
         <img src="../imgs/Altro/position.png" alt="Posizione" class="position-icon" />
     </button>
-        </div>
+ </div>
 
 <script>
 document.getElementById('get-pos-btn').addEventListener('click', function() {
