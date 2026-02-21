@@ -5,6 +5,6 @@ session_start();
 session_unset();
 session_destroy();
 //ritorniamo alla home
-header("Location: ../php/home.php");
+header("Location: home.php");
 exit;
 ?>
