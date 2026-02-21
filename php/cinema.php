@@ -23,6 +23,64 @@
             <h1>TERA</h1>
         </div>
         <div class="login">
+            <div class="pos" title="Informazioni sulla posizione">
+    <button type="button" id="get-pos-btn" >
+        <img src="../imgs/Altro/position.png" alt="Posizione" class="position-icon" />
+    </button>
+        </div>
+
+<script>
+document.getElementById('get-pos-btn').addEventListener('click', function() {
+    const isLogged = <?php echo (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) ? 'true' : 'false'; ?>;
+
+    if (!isLogged) {
+        alert("Attenzione: Devi essere loggato per visualizzare la tua posizione.");
+        return;
+    }
+
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            // Utilizziamo un servizio di Reverse Geocoding gratuito (BigDataCloud o Nominatim)
+            // Questo trasforma le coordinate in Città e Paese reali
+            const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=it`;
+
+            fetch(geoApiUrl)
+            .then(res => res.json())
+            .then(data => {
+                const citta = data.city || data.locality || "Sconosciuta";
+                const regione = data.principalSubdivision || "Sconosciuta";
+                const paese = data.countryName || "Scono    sciuto";
+
+                const msg = `📍 La tua posizione attuale:\n` +
+                            `   Città: ${citta}\n` +
+                            `   Regione: ${regione}\n` +
+                            `   Paese: ${paese}\n` +
+                            `   Coordinate: ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+
+                alert(msg);
+
+                // Opzionale: invia al server per salvarlo in sessione
+                fetch('../php/salva_posizione.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `lat=${lat}&lon=${lon}&city=${encodeURIComponent(citta)}`
+                });
+            })
+            .catch(() => {
+                alert("Errore nel recupero dei dettagli dell'indirizzo.");
+            });
+
+        }, function() {
+            alert("Errore: Attiva il GPS o consenti l'accesso alla posizione.");
+        });
+    } else {
+        alert("Il tuo browser non supporta la geolocalizzazione.");
+    }
+});
+</script>
     <div class="theme-icon" title="Cambia al tema Chiaro">
         <button id="theme-button">
             <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Solare" />

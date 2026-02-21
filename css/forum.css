@@ -177,7 +177,9 @@ hr {
 .theme-icon img:last-child {
     display: none;
 }
-
+.dark-mode .pos {
+    background-color: #7A3F16;
+}
 .dark-mode .theme-icon img:first-child {
     display: none;
 }
