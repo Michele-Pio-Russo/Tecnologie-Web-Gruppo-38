@@ -21,7 +21,7 @@
     <button type="button" id="get-pos-btn" >
         <img src="../imgs/Altro/position.png" alt="Posizione" class="position-icon" />
     </button>
-</div>
+        </div>
 
 <script>
 document.getElementById('get-pos-btn').addEventListener('click', function() {
@@ -46,7 +46,7 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
             .then(data => {
                 const citta = data.city || data.locality || "Sconosciuta";
                 const regione = data.principalSubdivision || "Sconosciuta";
-                const paese = data.countryName || "Sconosciuto";
+                const paese = data.countryName || "Scono    sciuto";
 
                 const msg = `📍 La tua posizione attuale:\n` +
                             `   Città: ${citta}\n` +
@@ -163,12 +163,7 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                 </div>
                 <div class="menu-itme">
                     <img src="../imgs/Home/Icone/icons8-forum-100.png" alt="forum">
-
-                    <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
-                     <a href="forum.php">FORUM</a>
-                    <?php else: ?>
-                    <a href="#" onclick="alert('Accesso negato: devi effettuare il login per entrare nel forum!'); return false;">FORUM</a>
-                    <?php endif; ?>
+                    <a href="forum.php">FORUM</a>
                 </div>
             </nav>
         </div>

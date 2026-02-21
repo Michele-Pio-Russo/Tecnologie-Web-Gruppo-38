@@ -210,6 +210,9 @@ hr {
 .dark-mode .theme-icon {
     background-color: #7A3F16;
 }
+.dark-mode .pos {
+    background-color: #7A3F16;
+}
 
 
 /*stile della classe main content, include quasi tutto il body sidebar inclusa*/
