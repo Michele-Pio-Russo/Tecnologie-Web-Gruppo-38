@@ -44,7 +44,7 @@ CREATE TABLE commenti (
 
 -- CREAZIONE TABELLA COMMENTI SEZIONI
 
-CREATE TABLE commenti (
+CREATE TABLE commenti_sezioni (
     id SERIAL PRIMARY KEY,
     home TEXT NOT NULL,
 	disegno TEXT NOT NULL,
