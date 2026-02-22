@@ -402,30 +402,25 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
     <!-- ========================= -->
     <div class="footer">
         <div class="contacts">
-
             <div class="contact whatsapp">
                 <img src="../imgs/Home/Footer/icons8-whatsapp-100 (1).png" alt="Whatsapp">
                 <a href="https://chat.whatsapp.com/DgrzEMnL7RWJKGSAYlQZ47?mode=gi_t">Whatsapp</a>
             </div>
-
             <div class="contact instagram">
                 <img src="../imgs/Home/Footer/icons8-instagram-100.png" alt="Instagram">
-                <a href="#">Instagram</a>
+                <a href="https://www.instagram.com/teraartisticproject/">Instagram</a>
             </div>
-
             <div class="contact facebook">
                 <img src="../imgs/Home/Footer/icons8-facebook-nuovo-100.png" alt="Facebook">
-                <a href="https://www.facebook.com/groups/1338264634726723/">Facebook</a>
+                <a href="https://www.facebook.com/groups/1338264634726723">Facebook</a>
             </div>
-
             <div class="contact telegram">
                 <img src="../imgs/Home/Footer/icons8-telegramma-100.png" alt="Telegram">
-                <a href="#">Telegram</a>
+                <a href="https://t.me/+Vgbv8NL50TQ5NDU0">Telegram</a>
             </div>
-
             <div class="contact discord">
                 <img src="../imgs/Home/Footer/icons8-logo-discord-100.png" alt="Discord">
-                <a href="#">Discord</a>
+                <a href="https://discord.gg/TpwZh35J">Discord</a>
             </div>
 
         </div>

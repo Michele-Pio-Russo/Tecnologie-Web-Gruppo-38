@@ -644,19 +644,19 @@
             </div>
             <div class="contact instagram">
                 <img src="../imgs/Home/Footer/icons8-instagram-100.png" alt="Instagram">
-                <a href="#">Instagram</a>
+                <a href="https://www.instagram.com/teraartisticproject/">Instagram</a>
             </div>
             <div class="contact facebook">
                 <img src="../imgs/Home/Footer/icons8-facebook-nuovo-100.png" alt="Facebook">
-                <a href="https://www.facebook.com/groups/1338264634726723/">Facebook</a>
+                <a href="https://www.facebook.com/groups/1338264634726723">Facebook</a>
             </div>
             <div class="contact telegram">
                 <img src="../imgs/Home/Footer/icons8-telegramma-100.png" alt="Telegram">
-                <a href="#">Telegram</a>
+                <a href="https://t.me/+Vgbv8NL50TQ5NDU0">Telegram</a>
             </div>
             <div class="contact discord">
                 <img src="../imgs/Home/Footer/icons8-logo-discord-100.png" alt="Discord">
-                <a href="#">Discord</a>
+                <a href="https://discord.gg/TpwZh35J">Discord</a>
             </div>
         </div>
         <p>© <?php echo date('Y') ?> TERA. All rights reserved.</p>
