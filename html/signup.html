@@ -20,7 +20,7 @@
                     <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Chiaro"/>
                     <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Scuro"/>
                 </button>
-        </div>
+            </div>
             <a href="../php/home.php" title="Vai alla pagina principale">
             <img src="../imgs/Home/Icone/icons8-home-100.png"
                 alt="Immagine Home" class="home-icon" /></a>
@@ -30,19 +30,19 @@
         <h2>SIGN UP</h2>
         <form action="../php/signup.php" method="POST" name="signup-form" onsubmit="return valida(this)">
             <div class="input">
-                <input type="text" id="nome" name="nome" placeholder="Username" > <!--onchange="verifica(this)"-->
+                <input type="text" id="nome" name="nome" placeholder="Username" required>
                 <img src="../imgs/Login/person.png" alt="email">
             </div>
             <div class="input">
-                <input type="email" id="email" name="email" placeholder="Email" > <!--onchange="controllaEmail(this)"-->
+                <input type="email" id="email" name="email" placeholder="Email" required>
                 <img src="../imgs/Login/mail.png" alt="email">
             </div>
             <div class="input">
-                <input type="password" id="password" name="password" placeholder="Password" > <!--onchange="controllaPass(this)"-->
+                <input type="password" id="password" name="password" placeholder="Password" required>
                 <img src="../imgs/Login/pass_yes.png" alt="password" id="PassIcon">
             </div>
             <div class="input">
-                <input type="password" id="password1" name="password1" placeholder="Conferma Password" >
+                <input type="password" id="password1" name="password1" placeholder="Conferma Password" required>
             </div>
             <button type="submit">Registrati</button>
             <div class="question">

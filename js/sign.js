@@ -29,53 +29,55 @@ if (darkMode === 'active') {
 //funzione per controllare le informazioni inserite nella form
 function valida(nomeModulo)
 {
-verifica(nomeModulo.nome);
-controllaPass(nomeModulo.password);
-controllaEmail(nomeModulo.email);
+    if (nomeModulo.email.value == "") {
+    alert("Devi inserire una mail");
+    nomeModulo.email.focus();
+    return false;
+    }
 
-if (nomeModulo.email.value == "") {
-alert("Devi inserire una mail");
-nomeModulo.email.focus();
-return false;
-}
+    if (nomeModulo.nome.value == "") {
+    alert("Devi inserire un nome");
+    nomeModulo.nome.focus();
+    return false;
+    }
 
+    if (nomeModulo.password.value == "") {
+    alert("Devi inserire una password");
+    nomeModulo.password.focus();
+    return false;
+    }
 
-if (nomeModulo.nome.value == "") {
-alert("Devi inserire un nome");
-nomeModulo.nome.focus();
-return false;
-}
+    if (nomeModulo.password.value != nomeModulo.password1.value ) {
+    alert("Devi inserire la stessa password");
+    nomeModulo.password.focus();
+    return false;
+    }
 
+    verifica(nomeModulo.nome);
 
-if (nomeModulo.password.value == "") {
-alert("Devi inserire una password");
-nomeModulo.password.focus();
-return false;
-}
+    if (!controllaPass(nomeModulo.password)) {
+        return false;
+    }
 
+    if (!controllaEmail(nomeModulo.email)) {
+        return false;
+    }
 
-if (nomeModulo.password.value != nomeModulo.password1.value ) {
-alert("Devi inserire la stessa password");
-nomeModulo.password.focus();
-return false;
-}
-
-
-return true
+    return true;
 }
 
 
 function verifica(nomeInput) {
-nome = nomeInput.value;
-atPos = nome.indexOf("@",0);
-if(atPos > -1) {
-alert("Il campo dell'username non accetta la @");
-var a = new Array();
-a = nome.split("@"); // restituisce un array splittato dalla @
-nomep = a[0];
-nomed = a[1];
-nomeInput.value = nomep+nomed;
-}
+    nome = nomeInput.value;
+    atPos = nome.indexOf("@",0);
+    if(atPos > -1) {
+    alert("Il campo dell'username non accetta la @");
+    var a = new Array();
+    a = nome.split("@"); // restituisce un array splittato dalla @
+    nomep = a[0];
+    nomed = a[1];
+    nomeInput.value = nomep+nomed;
+    }
 }
 
 //funzione che usiamo per controllare la validità della password che inserisce l'utente
@@ -111,15 +113,17 @@ function controllaEmail(inputEmail)
     if (!email.includes("@")) {
     alert("L'indirizzo email deve contenere una @\nNon ti preoccupare, l'ho aggiunta io :)");
     inputEmail.value = email + "@";
-    return;
+    return false;
     }
     const dominiComuni = ["gmail.com", "outlook.com", "yahoo.com", "hotmail.com", "libero.it"];
     const dominioUtente = email.split('@')[1];
 
     if (!dominiComuni.includes(dominioUtente)) {
          alert("Dominio della main non valido => Inserire uno dei seguenti domini:\n- gmail.com\n- outlook.com\n- yahoo.com\n- hotmail.com\n- libero.it")
-         rerurn
+         return false;
      }
+     
+     return true;
 }
 
 //associamo al bottone la funzione per triggerare il cambiamento tra tema chiaro e tema scuro
@@ -146,4 +150,3 @@ passIco.addEventListener('click', () => {
         passFiled.type="password"
         passFiled1.type="password"}
 });
-
