@@ -330,7 +330,7 @@ hr {
 /* Sezione Draggable */
 .container {
   display: flex;
-  width: 40%;
+  width: 50%;
   flex-direction: column;
   gap: 20px;
   font-family: sans-serif;

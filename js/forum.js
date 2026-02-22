@@ -54,44 +54,62 @@ themeToggleButton.addEventListener('click', () => {
 });
 
 //script per la sezione Draggable
-const items = document.querySelectorAll('.item');
-const zones = document.querySelectorAll('.drop-zone');
-
-// Gestione degli elementi trascinabili
-items.forEach(item => {
-  item.addEventListener('dragstart', (e) => {
-    // Salviamo l'ID dell'elemento che stiamo trascinando
-    e.dataTransfer.setData('text/plain', e.target.id);
-    // Effetto visivo durante il trascinamento
-    setTimeout(() => e.target.classList.add('hide'), 0);
-  });
-
-  item.addEventListener('dragend', (e) => {
-    e.target.classList.remove('hide');
-  });
-});
-
-// Gestione delle zone di rilascio
-zones.forEach(zone => {
-  // Necessario per consentire il "drop" (per default i browser lo bloccano)
-  zone.addEventListener('dragover', (e) => {
-    e.preventDefault(); 
-  });
-
-  zone.addEventListener('drop', (e) => {
-    e.preventDefault();
+document.addEventListener('DOMContentLoaded', () => {
     
-    // Recuperiamo l'ID dell'elemento trascinato
-    const id = e.dataTransfer.getData('text/plain');
-    const draggable = document.getElementById(id);
-    
-    // Assicuriamoci di appendere l'elemento alla drop-zone corretta
-    if (e.target.classList.contains('drop-zone')) {
-      e.target.appendChild(draggable);
-    } else {
-      // Se l'utente rilascia sopra un altro elemento già presente, 
-      // lo agganciamo comunque al contenitore padre
-      e.target.closest('.drop-zone').appendChild(draggable);
-    }
+    const items = document.querySelectorAll('.item');
+    const zonaDisponibili = document.getElementById('sezioni-disponibili');
+    const zonaPreferita = document.getElementById('sezione-preferita');
+
+    // 1. Rendiamo gli elementi trascinabili
+    items.forEach(item => {
+      item.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', e.target.id);
+        setTimeout(() => e.target.classList.add('hide'), 0);
+      });
+
+      item.addEventListener('dragend', (e) => {
+        e.target.classList.remove('hide');
+      });
+    });
+
+    // Le due zone in cui possiamo rilasciare gli elementi
+    const dropZones = [zonaDisponibili, zonaPreferita];
+
+    dropZones.forEach(zone => {
+      zone.addEventListener('dragover', (e) => {
+        e.preventDefault(); // Obbligatorio per abilitare il "drop"
+      });
+
+      zone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        
+        // Recuperiamo l'elemento che stiamo trascinando
+        const draggedId = e.dataTransfer.getData('text/plain');
+        const draggedElement = document.getElementById(draggedId);
+        
+        if (!draggedElement) return;
+
+        // Troviamo la zona esatta su cui stiamo rilasciando
+        const targetZone = e.target.closest('.drop-zone');
+
+        // LOGICA DI SOSTITUZIONE
+        if (targetZone === zonaPreferita) {
+          // Controlliamo se c'è già un elemento dentro "La tua Preferita"
+          const elementoGiaPresente = zonaPreferita.querySelector('.item');
+
+          // Se c'è già un elemento, e NON è quello che stiamo attualmente trascinando...
+          if (elementoGiaPresente && elementoGiaPresente !== draggedElement) {
+            // ...lo rimandiamo nella lista delle sezioni disponibili
+            zonaDisponibili.appendChild(elementoGiaPresente);
+          }
+          
+          // Inseriamo il nuovo elemento nei preferiti
+          zonaPreferita.appendChild(draggedElement);
+        } 
+        else if (targetZone === zonaDisponibili) {
+          // Se stiamo riportando un elemento indietro, lo aggiungiamo semplicemente alla lista
+          zonaDisponibili.appendChild(draggedElement);
+        }
+      });
+    });
   });
-});
