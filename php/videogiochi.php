@@ -129,7 +129,7 @@
             <div class="element2">
                 <figure>
                 <img class="image2" src="../imgs/Videogiochi/ff.jpg" alt="cloud e aerith">
-                <button type="button" class="fav-btn" data-path="../imgs/Videogiochi/ff.jpg">
+                <button type="button" class="fav-btn" data-path="../imgs/Videogiochi/ff.jpg" title="Aggiungi/Rimuovi dai preferiti">
                                     <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                                 </button>
                 </figure>
