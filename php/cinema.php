@@ -14,9 +14,6 @@
 
 <body>
 
-    <!-- ========================= -->
-    <!-- HEADER -->
-    <!-- ========================= -->
     <div class="header">
         <div class="logo">
             <div class="immagine-logo"></div>
@@ -24,409 +21,316 @@
         </div>
         <div class="login">
             <div class="pos" title="Informazioni sulla posizione">
-    <button type="button" id="get-pos-btn" >
-        <img src="../imgs/Altro/position.png" alt="Posizione" class="position-icon" />
-    </button>
-        </div>
+                <button type="button" id="get-pos-btn">
+                    <img src="../imgs/Altro/position.png" alt="Posizione" class="position-icon" />
+                </button>
+            </div>
 
-<script>
-document.getElementById('get-pos-btn').addEventListener('click', function() {
-    const isLogged = <?php echo (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) ? 'true' : 'false'; ?>;
+            <script>
+                document.getElementById('get-pos-btn').addEventListener('click', function() {
+                    const isLogged = <?php echo (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) ? 'true' : 'false'; ?>;
 
-    if (!isLogged) {
-        alert("Attenzione: Devi essere loggato per visualizzare la tua posizione.");
-        return;
-    }
+                    if (!isLogged) {
+                        alert("Attenzione: Devi essere loggato per visualizzare la tua posizione.");
+                        return;
+                    }
 
-    if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
+                    if ("geolocation" in navigator) {
+                        navigator.geolocation.getCurrentPosition(function(position) {
+                            const lat = position.coords.latitude;
+                            const lon = position.coords.longitude;
+                            const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=it`;
 
-            // Utilizziamo un servizio di Reverse Geocoding gratuito (BigDataCloud o Nominatim)
-            // Questo trasforma le coordinate in Città e Paese reali
-            const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=it`;
+                            fetch(geoApiUrl)
+                                .then(res => res.json())
+                                .then(data => {
+                                    const citta = data.city || data.locality || "Sconosciuta";
+                                    const regione = data.principalSubdivision || "Sconosciuta";
+                                    const paese = data.countryName || "Sconosciuto";
 
-            fetch(geoApiUrl)
-            .then(res => res.json())
-            .then(data => {
-                const citta = data.city || data.locality || "Sconosciuta";
-                const regione = data.principalSubdivision || "Sconosciuta";
-                const paese = data.countryName || "Scono    sciuto";
+                                    const msg = `📍 La tua posizione attuale:\n` +
+                                        `   Città: ${citta}\n` +
+                                        `   Regione: ${regione}\n` +
+                                        `   Paese: ${paese}\n` +
+                                        `   Coordinate: ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
 
-                const msg = `📍 La tua posizione attuale:\n` +
-                            `   Città: ${citta}\n` +
-                            `   Regione: ${regione}\n` +
-                            `   Paese: ${paese}\n` +
-                            `   Coordinate: ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+                                    alert(msg);
 
-                alert(msg);
+                                    fetch('../php/salva_posizione.php', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/x-www-form-urlencoded'
+                                        },
+                                        body: `lat=${lat}&lon=${lon}&city=${encodeURIComponent(citta)}`
+                                    });
+                                })
+                                .catch(() => {
+                                    alert("Errore nel recupero dei dettagli dell'indirizzo.");
+                                });
 
-                // Opzionale: invia al server per salvarlo in sessione
-                fetch('../php/salva_posizione.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: `lat=${lat}&lon=${lon}&city=${encodeURIComponent(citta)}`
+                        }, function() {
+                            alert("Errore: Attiva il GPS o consenti l'accesso alla posizione.");
+                        });
+                    } else {
+                        alert("Il tuo browser non supporta la geolocalizzazione.");
+                    }
                 });
-            })
-            .catch(() => {
-                alert("Errore nel recupero dei dettagli dell'indirizzo.");
-            });
+            </script>
 
-        }, function() {
-            alert("Errore: Attiva il GPS o consenti l'accesso alla posizione.");
-        });
-    } else {
-        alert("Il tuo browser non supporta la geolocalizzazione.");
-    }
-});
-</script>
-    <div class="theme-icon" title="Cambia al tema Chiaro">
-        <button id="theme-button">
-            <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Solare" />
-            <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Lunare" />
-        </button>
-    </div>
-    <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
-        <p><?php echo htmlspecialchars($_SESSION['nome_utente']); ?></p>
-        <div class="pref-icon" title="Vai ai preferiti">
-            <a href="preferiti.php">
-                <img src="../imgs/Altro/preferiti.gif" alt="Preferiti" class="preferiti-icon" />
-            </a>
+            <div class="theme-icon" title="Cambia al tema Chiaro">
+                <button id="theme-button">
+                    <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Solare" />
+                    <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Lunare" />
+                </button>
+            </div>
+
+            <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
+                <p><?php echo htmlspecialchars($_SESSION['nome_utente']); ?></p>
+                <div class="pref-icon" title="Vai ai preferiti">
+                    <a href="preferiti.php">
+                        <img src="../imgs/Altro/preferiti.gif" alt="Preferiti" class="preferiti-icon" />
+                    </a>
+                </div>
+                <a href="../php/logout.php" title="Logout">
+                    <img src="../imgs/Login/logout.png" alt="User" class="login-icon" />
+                </a>
+            <?php else: ?>
+                <p>Login</p>
+                <a href="login.php" title="Vai alla pagina di accesso">
+                    <img src="../imgs/Login/login1.png" alt="Immagine Login" class="login-icon" />
+                </a>
+            <?php endif; ?>
         </div>
-        <a href="../php/logout.php" title="Logout">
-            <img src="../imgs/Login/logout.png" alt="User" class="login-icon" />
-        </a>
-    <?php else: ?>
-        <p>Login</p>
-        <a href="login.php" title="Vai alla pagina di accesso">
-            <img src="../imgs/Login/login1.png"
-                 alt="Immagine Login" class="login-icon" />
-        </a>
-    <?php endif; ?>
-</div>
     </div>
 
-    <!-- ========================= -->
-    <!-- MAIN CONTENT -->
-    <!-- ========================= -->
     <div class="main-content">
-
         <div class="content-wrapper">
 
-            <!-- ========================= -->
-            <!-- CONTENT 1 -->
-            <!-- ========================= -->
             <div class="content">
                 <div class="sectionlight">
                     <h2 style="text-align: center;">Cinema</h2>
                     <div class="element3">
-                        <p>Il cinema è stato rivoluzionario: ha preso la fotografia e le ha dato
-                            movimento e parola. È quell'arte che riesce a farti vivere mille vite diverse
-                            stando seduto al buio, unendo immagini, musica e storie per farti emozionare come
-                            nient'altro sa fare.
-                        </p>
+                        <p>Il cinema è stato rivoluzionario: ha preso la fotografia e le ha dato movimento e parola. È quell'arte che riesce a farti vivere mille vite diverse stando seduto al buio, unendo immagini, musica e storie per farti emozionare come nient'altro sa fare.</p>
                     </div>
                     <hr>
-                    <h2>Il Cinema come Linguaggio Totale</h2>
 
+                    <h2>Il Cinema come Linguaggio Totale</h2>
                     <div class="element1">
                         <figure>
-                            <img class="image1" src="../imgs/Cinema/c1.jpg" alt="Errore di caricamento">
+                            <img class="image1" src="../imgs/Cinema/c1.jpg" alt="Cinema Linguaggio">
+                            <figcaption style="text-align: center;">
+                                L'esperienza sensoriale del cinema
+                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/c1.jpg')" title="Aggiungi ai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
                         </figure>
-                        <p>
-                            Il cinema è una forma d’arte totale, capace di fondere narrazione, immagine,
-                            suono e performance in un’unica esperienza sensoriale.
-                            Ogni scelta formale, dalla luce al montaggio, contribuisce
-                            a guidare lo spettatore dentro una visione.
-                        </p>
+                        <p>Il cinema è una forma d’arte totale, capace di fondere narrazione, immagine, suono e performance in un’unica esperienza sensoriale. Ogni scelta formale, dalla luce al montaggio, contribuisce a guidare lo spettatore dentro una visione.</p>
                     </div>
 
-                    <br><br><br><hr><br><br><br>
+                    <br><br><br>
+                    <hr><br><br><br>
 
                     <h2 style="text-align: right;">Regia: La Visione che Tiene Insieme Tutto</h2>
-
                     <div class="element2">
                         <figure>
-                            <img class="image1" src="../imgs/Cinema/c2.jpg" alt="Errore di caricamento">
+                            <img class="image1" src="../imgs/Cinema/c2.jpg" alt="Regia">
+                            <figcaption style="text-align: center;">
+                                Il tocco del regista
+                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/c2.jpg')" title="Aggiungi ai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
                         </figure>
-                        <p>
-                            La regia è l’asse portante di un film. È la visione che coordina e armonizza tutti gli
-                            elementi, trasformando una storia scritta in un’esperienza emotiva concreta. Attraverso il
-                            controllo del ritmo, del punto di vista e della messa in scena, il regista decide non solo
-                            cosa raccontare, ma come farlo percepire. La regia è, in questo senso, un atto
-                            interpretativo: una lettura del mondo tradotta in immagini.
-                        </p>
+                        <p>La regia è l’asse portante di un film. È la visione che coordina e armonizza tutti gli elementi, trasformando una storia scritta in un’esperienza emotiva concreta. Attraverso il controllo del ritmo, del punto di vista e della messa in scena, il regista decide non solo cosa raccontare, ma come farlo percepire.</p>
                     </div>
 
-                    <br><br><br><hr><br><br><br>
+                    <br><br><br>
+                    <hr><br><br><br>
 
                     <h2>Recitazione: Dare un Corpo all’Idea</h2>
-
                     <div class="element1">
                         <figure>
-                            <img class="image1" src="../imgs/Cinema/c3.jpg" alt="Errore di caricamento">
+                            <img class="image1" src="../imgs/Cinema/c3.jpg" alt="Recitazione">
+                            <figcaption style="text-align: center;">
+                                L'incarnazione del personaggio
+                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/c3.jpg')" title="Aggiungi ai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
                         </figure>
-                        <p>
-                            La recitazione è l’arte di incarnare il personaggio. Attraverso il corpo, la voce e lo
-                            sguardo, l’attore rende credibile ciò che sulla pagina è solo potenziale. È grazie alla
-                            performance che lo spettatore può identificarsi, empatizzare o entrare in conflitto con ciò
-                            che vede. La recitazione non trasmette solo emozioni, ma rende visibili idee e tensioni
-                            interiori.
-                        </p>
+                        <p>La recitazione è l’arte di incarnare il personaggio. Attraverso il corpo, la voce e lo sguardo, l’attore rende credibile ciò che sulla pagina è solo potenziale. È grazie alla performance che lo spettatore può identificarsi o entrare in conflitto con ciò che vede.</p>
                     </div>
-
                 </div>
             </div>
 
-            <!-- ========================= -->
-            <!-- CONTENT 2 -->
-            <!-- ========================= -->
             <div class="content2">
                 <div class="sectiondark">
-
-                    <h2 style="text-align: right;">Sceneggiatura: La Struttura Invisibile del Racconto</h2>
-
+                    <h2 style="text-align: right;">Sceneggiatura: La Struttura Invisibile</h2>
                     <div class="element2">
                         <figure>
-                            <img class="image1" src="../imgs/Cinema/c4.jpg" alt="Errore di caricamento">
+                            <img class="image1" src="../imgs/Cinema/c4.jpg" alt="Sceneggiatura">
+                            <figcaption style="text-align: center;">
+                                Lo scheletro del racconto
+                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/c4.jpg')" title="Aggiungi ai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
                         </figure>
-                        <p>
-                            La sceneggiatura è lo scheletro nascosto del film. Trama, dialoghi, conflitti e sviluppo dei
-                            personaggi costruiscono l’ossatura su cui tutto il resto prende forma. Un buon script non si
-                            limita a raccontare eventi, ma organizza il tempo, il significato e la tensione narrativa. È
-                            una scrittura che pensa già per immagini.
-                        </p>
+                        <p>La sceneggiatura è lo scheletro nascosto del film. Trama, dialoghi e conflitti costruiscono l’ossatura su cui tutto il resto prende forma. Un buon script non si limita a raccontare eventi, ma organizza il tempo e la tensione narrativa.</p>
                     </div>
 
-                    <br><br><br><hr><br><br><br>
+                    <br><br><br>
+                    <hr><br><br><br>
 
                     <h2>Messaggi: L’Arte che Parla Senza Dire</h2>
-
                     <div class="element1">
                         <figure>
-                            <img class="image1" src="../imgs/Cinema/c5.jpg" alt="Errore di caricamento">
+                            <img class="image1" src="../imgs/Cinema/c5.jpg" alt="Messaggi">
+                            <figcaption style="text-align: center;">
+                                Riflessione e sottotesto
+                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/c5.jpg')" title="Aggiungi ai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
                         </figure>
-                        <p>
-                            Il cinema può essere puro intrattenimento, ma anche strumento di riflessione sociale,
-                            politica ed esistenziale. I messaggi emergono dalle scelte narrative e visive: cosa viene
-                            mostrato, cosa viene omesso e in che modo. Spesso il significato più profondo non è
-                            esplicito, ma suggerito attraverso immagini, silenzi e contrasti, lasciando allo spettatore
-                            il compito di interpretare.
-                        </p>
+                        <p>Il cinema può essere strumento di riflessione sociale, politica ed esistenziale. Spesso il significato più profondo non è esplicito, ma suggerito attraverso immagini e silenzi, lasciando allo spettatore il compito di interpretare.</p>
                     </div>
 
-                    <br><br><br><hr><br><br><br>
+                    <br><br><br>
+                    <hr><br><br><br>
 
                     <h2 style="text-align: right;">Costumi: L’Abito come Narrazione</h2>
-
                     <div class="element2">
                         <figure>
-                            <img class="image1" src="../imgs/Cinema/c6.jpg" alt="Errore di caricamento">
-                            <figcaption style="text-align: center;">Peaky Blinders, serie TV</figcaption>
+                            <img class="image1" src="../imgs/Cinema/c6.jpg" alt="Costumi">
+                            <figcaption style="text-align: center;">
+                                Peaky Blinders: Identità visiva
+                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/c6.jpg')" title="Aggiungi ai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
                         </figure>
-                        <p>
-                            I costumi non sono semplici elementi estetici, ma veri e propri strumenti narrativi.
-                            Definiscono l’identità dei personaggi, il loro status sociale, il periodo storico e il
-                            contesto culturale. Un abito può comunicare appartenenza, ribellione, potere o fragilità,
-                            diventando parte integrante del racconto.
-                        </p>
+                        <p>I costumi definiscono l’identità dei personaggi e il loro status sociale. Un abito può comunicare appartenenza, ribellione o potere, diventando parte integrante del racconto cinematografico.</p>
                     </div>
 
-                    <br><br><br><hr><br><br><br>
+                    <br><br><br>
+                    <hr><br><br><br>
 
-                    <h2>Illuminazione: Scrivere con la Luce ed il buio</h2>
-
+                    <h2>Illuminazione: Scrivere con la Luce</h2>
                     <div class="element1">
                         <figure>
-                            <img class="image1" src="../imgs/Cinema/c7.jpg" alt="Errore di caricamento">
-                            <figcaption style="text-align: center;">Barry Lyndon di Stanley Kubrick</figcaption>
+                            <img class="image1" src="../imgs/Cinema/c7.jpg" alt="Illuminazione">
+                            <figcaption style="text-align: center;">
+                                Barry Lyndon: La luce naturale
+                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/c7.jpg')" title="Aggiungi ai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
                         </figure>
-                        <p>
-                            L’illuminazione costruisce l’atmosfera emotiva del film. Luce e ombra guidano lo sguardo
-                            dello spettatore e influenzano la percezione delle scene. Non servono solo a rendere
-                            visibile l’azione, ma a evocare sensazioni: tensione, inquietudine, intimità o malinconia.
-                            La luce diventa così un linguaggio silenzioso.
-                        </p>
+                        <p>L’illuminazione costruisce l’atmosfera emotiva. Luce e ombra guidano lo sguardo e influenzano la percezione, evocando tensione, intimità o malinconia.</p>
                     </div>
 
-                    <br><br><br><hr><br><br><br>
+                    <br><br><br>
+                    <hr><br><br><br>
 
                     <h2 style="text-align: right;">Audio: Il Suono che Avvolge</h2>
-
                     <div class="element2">
                         <figure>
-                            <img class="image1" src="../imgs/Cinema/c8.jpg" alt="Errore di caricamento">
-                            <figcaption style="text-align: center;">Dunkirk (2017) – Christopher Nolan</figcaption>
+                            <img class="image1" src="../imgs/Cinema/c8.jpg" alt="Audio">
+                            <figcaption style="text-align: center;">
+                                Dunkirk: L'immersione sonora
+                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/c8.jpg')" title="Aggiungi ai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
                         </figure>
-                        <p>
-                            L’audio comprende musica, effetti sonori e dialoghi, ed è fondamentale per l’immersione
-                            cinematografica. Il suono può amplificare l’emozione, creare ritmo, suggerire significati
-                            nascosti o anticipare eventi. Spesso è proprio l’audio a rendere un’immagine memorabile,
-                            completando l’esperienza sensoriale.
-                        </p>
+                        <p>L’audio comprende musica ed effetti sonori. È fondamentale per l’immersione: può amplificare l’emozione e rendere un’immagine memorabile.</p>
                     </div>
                 </div>
             </div>
-
-            <!-- ========================= -->
-            <!-- CONTENT 3 -->
-            <!-- ========================= -->
 
             <div class="content">
                 <div class="sectionlight">
-
                     <h2>Tre Film, Tre Visioni</h2>
 
                     <h3>Grand Budapest Hotel</h3>
                     <div class="element1">
                         <figure>
-                            <img class="image1" src="../imgs/Cinema/grandbudapest.jpg" alt="grand budapest">
-                            <figcaption style="text-align: center;">L’estetica come mondo chiuso</figcaption>
-                            <a href="https://youtu.be/G1jG8HUY4zI?si=bLU3HEOZrBCloqTb" target="_blank"
-                                style="text-align: center;">
-                                Clicca qui per il trailer del film
-                            </a>
+                            <img class="image1" src="../imgs/Cinema/grandbudapest.jpg" alt="Grand Budapest">
+                            <figcaption style="text-align: center;">
+                                L’estetica come mondo chiuso
+                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/grandbudapest.jpg')" title="Aggiungi ai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
+                            <a href="https://youtu.be/G1jG8HUY4zI" target="_blank">Guarda il Trailer</a>
                         </figure>
-                        <p>
-                            In Grand Budapest Hotel l’arte vive soprattutto nella forma. Wes Anderson costruisce un
-                            universo visivo controllatissimo, fatto di colori pastello, simmetrie ossessive e
-                            inquadrature geometriche. Ogni fotogramma è concepito come un quadro, in cui scenografia,
-                            costumi e movimenti di macchina raccontano quanto i dialoghi. Questa estetica non è mero
-                            esercizio stilistico: crea una distanza dalla realtà che trasforma nostalgia e decadenza in
-                            una fiaba elegante, ironica e profondamente malinconica sotto la superficie giocosa.
-                        </p>
+                        <p>Wes Anderson costruisce un universo visivo fatto di colori pastello e simmetrie ossessive. Ogni fotogramma è un quadro che trasforma la nostalgia in una fiaba elegante.</p>
                     </div>
 
-                    <br><br><br><hr><br><br><br>
+                    <br><br><br>
+                    <hr><br><br><br>
 
                     <h3 style="text-align: right;">Seven</h3>
                     <div class="element2">
                         <figure>
-                            <img class="image2" src="../imgs/Cinema/seven.jpg" alt="seven">
-                            <figcaption style="text-align: center;">Il male come sistema logico</figcaption>
-                            <a href="https://youtu.be/hKUABU9uPmw?si=mUGRj_c9wtC251qS" target="_blank"
-                                style="text-align: center;">
-                                Clicca qui per il trailer del film
-                            </a>
+                            <img class="image2" src="../imgs/Cinema/seven.jpg" alt="Seven">
+                            <figcaption style="text-align: center;">
+                                Il male come sistema logico
+                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/seven.jpg')" title="Aggiungi ai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
+                            <a href="https://youtu.be/hKUABU9uPmw" target="_blank">Guarda il Trailer</a>
                         </figure>
-                        <p>
-                            In Seven l’arte si manifesta nel suo messaggio morale cupissimo e nella recitazione
-                            disturbante, in particolare quella del serial killer. La violenza non è spettacolo, ma
-                            linguaggio simbolico: uno strumento per riflettere su peccato, apatia e responsabilità
-                            morale. I sette peccati capitali diventano una mappa di punizione razionale e ordinata,
-                            inquietante proprio per la sua coerenza. La performance dell’assassino è glaciale e
-                            controllata, quasi filosofica, e costringe lo spettatore a confrontarsi con l’idea che il
-                            male possa essere lucido, metodico e logicamente strutturato.
-                        </p>
-                    </div>
-
-                    <br><br><br><hr><br><br><br>
-                    
-                    <h3>Donnie Darko</h3>
-                    <div class="element1">
-                        <figure>
-                            <img class="image1" src="../imgs/Cinema/donniedarko.jpg" alt="donnie darko">
-                            <figcaption style="text-align: center;">Identità, destino e ambiguità</figcaption>
-                            <a href="https://youtu.be/Uab7LYrAiqM?si=UkaZdrZDQOPf6-ub" target="_blank"
-                                style="text-align: center;">
-                                Clicca qui per il trailer del film
-                            </a>
-                        </figure>
-                        <p>
-                            Donnie Darko è arte nella sua ambiguità. Il film fonde fisica teorica, viaggi nel tempo e
-                            psicologia in una narrazione filtrata dalla mente fragile del protagonista. Non è mai chiaro
-                            se ciò che vediamo sia reale, metafisico o frutto di una psicosi, e questa incertezza è il
-                            cuore dell’opera. La storia segue più uno stato mentale che una trama lineare, utilizzando
-                            simboli e paradossi per interrogarsi su destino, libero arbitrio e alienazione
-                            adolescenziale. L’arte risiede nel caos controllato, nel lascia lo spettatore con più
-                            domande che risposte.
-                        </p>
+                        <p>In Seven la violenza è un linguaggio simbolico sui sette peccati capitali. La performance del killer mostra come il male possa essere lucido e metodico.</p>
                     </div>
 
                     <br><br><br>
+                    <hr><br><br><br>
 
+                    <h3>Donnie Darko</h3>
+                    <div class="element1">
+                        <figure>
+                            <img class="image1" src="../imgs/Cinema/donniedarko.jpg" alt="Donnie Darko">
+                            <figcaption style="text-align: center;">
+                                Identità e ambiguità
+                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/donniedarko.jpg')" title="Aggiungi ai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
+                            <a href="https://youtu.be/Uab7LYrAiqM" target="_blank">Guarda il Trailer</a>
+                        </figure>
+                        <p>Donnie Darko fonde fisica teorica e psicologia. L’arte risiede nel caos controllato e nel lasciare lo spettatore con più domande che risposte.</p>
+                    </div>
                 </div>
             </div>
+        </div>
 
-        </div> <!-- END CONTENT-WRAPPER -->
-
-        <!-- ========================= -->
-        <!-- SIDEBAR -->
-        <!-- ========================= -->
         <div class="sidebar">
             <nav class="menu">
-
-                <div class="menu-itme">
-                    <img src="../imgs/Home/Icone/icons8-home-100.png" alt="home">
-                    <a href="home.php">HOME</a>
-                </div>
-
-                <div class="menu-itme">
-                    <img src="../imgs/Home/Icone/icons8-pencil-100.png" alt="animazione">
-                    <a href="animazione.php">ANIMAZIONE & DISEGNO</a>
-                </div>
-
-                <div class="menu-itme">
-                    <img src="../imgs/Home/Icone/icons8-controller-100.png" alt="videogiochi">
-                    <a href="videogiochi.php">VIDEOGIOCHI</a>
-                </div>
-
-                <div class="menu-itme">
-                    <img src="../imgs/Home/Icone/icons8-headphones-100.png" alt="hip-hop">
-                    <a href="hip-hop.php">HIP-HOP</a>
-                </div>
-
-                <div class="menu-itme">
-                    <img src="../imgs/Home/Icone/icons8-clapperboard-100 (1).png" alt="cinema">
-                    <a href="cinema.php">CINEMA</a>
-                </div>
-
-                <div class="menu-itme">
-                    <img src="../imgs/Home/Icone/icons8-other-100.png" alt="menzioni">
-                    <a href="menzioni.php">MENZIONI ONOREVOLI</a>
-                </div>
-
-                <div class="menu-itme">
-                    <img src="../imgs/Home/Icone/icons8-forum-100.png" alt="forum">
-                     <a href="forum.php">FORUM</a>
-                </div>
-
+                <div class="menu-itme"><img src="../imgs/Home/Icone/icons8-home-100.png" alt="home"><a href="home.php">HOME</a></div>
+                <div class="menu-itme"><img src="../imgs/Home/Icone/icons8-pencil-100.png" alt="animazione"><a href="animazione.php">ANIMAZIONE</a></div>
+                <div class="menu-itme"><img src="../imgs/Home/Icone/icons8-controller-100.png" alt="videogiochi"><a href="videogiochi.php">VIDEOGIOCHI</a></div>
+                <div class="menu-itme"><img src="../imgs/Home/Icone/icons8-headphones-100.png" alt="hip-hop"><a href="hip-hop.php">HIP-HOP</a></div>
+                <div class="menu-itme"><img src="../imgs/Home/Icone/icons8-clapperboard-100 (1).png" alt="cinema"><a href="cinema.php">CINEMA</a></div>
+                <div class="menu-itme"><img src="../imgs/Home/Icone/icons8-other-100.png" alt="menzioni"><a href="menzioni.php">MENZIONI</a></div>
+                <div class="menu-itme"><img src="../imgs/Home/Icone/icons8-forum-100.png" alt="forum"><a href="forum.php">FORUM</a></div>
             </nav>
         </div>
-
-    </div> <!-- END MAIN CONTENT -->
-
-    <!-- ========================= -->
-    <!-- FOOTER -->
-    <!-- ========================= -->
-    <div class="footer">
-        <div class="contacts">
-            <div class="contact whatsapp">
-                <img src="../imgs/Home/Footer/icons8-whatsapp-100 (1).png" alt="Whatsapp">
-                <a href="https://chat.whatsapp.com/DgrzEMnL7RWJKGSAYlQZ47?mode=gi_t">Whatsapp</a>
-            </div>
-            <div class="contact instagram">
-                <img src="../imgs/Home/Footer/icons8-instagram-100.png" alt="Instagram">
-                <a href="https://www.instagram.com/teraartisticproject/">Instagram</a>
-            </div>
-            <div class="contact facebook">
-                <img src="../imgs/Home/Footer/icons8-facebook-nuovo-100.png" alt="Facebook">
-                <a href="https://www.facebook.com/groups/1338264634726723">Facebook</a>
-            </div>
-            <div class="contact telegram">
-                <img src="../imgs/Home/Footer/icons8-telegramma-100.png" alt="Telegram">
-                <a href="https://t.me/+Vgbv8NL50TQ5NDU0">Telegram</a>
-            </div>
-            <div class="contact discord">
-                <img src="../imgs/Home/Footer/icons8-logo-discord-100.png" alt="Discord">
-                <a href="https://discord.gg/TpwZh35J">Discord</a>
-            </div>
-
-        </div>
-        <p>© <?php echo date('Y')?> TERA. All rights reserved.</p>
     </div>
 
+    <div class="footer">
+        <div class="contacts">
+            <div class="contact whatsapp"><img src="../imgs/Home/Footer/icons8-whatsapp-100 (1).png" alt="WA"><a href="#">Whatsapp</a></div>
+            <div class="contact instagram"><img src="../imgs/Home/Footer/icons8-instagram-100.png" alt="IG"><a href="https://www.instagram.com/teraartisticproject/">Instagram</a></div>
+            <div class="contact facebook"><img src="../imgs/Home/Footer/icons8-facebook-nuovo-100.png" alt="FB"><a href="#">Facebook</a></div>
+            <div class="contact telegram"><img src="../imgs/Home/Footer/icons8-telegramma-100.png" alt="TG"><a href="#">Telegram</a></div>
+            <div class="contact discord"><img src="../imgs/Home/Footer/icons8-logo-discord-100.png" alt="DC"><a href="#">Discord</a></div>
+        </div>
+        <p>© <?php echo date('Y') ?> TERA. All rights reserved.</p>
+    </div>
 </body>
 
 </html>

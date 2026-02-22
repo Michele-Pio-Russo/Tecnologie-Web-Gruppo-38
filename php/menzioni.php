@@ -1,11 +1,13 @@
 <?php session_start(); ?>
-<html>
+<!DOCTYPE html>
+<html lang="it">
 
 <head>
     <title>Tera ➔ Menzioni Onorevoli</title>
     <link rel="icon" href="../imgs/Logo/T.png" type="image/x-icon">
-    <meta name="description" content="homepage">
+    <meta name="description" content="Menzioni Onorevoli - Altre forme d'arte">
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/menzioni.css" />
     <script type="text/javascript" src="../js/index.js" defer></script>
 </head>
@@ -18,277 +20,248 @@
         </div>
         <div class="login">
             <div class="pos" title="Informazioni sulla posizione">
-    <button type="button" id="get-pos-btn" >
-        <img src="../imgs/Altro/position.png" alt="Posizione" class="position-icon" />
-    </button>
-        </div>
+                <button type="button" id="get-pos-btn">
+                    <img src="../imgs/Altro/position.png" alt="Posizione" class="position-icon" />
+                </button>
+            </div>
 
-<script>
-document.getElementById('get-pos-btn').addEventListener('click', function() {
-    const isLogged = <?php echo (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) ? 'true' : 'false'; ?>;
+            <script>
+                document.getElementById('get-pos-btn').addEventListener('click', function() {
+                    const isLogged = <?php echo (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) ? 'true' : 'false'; ?>;
 
-    if (!isLogged) {
-        alert("Attenzione: Devi essere loggato per visualizzare la tua posizione.");
-        return;
-    }
+                    if (!isLogged) {
+                        alert("Attenzione: Devi essere loggato per visualizzare la tua posizione.");
+                        return;
+                    }
 
-    if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
+                    if ("geolocation" in navigator) {
+                        navigator.geolocation.getCurrentPosition(function(position) {
+                            const lat = position.coords.latitude;
+                            const lon = position.coords.longitude;
+                            const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=it`;
 
-            // Utilizziamo un servizio di Reverse Geocoding gratuito (BigDataCloud o Nominatim)
-            // Questo trasforma le coordinate in Città e Paese reali
-            const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=it`;
+                            fetch(geoApiUrl)
+                                .then(res => res.json())
+                                .then(data => {
+                                    const citta = data.city || data.locality || "Sconosciuta";
+                                    const regione = data.principalSubdivision || "Sconosciuta";
+                                    const paese = data.countryName || "Sconosciuto";
 
-            fetch(geoApiUrl)
-            .then(res => res.json())
-            .then(data => {
-                const citta = data.city || data.locality || "Sconosciuta";
-                const regione = data.principalSubdivision || "Sconosciuta";
-                const paese = data.countryName || "Scono    sciuto";
+                                    const msg = `📍 La tua posizione attuale:\n` +
+                                        `   Città: ${citta}\n` +
+                                        `   Regione: ${regione}\n` +
+                                        `   Paese: ${paese}\n` +
+                                        `   Coordinate: ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
 
-                const msg = `📍 La tua posizione attuale:\n` +
-                            `   Città: ${citta}\n` +
-                            `   Regione: ${regione}\n` +
-                            `   Paese: ${paese}\n` +
-                            `   Coordinate: ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+                                    alert(msg);
 
-                alert(msg);
-
-                // Opzionale: invia al server per salvarlo in sessione
-                fetch('../php/salva_posizione.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: `lat=${lat}&lon=${lon}&city=${encodeURIComponent(citta)}`
+                                    fetch('../php/salva_posizione.php', {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                                        body: `lat=${lat}&lon=${lon}&city=${encodeURIComponent(citta)}`
+                                    });
+                                })
+                                .catch(() => {
+                                    alert("Errore nel recupero dei dettagli dell'indirizzo.");
+                                });
+                        }, function() {
+                            alert("Errore: Attiva il GPS o consenti l'accesso alla posizione.");
+                        });
+                    } else {
+                        alert("Il tuo browser non supporta la geolocalizzazione.");
+                    }
                 });
-            })
-            .catch(() => {
-                alert("Errore nel recupero dei dettagli dell'indirizzo.");
-            });
+            </script>
 
-        }, function() {
-            alert("Errore: Attiva il GPS o consenti l'accesso alla posizione.");
-        });
-    } else {
-        alert("Il tuo browser non supporta la geolocalizzazione.");
-    }
-});
-</script>
-    <div class="theme-icon" title="Cambia al tema Chiaro">
-        <button id="theme-button">
-            <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Solare" />
-            <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Lunare" />
-        </button>
-    </div>
-    <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
-        <p><?php echo htmlspecialchars($_SESSION['nome_utente']); ?></p>
-        <div class="pref-icon" title="Vai ai preferiti">
-            <a href="preferiti.php">
-                <img src="../imgs/Altro/preferiti.gif" alt="Preferiti" class="preferiti-icon" />
-            </a>
+            <div class="theme-icon" title="Cambia al tema Chiaro">
+                <button id="theme-button">
+                    <img src="../imgs/Tema/light_mode.png" alt="Tema Chiaro" />
+                    <img src="../imgs/Tema/dark_mode.png" alt="Tema Scuro" />
+                </button>
+            </div>
+
+            <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
+                <p><?php echo htmlspecialchars($_SESSION['nome_utente']); ?></p>
+                <div class="pref-icon" title="Vai ai preferiti">
+                    <a href="preferiti.php">
+                        <img src="../imgs/Altro/preferiti.gif" alt="Preferiti" class="preferiti-icon" />
+                    </a>
+                </div>
+                <a href="../php/logout.php" title="Logout">
+                    <img src="../imgs/Login/logout.png" alt="User" class="login-icon" />
+                </a>
+            <?php else: ?>
+                <p>Login</p>
+                <a href="login.php" title="Accedi">
+                    <img src="../imgs/Login/login1.png" alt="Login" class="login-icon" />
+                </a>
+            <?php endif; ?>
         </div>
-        <a href="../php/logout.php" title="Logout">
-            <img src="../imgs/Login/logout.png" alt="User" class="login-icon" />
-        </a>
-    <?php else: ?>
-        <p>Login</p>
-        <a href="login.php" title="Vai alla pagina di accesso">
-            <img src="../imgs/Login/login1.png"
-                 alt="Immagine Login" class="login-icon" />
-        </a>
-    <?php endif; ?>
-</div>
     </div>
+
     <div class="main-content">
         <div class="content">
             <h2 style="text-align: center;">Menzioni Onorevoli</h2>
             <div class="element3">
-                <p>In questa sezione presentiamo altre forme d'arte che vale la pena raccontare, per quanto
-                    possano essere diffuse molto spesso non vengono considerate arte ma la verità è che
-                    anche qui la componente artistica è molto accentuata.
-                </p>
+                <p>In questa sezione presentiamo altre forme d'arte che vale la pena raccontare. Sebbene diffuse, spesso non vengono considerate "arte" nel senso tradizionale, ma la verità è che la componente creativa e comunicativa è qui estremamente accentuata.</p>
             </div>
             <hr>
+
             <h2>Fotografia: fermare un istante</h2>
             <div class="element1">
-                <img class="image2" src="../imgs/Menzioni Onorevoli/Fotografia.jpg" alt="fotografia">
-                <p>Scattare una foto non significa soltanto premere un pulsante.
-                    È una scelta consapevole: decido cosa includere nel mio scatto e, soprattutto, cosa escludere. È in
-                    questo modo che trasformo un momento qualunque in qualcosa che ha un significato profondo e che può
-                    essere interpretato. Gioco con la luce, con i colori e con il contrasto, non per riprodurre
-                    fedelmente la realtà, ma per esprimere la mia visione e il mio messaggio. Alla fine, una foto è un
-                    modo di comunicare: può essere un pensiero personale e intimo o un messaggio forte e provocatorio,
-                    ma l'aspetto fondamentale è sempre la consapevolezza di ciò che si sceglie di mostrare e condividere
-                    con gli altri.<br>
-
-                    E no, non finisce tutto con il click. La parte vera arriva dopo, quando ti metti al computer a
-                    sistemare i file. La post-produzione serve proprio a questo: a sistemare e pulire l'immagine finché
-                    non somiglia esattamente a quello che avevi in mente, a renderla perfetta.
-                </p>
+                <figure>
+                    <img class="image2" src="../imgs/Menzioni Onorevoli/Fotografia.jpg" alt="fotografia">
+                    <figcaption>
+                        L'arte dello scatto consapevole
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Menzioni Onorevoli/Fotografia.jpg')" title="Aggiungi ai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
+                <p>Scattare una foto non significa soltanto premere un pulsante. È una scelta consapevole: decidere cosa includere e cosa escludere. Si gioca con la luce e il contrasto per esprimere una visione personale. La post-produzione è poi l'atto finale per rendere l'immagine esattamente come l'avevi immaginata.</p>
             </div>
+
             <h2>Street photography: la città senza filtri</h2>
             <div class="element1">
-                <img class="image1" src="../imgs/Menzioni Onorevoli/StreetPhotograpy.jpg" alt="street photography">
-                <p>Prendi la street photography. Lì non puoi mettere in posa
-                    nessuno, non c'è trucco. Esci in strada e aspetti che la vita ti succeda davanti. Un tizio che
-                    corre, un gioco di ombre su un muro, il caos dei palazzi... sono tutte storie pronte. Non stai solo
-                    documentando che la gente cammina per strada; stai interpretando il ritmo e le tensioni di un posto.
-                    È un esercizio di pazienza: resti lì fermo finché quel caos non si ordina da solo per un secondo
-                    dentro l'obiettivo. In quel momento, anche un dettaglio banale come una mano che stringe un caffè o
-                    un riflesso in una pozzanghera smettono di essere rumore e diventano il racconto della città.
-                </p>
+                <figure>
+                    <img class="image1" src="../imgs/Menzioni Onorevoli/StreetPhotograpy.jpg" alt="street photography">
+                    <figcaption>
+                        La vita che accade in strada
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Menzioni Onorevoli/StreetPhotograpy.jpg')" title="Aggiungi ai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
+                <p>Nella street photography non c'è trucco. È un esercizio di pazienza e osservazione, dove il caos urbano trova un ordine geometrico o narrativo per un solo secondo dentro l'obiettivo, trasformando il banale in racconto.</p>
             </div>
+
             <hr>
+
             <h2 style="text-align: right;">Carte: quando l'arte si tiene in mano</h2>
             <div class="element2">
-                <img class="image1" src="../imgs/Menzioni Onorevoli/carte.jpg" alt="carte">
-                <p>C'è un motivo se collezioniamo carte invece di guardare solo disegni su uno schermo: è il piacere di
-                    averle tra le mani. Una carta deve funzionare su due livelli. Primo, deve essere bella da vedere e
-                    farti capire subito chi hai davanti. Secondo, deve servire al gioco. È un mix strano tra estetica e
-                    meccanica, ossia deve essere iconica ma anche utile per la tua strategia. Fra le classiche troviamo
-                    sicuramente
-                    le carte napoletane e francesi, ma ovviamente ci sono 1000 altri mondi.
-                </p>
+                <figure>
+                    <img class="image1" src="../imgs/Menzioni Onorevoli/carte.jpg" alt="carte">
+                    <figcaption>
+                        Design e collezionismo
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Menzioni Onorevoli/carte.jpg')" title="Aggiungi ai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
+                <p>Una carta deve funzionare su due livelli: l'estetica e la meccanica di gioco. È un oggetto fisico che deve essere iconico e utile alla strategia, dalle classiche napoletane ai mondi complessi dei TCG moderni.</p>
             </div>
+
             <h2 style="text-align: right;">Pokémon: riconoscersi in un istante</h2>
             <div class="element2">
-                <img class="image1" src="../imgs/Menzioni Onorevoli/pokemon.jpg" alt="pokemon">
-                <p>Il successo dei Pokémon sta tutto nella semplicità. Vedi una creatura e sai già chi è, che tipo di
-                    poteri ha e quanto è forte. Il design è pulito, quasi amichevole. È un mondo dove collezionare,
-                    scambiare e combattere è facilissimo, e questo crea un legame che dura anni, è la dimostrazione che
-                    quando un design visivo è forte il gioco ti resta dentro. Ovviamente oltre la componente estetica
-                    esiste un set ben preciso di regole per utilizzare le carte, abilità, attacchi ed evoluzioni.
-                </p>
+                <figure>
+                    <img class="image1" src="../imgs/Menzioni Onorevoli/pokemon.jpg" alt="pokemon">
+                    <figcaption>
+                        L'immediatezza del Character Design
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Menzioni Onorevoli/pokemon.jpg')" title="Aggiungi ai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
+                <p>Il successo dei Pokémon risiede in un design pulito e amichevole. La forza visiva di queste creature crea un legame duraturo, dove l'estetica si sposa con un set preciso di regole, abilità ed evoluzioni.</p>
             </div>
+
             <h2>Exploding Kittens: ridere del caos</h2>
             <div class="element1">
-                <img class="image1" src="../imgs/Menzioni Onorevoli/Exploding kittens.jpg" alt="exploding kittens">
-                <p>In questo caso non servono storie lunghe e complesse. Il gioco si basa su disegni strani e
-                    divertenti, ironia e situazioni assurde come i gattini che esplodono. Tutto è molto semplice e
-                    diretto: le carte sono utilizzate per creare un po' di tensione e per far ridere gli amici. Questo
-                    gioco dimostra che non è necessario avere un'arte raffinata e complessa per creare qualcosa di
-                    divertente; basta avere lo stile giusto per creare l'atmosfera giusta.
-                </p>
+                <figure>
+                    <img class="image1" src="../imgs/Menzioni Onorevoli/Exploding kittens.jpg" alt="exploding kittens">
+                    <figcaption>
+                        Ironia e stile diretto
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Menzioni Onorevoli/Exploding kittens.jpg')" title="Aggiungi ai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
+                <p>Questo gioco dimostra che non serve un'arte raffinata per divertire; basta lo stile giusto per creare l'atmosfera. Disegni assurdi e situazioni comiche creano una tensione ludica immediata.</p>
             </div>
+
             <h2>Magic: The Gathering: un mondo in un mazzo</h2>
             <div class="element1">
-                <img class="image1" src="../imgs/Menzioni Onorevoli/magic.jpg" alt="città pixel">
-                <p>Il gioco di Magic è come un grande puzzle, dove ogni carta rappresenta un pezzo importante. Il nome
-                    della carta, l'illustrazione e le abilità speciali che possiede, lavorano tutte insieme per creare
-                    una piccola storia di fantasia. Questo gioco è perfetto per le persone che amano pensare e creare
-                    strategie complesse. La cosa che rende Magic ancora più speciale è la bellezza delle illustrazioni
-                    delle carte, che si combina con una profondità di gioco veramente incredibile. In questo modo, Magic
-                    riesce a bilanciare alla perfezione l'aspetto artistico con la competizione, creando un'esperienza
-                    unica per i giocatori. Il risultato è un gioco che è sia bello da vedere, sia stimolante da giocare.
-                </p>
+                <figure>
+                    <img class="image1" src="../imgs/Menzioni Onorevoli/magic.jpg" alt="magic">
+                    <figcaption>
+                        L'apice dell'illustrazione fantasy
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Menzioni Onorevoli/magic.jpg')" title="Aggiungi ai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
+                <p>Magic bilancia perfettamente l'aspetto artistico con la competizione. Ogni carta è un'opera d'arte che contribuisce a una narrazione fantasy profonda e a strategie di gioco incredibilmente stimolanti.</p>
             </div>
+
             <h2 style="text-align: right;">Disney Lorcana: nostalgia e strategia</h2>
             <div class="element2">
-                <img class="image1" src="../imgs/Menzioni Onorevoli/Lorcana.jpg">
-                <p>
-                    Lorcana prende i personaggi Disney che tutti conosciamo e li mette in un contesto nuovo.
-                    Le illustrazioni sono veramente fantastiche, tuttavia il gioco non è solo per bambini:
-                    c'è una tattica vera sotto, ovviamente
-                    è perfetto perché attira le persone che amano i film Disney
-                    ma come ogni gioco di carte soddisfa anche chi cerca una sfida seria tra mazzi e combinazioni,
-                    avendo
-                    le proprie regole.
-                </p>
+                <figure>
+                    <img class="image1" src="../imgs/Menzioni Onorevoli/Lorcana.jpg" alt="lorcana">
+                    <figcaption>
+                        Reinterpretazione dei classici
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Menzioni Onorevoli/Lorcana.jpg')" title="Aggiungi ai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
+                <p>Lorcana prende i personaggi Disney e li reinterpreta con illustrazioni fantastiche. Sotto la superficie nostalgica si cela una sfida tattica seria per giocatori di ogni età.</p>
             </div>
+
             <h2 style="text-align: right;">Tarocchi: guardarsi dentro</h2>
             <div class="element2">
-                <img class="image1" src="../imgs/Menzioni Onorevoli/Tarocchi.jpg">
-                <p>
-                    I Tarocchi sono uno strumento molto interessante per conoscere meglio se stessi.
-                    Quando si utilizzano, a detta di alcuni si può scoprire molto sul proprio carattere e sulle proprie
-                    emozioni.
-                    Possono aiutare a capire cosa si prova veramente e a trovare un equilibrio interiore,
-                    utilizzarli può essere un'esperienza molto personale e intima, perché si tratta di
-                    esplorare i propri pensieri e sentimenti più profondi.
-                    I Tarocchi sono completamente diversi dai tipi di carte
-                    elencati prima: qui non devi battere nessuno, ogni carta è un simbolo,
-                    un'immagine antica che serve a farti riflettere. Non c'è una regola fissa, ma un'interazione
-                    continua tra te e quello che vedi. È come se le carte fossero uno specchio per la tua narrazione
-                    personale, un po' come l'oroscopo.
-
-                </p>
+                <figure>
+                    <img class="image1" src="../imgs/Menzioni Onorevoli/Tarocchi.jpg" alt="tarocchi">
+                    <figcaption>
+                        Simbologia e introspezione
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Menzioni Onorevoli/Tarocchi.jpg')" title="Aggiungi ai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
+                <p>Qui non si vince contro nessuno: ogni carta è un simbolo antico che funge da specchio per la propria narrazione interiore. Un'interazione continua tra l'immagine e chi la osserva.</p>
             </div>
+
             <hr>
+
             <h2 style="text-align: center;">Cucina: l'arte che si mangia</h2>
             <div class="element3">
-                <p>
-                    La cucina è un'arte sensoriale, in cui sapori, colori, consistenze e profumi diventano linguaggio.
-                    Ogni piatto è una combinazione di tecnica, creatività e cultura: la scelta degli ingredienti, il
-                    bilanciamento dei sapori, il tempo di cottura e la presentazione sono tutti elementi che comunicano
-                    identità e intenzione. La cucina non è solo nutrimento, ma anche memoria e condivisione: un piatto
-                    può raccontare una storia personale, un territorio o un'epoca. In questo senso, la cucina è un'arte
-                    che coinvolge corpo e mente, capace di trasformare il quotidiano in esperienza estetica.
-                </p> 
+                <p>La cucina è un'arte sensoriale totale. Ogni piatto comunica identità tramite il bilanciamento di sapori, colori e consistenze. È memoria e condivisione, capace di trasformare il nutrimento quotidiano in un'esperienza estetica coinvolgente.</p>
                 <br>
-                <img class="image1" src="../imgs/Menzioni Onorevoli/Cucina.jpg" alt="cucina">
+                <figure>
+                    <img class="image1" src="../imgs/Menzioni Onorevoli/Cucina.jpg" alt="cucina">
+                    <figcaption>
+                        L'estetica del gusto
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Menzioni Onorevoli/Cucina.jpg')" title="Aggiungi ai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
             </div>
         </div>
+
         <div class="sidebar">
             <nav class="menu">
-                <div class="menu-itme">
-                    <img src="../imgs/Home/Icone/icons8-home-100.png" alt="home icon">
-                    <a href="home.php">HOME</a>
-                </div>
-                <div class="menu-itme">
-                    <img src="../imgs/Home/Icone/icons8-pencil-100.png" alt="animazione">
-                    <a href="animazione.php">ANIMAZIONE & DISEGNO</a>
-                </div>
-                <div class="menu-itme">
-                    <img src="../imgs/Home/Icone/icons8-controller-100.png" alt="videogiochi">
-                    <a href="videogiochi.php">VIDEOGIOCHI</a>
-                </div>
-                <div class="menu-itme">
-                    <img src="../imgs/Home/Icone/icons8-headphones-100.png" alt="hip-hop">
-                    <a href="hip-hop.php">HIP-HOP</a>
-                </div>
-                <div class="menu-itme">
-                    <img src="../imgs/Home/Icone/icons8-clapperboard-100 (1).png" alt="cinema">
-                    <a href="cinema.php">CINEMA</a>
-                </div>
-                <div class="menu-itme">
-                    <img src="../imgs/Home/Icone/icons8-other-100.png" alt="menzioni">
-                    <a href="menzioni.php">MENZIONI ONOREVOLI</a>
-                </div>
-                <div class="menu-itme">
-                    <img src="../imgs/Home/Icone/icons8-forum-100.png" alt="forum">
-                    
-                     <a href="forum.php">FORUM</a>
-                </div>
+                <div class="menu-itme"><img src="../imgs/Home/Icone/icons8-home-100.png" alt="home"><a href="home.php">HOME</a></div>
+                <div class="menu-itme"><img src="../imgs/Home/Icone/icons8-pencil-100.png" alt="animazione"><a href="animazione.php">ANIMAZIONE</a></div>
+                <div class="menu-itme"><img src="../imgs/Home/Icone/icons8-controller-100.png" alt="videogiochi"><a href="videogiochi.php">VIDEOGIOCHI</a></div>
+                <div class="menu-itme"><img src="../imgs/Home/Icone/icons8-headphones-100.png" alt="hip-hop"><a href="hip-hop.php">HIP-HOP</a></div>
+                <div class="menu-itme"><img src="../imgs/Home/Icone/icons8-clapperboard-100 (1).png" alt="cinema"><a href="cinema.php">CINEMA</a></div>
+                <div class="menu-itme"><img src="../imgs/Home/Icone/icons8-other-100.png" alt="menzioni"><a href="menzioni.php">MENZIONI</a></div>
+                <div class="menu-itme"><img src="../imgs/Home/Icone/icons8-forum-100.png" alt="forum"><a href="forum.php">FORUM</a></div>
             </nav>
         </div>
     </div>
+
     <div class="footer">
         <div class="contacts">
-            <div class="contact whatsapp">
-                <img src="../imgs/Home/Footer/icons8-whatsapp-100 (1).png" alt="Whatsapp">
-                <a href="https://chat.whatsapp.com/DgrzEMnL7RWJKGSAYlQZ47?mode=gi_t">Whatsapp</a>
-            </div>
-            <div class="contact instagram">
-                <img src="../imgs/Home/Footer/icons8-instagram-100.png" alt="Instagram">
-                <a href="https://www.instagram.com/teraartisticproject/">Instagram</a>
-            </div>
-            <div class="contact facebook">
-                <img src="../imgs/Home/Footer/icons8-facebook-nuovo-100.png" alt="Facebook">
-                <a href="https://www.facebook.com/groups/1338264634726723">Facebook</a>
-            </div>
-            <div class="contact telegram">
-                <img src="../imgs/Home/Footer/icons8-telegramma-100.png" alt="Telegram">
-                <a href="https://t.me/+Vgbv8NL50TQ5NDU0">Telegram</a>
-            </div>
-            <div class="contact discord">
-                <img src="../imgs/Home/Footer/icons8-logo-discord-100.png" alt="Discord">
-                <a href="https://discord.gg/TpwZh35J">Discord</a>
-            </div>
+            <div class="contact whatsapp"><img src="../imgs/Home/Footer/icons8-whatsapp-100 (1).png" alt="WA"><a href="#">Whatsapp</a></div>
+            <div class="contact instagram"><img src="../imgs/Home/Footer/icons8-instagram-100.png" alt="IG"><a href="https://www.instagram.com/teraartisticproject/">Instagram</a></div>
+            <div class="contact facebook"><img src="../imgs/Home/Footer/icons8-facebook-nuovo-100.png" alt="FB"><a href="#">Facebook</a></div>
+            <div class="contact telegram"><img src="../imgs/Home/Footer/icons8-telegramma-100.png" alt="TG"><a href="#">Telegram</a></div>
+            <div class="contact discord"><img src="../imgs/Home/Footer/icons8-logo-discord-100.png" alt="DC"><a href="#">Discord</a></div>
         </div>
         <p>© <?php echo date('Y')?> TERA. All rights reserved.</p>
     </div>
 </body>
-
 
 </html>

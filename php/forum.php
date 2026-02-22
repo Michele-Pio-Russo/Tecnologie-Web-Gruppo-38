@@ -226,6 +226,7 @@ if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) {
             <h3>Lascia una valutazione alle sezioni</h3>
             <?php if (isset($_SESSION['autorizzato'])): ?>
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                    
                     <img src="../imgs/Form/Ringraziamenti.jpg" alt="Ringraziamenti" align="right" class="image1">
 
                     <h3>Quali sezioni hai preferito di più?</h3>

@@ -1,5 +1,6 @@
 <?php session_start(); ?>
-<html>
+<!DOCTYPE html>
+<html lang="it">
 
 <head>
     <title>Tera ➔ Home</title>
@@ -10,7 +11,7 @@
     <script type="text/javascript" src="../js/index.js" defer></script>
 </head>
 
-<body class="">
+<body>
     <div class="header">
         <div class="logo">
             <div class="immagine-logo"></div>
@@ -18,121 +19,149 @@
         </div>
         <div class="login">
             <div class="pos" title="Informazioni sulla posizione">
-    <button type="button" id="get-pos-btn" >
-        <img src="../imgs/Altro/position.png" alt="Posizione" class="position-icon" />
-    </button>
-        </div>
+                <button type="button" id="get-pos-btn">
+                    <img src="../imgs/Altro/position.png" alt="Posizione" class="position-icon" />
+                </button>
+            </div>
 
-<script>
-document.getElementById('get-pos-btn').addEventListener('click', function() {
-    const isLogged = <?php echo (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) ? 'true' : 'false'; ?>;
+            <script>
+                document.getElementById('get-pos-btn').addEventListener('click', function() {
+                    const isLogged = <?php echo (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) ? 'true' : 'false'; ?>;
 
-    if (!isLogged) {
-        alert("Attenzione: Devi essere loggato per visualizzare la tua posizione.");
-        return;
-    }
+                    if (!isLogged) {
+                        alert("Attenzione: Devi essere loggato per visualizzare la tua posizione.");
+                        return;
+                    }
 
-    if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
+                    if ("geolocation" in navigator) {
+                        navigator.geolocation.getCurrentPosition(function(position) {
+                            const lat = position.coords.latitude;
+                            const lon = position.coords.longitude;
+                            const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=it`;
 
-            // Utilizziamo un servizio di Reverse Geocoding gratuito (BigDataCloud o Nominatim)
-            // Questo trasforma le coordinate in Città e Paese reali
-            const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=it`;
+                            fetch(geoApiUrl)
+                                .then(res => res.json())
+                                .then(data => {
+                                    const citta = data.city || data.locality || "Sconosciuta";
+                                    const regione = data.principalSubdivision || "Sconosciuta";
+                                    const paese = data.countryName || "Sconosciuto";
 
-            fetch(geoApiUrl)
-            .then(res => res.json())
-            .then(data => {
-                const citta = data.city || data.locality || "Sconosciuta";
-                const regione = data.principalSubdivision || "Sconosciuta";
-                const paese = data.countryName || "Scono    sciuto";
+                                    const msg = `📍 La tua posizione attuale:\n` +
+                                        `   Città: ${citta}\n` +
+                                        `   Regione: ${regione}\n` +
+                                        `   Paese: ${paese}\n` +
+                                        `   Coordinate: ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
 
-                const msg = `📍 La tua posizione attuale:\n` +
-                            `   Città: ${citta}\n` +
-                            `   Regione: ${regione}\n` +
-                            `   Paese: ${paese}\n` +
-                            `   Coordinate: ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+                                    alert(msg);
 
-                alert(msg);
+                                    fetch('../php/salva_posizione.php', {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                                        body: `lat=${lat}&lon=${lon}&city=${encodeURIComponent(citta)}`
+                                    });
+                                })
+                                .catch(() => {
+                                    alert("Errore nel recupero dei dettagli dell'indirizzo.");
+                                });
 
-                // Opzionale: invia al server per salvarlo in sessione
-                fetch('../php/salva_posizione.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: `lat=${lat}&lon=${lon}&city=${encodeURIComponent(citta)}`
+                        }, function() {
+                            alert("Errore: Attiva il GPS o consenti l'accesso alla posizione.");
+                        });
+                    } else {
+                        alert("Il tuo browser non supporta la geolocalizzazione.");
+                    }
                 });
-            })
-            .catch(() => {
-                alert("Errore nel recupero dei dettagli dell'indirizzo.");
-            });
+            </script>
 
-        }, function() {
-            alert("Errore: Attiva il GPS o consenti l'accesso alla posizione.");
-        });
-    } else {
-        alert("Il tuo browser non supporta la geolocalizzazione.");
-    }
-});
-</script>
-    <div class="theme-icon" title="Cambia al tema Chiaro">
-        <button id="theme-button">
-            <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Solare" />
-            <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Lunare" />
-        </button>
-    </div>
-    <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
-        <p><?php echo htmlspecialchars($_SESSION['nome_utente']); ?></p>
-        <div class="pref-icon" title="Vai ai preferiti">
-            <a href="preferiti.php">
-                <img src="../imgs/Altro/preferiti.gif" alt="Preferiti" class="preferiti-icon" />
-            </a>
+            <div class="theme-icon" title="Cambia al tema Chiaro">
+                <button id="theme-button">
+                    <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Solare" />
+                    <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Lunare" />
+                </button>
+            </div>
+
+            <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
+                <p><?php echo htmlspecialchars($_SESSION['nome_utente']); ?></p>
+                <div class="pref-icon" title="Vai ai preferiti">
+                    <a href="preferiti.php">
+                        <img src="../imgs/Altro/preferiti.gif" alt="Preferiti" class="preferiti-icon" />
+                    </a>
+                </div>
+                <a href="../php/logout.php" title="Logout">
+                    <img src="../imgs/Login/logout.png" alt="User" class="login-icon" />
+                </a>
+            <?php else: ?>
+                <p>Login</p>
+                <a href="login.php" title="Vai alla pagina di accesso">
+                    <img src="../imgs/Login/login1.png" alt="Immagine Login" class="login-icon" />
+                </a>
+            <?php endif; ?>
         </div>
-        <a href="../php/logout.php" title="Logout">
-            <img src="../imgs/Login/logout.png" alt="User" class="login-icon" />
-        </a>
-    <?php else: ?>
-        <p>Login</p>
-        <a href="login.php" title="Vai alla pagina di accesso">
-            <img src="../imgs/Login/login1.png"
-                 alt="Immagine Login" class="login-icon" />
-        </a>
-    <?php endif; ?>
-</div>
     </div>
+
     <div class="main-content">
         <div class="content">
             <h2>Chi siamo?</h2>
             <div class="element1">
-                <img class="image1" src="../imgs/Home/home1.jpg" alt="Errore di caricamento immagine">
+                <figure>
+                    <img class="image1" src="../imgs/Home/home1.jpg" alt="Chi siamo">
+                    <figcaption style="text-align: center;">
+                        La nostra visione
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Home/home1.jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
                 <p>Siamo tre ragazzi con un’idea: creare una community per chi, come noi, va oltre la superficie.
-                    Persone che non si accontentano di consumare contenuti in un periodo storico predominato da
-                    passività,
+                    Persone che non si accontentano di consumare contenuti in un periodo storico predominato da passività,
                     ma vogliono capire il messaggio, l’intento e il valore artistico dietro ogni forma di espressione
                     e partecipare in modo attivo al progetto. Da questa necessità nasce Tera.</p>
             </div>
+
             <h2 style="text-align: right;">Perché dovresti prendere parte al nostro progetto?</h2>
             <div class="element2">
-                <img class="image1" src="../imgs/Home/home2.jpg" alt="Errore di caricamento immagine">
+                <figure>
+                    <img class="image1" src="../imgs/Home/home2.jpg" alt="Partecipa">
+                    <figcaption style="text-align: center;">
+                        Confronto e Passione
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Home/home2.jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
                 <p>Partecipare attivamente al nostro progetto vuol dire portare, proprio come abbiamo fatto noi,
                     la propria visione su ciò che più gli appassiona. Ognuno di noi ha una propria visione, e Tera è
-                    fatto per concretizzarla.
-                    Si tratta di raccontare perché qualcosa ti colpisce, di confrontarsi senza paura di essere giudicati
-                    e di costruire un dialogo
-                    autentico attorno alle proprie passioni.</p>
+                    fatto per concretizzarla. Si tratta di raccontare perché qualcosa ti colpisce, di confrontarsi senza 
+                    paura di essere giudicati e di costruire un dialogo autentico attorno alle proprie passioni.</p>
             </div>
+
             <h2>Cosa trovi su Tera.</h2>
             <div class="element1">
-                <img class="image1" src="../imgs/Home/home3.jpg" alt="Errore di caricamento immagine">
+                <figure>
+                    <img class="image1" src="../imgs/Home/home3.jpg" alt="Contenuti">
+                    <figcaption style="text-align: center;">
+                        Esplora e Approfondisci
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Home/home3.jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
                 <p>Tera non è un semplice sito web: è un progetto che vuole crescere, creare community e far scoprire
-                    nuove prospettive.
-                    Qui puoi leggere analisi, scoprire contenuti, confrontarti con altri e approfondire tutto ciò che
-                    riguarda arte,
-                    cultura e creatività, in modo accessibile ma profondo.</p>
+                    nuove prospettive. Qui puoi leggere analisi, scoprire contenuti, confrontarti con altri e approfondire 
+                    tutto ciò che riguarda arte, cultura e creatività, in modo accessibile ma profondo.</p>
             </div>
+
             <h2 style="text-align: right;">Regolamento</h2>
             <div class="element2">
-                <img class="image1" src="../imgs/Home/home4.jpg" alt="Errore di caricamento immagine">
+                <figure>
+                    <img class="image1" src="../imgs/Home/home4.jpg" alt="Regolamento">
+                    <figcaption style="text-align: center;">
+                        Le nostre regole
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Home/home4.jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
                 <ul>
                     <li>Essere rispettosi nei confronti dei creatori del sito e degli altri utenti.</li>
                     <li>Usare un linguaggio corretto e costruttivo.</li>
@@ -140,6 +169,7 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                 </ul>
             </div>
         </div>
+
         <div class="sidebar">
             <nav class="menu">
                 <div class="menu-itme">
@@ -173,6 +203,7 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
             </nav>
         </div>
     </div>
+
     <div class="footer">
         <div class="contacts">
             <div class="contact whatsapp">
@@ -195,11 +226,9 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                 <img src="../imgs/Home/Footer/icons8-logo-discord-100.png" alt="Discord">
                 <a href="https://discord.gg/TpwZh35J">Discord</a>
             </div>
-            </div>
         </div>
         <p>© <?php echo date('Y')?> TERA. All rights reserved.</p>
     </div>
 </body>
-
 
 </html>

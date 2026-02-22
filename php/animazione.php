@@ -1,5 +1,6 @@
 <?php session_start(); ?>
-<html>
+<!DOCTYPE html>
+<html lang="it">
 
 <head>
     <title>Tera ➔ Animazione & Disegno</title>
@@ -18,257 +19,249 @@
         </div>
         <div class="login">
             <div class="pos" title="Informazioni sulla posizione">
-    <button type="button" id="get-pos-btn" >
-        <img src="../imgs/Altro/position.png" alt="Posizione" class="position-icon" />
-    </button>
-        </div>
+                <button type="button" id="get-pos-btn">
+                    <img src="../imgs/Altro/position.png" alt="Posizione" class="position-icon" />
+                </button>
+            </div>
 
-<script>
-document.getElementById('get-pos-btn').addEventListener('click', function() {
-    const isLogged = <?php echo (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) ? 'true' : 'false'; ?>;
+            <script>
+                document.getElementById('get-pos-btn').addEventListener('click', function() {
+                    const isLogged = <?php echo (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) ? 'true' : 'false'; ?>;
 
-    if (!isLogged) {
-        alert("Attenzione: Devi essere loggato per visualizzare la tua posizione.");
-        return;
-    }
+                    if (!isLogged) {
+                        alert("Attenzione: Devi essere loggato per visualizzare la tua posizione.");
+                        return;
+                    }
 
-    if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
+                    if ("geolocation" in navigator) {
+                        navigator.geolocation.getCurrentPosition(function(position) {
+                            const lat = position.coords.latitude;
+                            const lon = position.coords.longitude;
+                            const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=it`;
 
-            // Utilizziamo un servizio di Reverse Geocoding gratuito (BigDataCloud o Nominatim)
-            // Questo trasforma le coordinate in Città e Paese reali
-            const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=it`;
+                            fetch(geoApiUrl)
+                                .then(res => res.json())
+                                .then(data => {
+                                    const citta = data.city || data.locality || "Sconosciuta";
+                                    const regione = data.principalSubdivision || "Sconosciuta";
+                                    const paese = data.countryName || "Sconosciuto";
 
-            fetch(geoApiUrl)
-            .then(res => res.json())
-            .then(data => {
-                const citta = data.city || data.locality || "Sconosciuta";
-                const regione = data.principalSubdivision || "Sconosciuta";
-                const paese = data.countryName || "Scono    sciuto";
+                                    const msg = `📍 La tua posizione attuale:\n` +
+                                        `   Città: ${citta}\n` +
+                                        `   Regione: ${regione}\n` +
+                                        `   Paese: ${paese}\n` +
+                                        `   Coordinate: ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
 
-                const msg = `📍 La tua posizione attuale:\n` +
-                            `   Città: ${citta}\n` +
-                            `   Regione: ${regione}\n` +
-                            `   Paese: ${paese}\n` +
-                            `   Coordinate: ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+                                    alert(msg);
 
-                alert(msg);
+                                    fetch('../php/salva_posizione.php', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/x-www-form-urlencoded'
+                                        },
+                                        body: `lat=${lat}&lon=${lon}&city=${encodeURIComponent(citta)}`
+                                    });
+                                })
+                                .catch(() => {
+                                    alert("Errore nel recupero dei dettagli dell'indirizzo.");
+                                });
 
-                // Opzionale: invia al server per salvarlo in sessione
-                fetch('../php/salva_posizione.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: `lat=${lat}&lon=${lon}&city=${encodeURIComponent(citta)}`
+                        }, function() {
+                            alert("Errore: Attiva il GPS o consenti l'accesso alla posizione.");
+                        });
+                    } else {
+                        alert("Il tuo browser non supporta la geolocalizzazione.");
+                    }
                 });
-            })
-            .catch(() => {
-                alert("Errore nel recupero dei dettagli dell'indirizzo.");
-            });
+            </script>
 
-        }, function() {
-            alert("Errore: Attiva il GPS o consenti l'accesso alla posizione.");
-        });
-    } else {
-        alert("Il tuo browser non supporta la geolocalizzazione.");
-    }
-});
-</script>
-    <div class="theme-icon" title="Cambia al tema Chiaro">
-        <button id="theme-button">
-            <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Solare" />
-            <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Lunare" />
-        </button>
-    </div>
-    <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
-        <p><?php echo htmlspecialchars($_SESSION['nome_utente']); ?></p>
-        <div class="pref-icon" title="Vai ai preferiti">
-            <a href="preferiti.php">
-                <img src="../imgs/Altro/preferiti.gif" alt="Preferiti" class="preferiti-icon" />
-            </a>
+            <div class="theme-icon" title="Cambia al tema Chiaro">
+                <button id="theme-button">
+                    <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Solare" />
+                    <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Lunare" />
+                </button>
+            </div>
+
+            <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
+                <p><?php echo htmlspecialchars($_SESSION['nome_utente']); ?></p>
+                <div class="pref-icon" title="Vai ai preferiti">
+                    <a href="preferiti.php">
+                        <img src="../imgs/Altro/preferiti.gif" alt="Preferiti" class="preferiti-icon" />
+                    </a>
+                </div>
+                <a href="../php/logout.php" title="Logout">
+                    <img src="../imgs/Login/logout.png" alt="User" class="login-icon" />
+                </a>
+            <?php else: ?>
+                <p>Login</p>
+                <a href="login.php" title="Vai alla pagina di accesso">
+                    <img src="../imgs/Login/login1.png" alt="Immagine Login" class="login-icon" />
+                </a>
+            <?php endif; ?>
         </div>
-        <a href="../php/logout.php" title="Logout">
-            <img src="../imgs/Login/logout.png" alt="User" class="login-icon" />
-        </a>
-    <?php else: ?>
-        <p>Login</p>
-        <a href="login.php" title="Vai alla pagina di accesso">
-            <img src="../imgs/Login/login1.png"
-                 alt="Immagine Login" class="login-icon" />
-        </a>
-    <?php endif; ?>
-</div>
     </div>
 
     <div class="main-content">
         <div class="content">
             <h2 style="text-align: center;">Animazione</h2>
             <div class="element3">
-                <p>I cartoni animati ci hanno accompagnato fin da quando
-                    eravamo bambini, ovviamente i designer hanno sempre optato per scelte stilistiche importanti
-                    che ci tenevano incollati allo schermo, in questa sezione parliamo proprio di questo.
-                </p>
+                <p>I cartoni animati ci hanno accompagnato fin da quando eravamo bambini, ovviamente i designer hanno sempre optato per scelte stilistiche importanti che ci tenevano incollati allo schermo, in questa sezione parliamo proprio di questo.</p>
             </div>
             <hr>
+
             <h2>Il Caos Cinetico Moderno</h2>
             <div class="element1">
-                <img class="image1" src="../imgs/Animazione/DANDADAN.jpg" alt="Dandadan Okarun">
-                <p>
-                    In <em>Dandadan</em>, il disegno rompe le regole della pulizia classica. L'autore utilizza linee
-                    "sporche" e un contrasto
-                    netto tra nero profondo e colori psichedelici per rappresentare il soprannaturale. A differenza
-                    degli anime tradizionali,
-                    qui il "line art" varia di spessore improvvisamente per accentuare la follia della scena, mescolando
-                    l'estetica horror
-                    con quella pop in un equilibrio visivo che ricorda i poster punk rock.
-                </p>
+                <figure>
+                    <img class="image1" src="../imgs/Animazione/DANDADAN.jpg" alt="Dandadan Okarun">
+                    <figcaption style="text-align: center;">
+                        Dandadan: Okarun in azione
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/DANDADAN.jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
+                <p>In <em>Dandadan</em>, il disegno rompe le regole della pulizia classica. L'autore utilizza linee "sporche" e un contrasto netto tra nero profondo e colori psichedelici per rappresentare il soprannaturale. A differenza degli anime tradizionali, qui il "line art" varia di spessore improvvisamente per accentuare la follia della scena, mescolando l'estetica horror con quella pop in un equilibrio visivo che ricorda i poster punk rock.</p>
             </div>
 
             <h2 style="text-align: right;">I Padri dello Slapstick</h2>
             <div class="element2">
-                <img class="image2" src="../imgs/Animazione/download (5).jpg" alt="Looney Tunes End Card">
-                <p>
-                    Prima della computer grafica, c'erano loro. I <em>Looney Tunes</em> hanno inventato la "fisica dei
-                    cartoni": un personaggio
-                    non cade nel burrone finché non guarda giù. Artisti come Chuck Jones usavano i cosiddetti "Smear
-                    Frames" (fotogrammi sbavati)
-                    per simulare la velocità: disegnavano un personaggio con tre teste o dieci gambe in un singolo frame
-                    per ingannare l'occhio
-                    umano e creare un movimento fluidissimo, una tecnica studiata ancora oggi nelle scuole d'arte.
-                </p>
+                <figure>
+                    <img class="image2" src="../imgs/Animazione/download (5).jpg" alt="Looney Tunes End Card">
+                    <figcaption style="text-align: center;">
+                        Looney Tunes: L'immortale "That's all Folks!"
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/download (5).jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
+                <p>Prima della computer grafica, c'erano loro. I <em>Looney Tunes</em> hanno inventato la "fisica dei cartoni": un personaggio non cade nel burrone finché non guarda giù. Artisti come Chuck Jones usavano i cosiddetti "Smear Frames" (fotogrammi sbavati) per simulare la velocità: disegnavano un personaggio con tre teste o dieci gambe in un singolo frame per ingannare l'occhio umano e creare un movimento fluidissimo.</p>
             </div>
 
             <h2>L'Immersività dei Fondali</h2>
             <div class="element1">
-                <img class="image1" src="../imgs/Animazione/download (4).jpg" alt="Studio Ghibli Mashup">
-                <p>
-                    L'immagine qui a fianco unisce i mondi dello Studio Ghibli, famosi per una caratteristica unica: i
-                    fondali dipinti a mano.
-                    Mentre i personaggi hanno colori piatti (cell shading) per facilitare l'animazione, il mondo attorno
-                    a loro è dipinto
-                    con una ricchezza di dettagli quasi impressionista. Hayao Miyazaki insiste sul concetto di "Ma"
-                    (spazio vuoto):
-                    scene in cui non succede nulla, solo nuvole che passano o erba che si muove, fondamentali per dare
-                    un'anima al disegno.
-                </p>
+                <figure>
+                    <img class="image1" src="../imgs/Animazione/download (4).jpg" alt="Studio Ghibli Mashup">
+                    <figcaption style="text-align: center;">
+                        L'arte dei fondali dello Studio Ghibli
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/download (4).jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
+                <p>L'immagine qui a fianco unisce i mondi dello Studio Ghibli, famosi per i fondali dipinti a mano. Mentre i personaggi hanno colori piatti (cell shading), il mondo attorno a loro è dipinto con una ricchezza di dettagli quasi impressionista. Hayao Miyazaki insiste sul concetto di "Ma" (spazio vuoto): scene contemplative fondamentali per dare un'anima al disegno.</p>
             </div>
 
             <h2 style="text-align: right;">Lo Stile "CalArts" e il Post-Apocalittico</h2>
             <div class="element2">
-                <img class="image2" src="../imgs/Animazione/download (3).jpg" alt="Adventure Time Campfire">
-                <p>
-                    <em>Adventure Time</em> ha sdoganato il moderno stile "Noodle Arms" (arti a spaghetto), privo di
-                    articolazioni anatomiche rigide.
-                    Sembra infantile, ma nasconde una genialità tecnica: permette animazioni espressive con budget
-                    ridotti. L'immagine del fuoco
-                    evoca il contrasto tipico della serie: un design colorato e carino ("candy gore") che nasconde un
-                    background cupo
-                    e post-apocalittico (la Terra di Ooo è il nostro mondo dopo una guerra nucleare), dimostrando che il
-                    disegno semplice
-                    può raccontare storie adulte.
-                </p>
+                <figure>
+                    <img class="image2" src="../imgs/Animazione/download (3).jpg" alt="Adventure Time Campfire">
+                    <figcaption style="text-align: center;">
+                        Adventure Time: Un design semplice per storie profonde
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/download (3).jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
+                <p><em>Adventure Time</em> ha sdoganato lo stile "Noodle Arms", privo di articolazioni rigide. Sembra infantile, ma permette animazioni espressive con budget ridotti. Il design colorato nasconde un background cupo e post-apocalittico, dimostrando che il disegno semplice può raccontare storie adulte.</p>
             </div>
 
             <h2>Graffiti e Tratto Sporco</h2>
             <div class="element1">
-                <img class="image1" src="../imgs/Animazione/download (6).jpg" alt="Gachiakuta Urban Style">
-                <p>
-                    Osservando <em>Gachiakuta</em>, notiamo come l'animazione stia recuperando il sapore del "bozzetto".
-                    I personaggi hanno contorni spessi, quasi disegnati con un pennarello indelebile o una bomboletta
-                    spray.
-                    Questo stile "Urban" rifiuta la perfezione digitale: le mani sono spesso ingigantite per enfatizzare
-                    i gesti
-                    e le ombre sono tratteggiate a mano (hatching) invece che sfumate, dando al disegno una consistenza
-                    ruvida e materica.
-                </p>
+                <figure>
+                    <img class="image1" src="../imgs/Animazione/download (6).jpg" alt="Gachiakuta Urban Style">
+                    <figcaption style="text-align: center;">
+                        Gachiakuta: L'estetica urban e ruvida
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/download (6).jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
+                <p>In <em>Gachiakuta</em>, l'animazione recupera il sapore del "bozzetto". I personaggi hanno contorni spessi, quasi disegnati con un pennarello indelebile. Questo stile "Urban" rifiuta la perfezione digitale, dando al disegno una consistenza ruvida e materica.</p>
             </div>
 
             <h2 style="text-align: right;">La Psicologia delle Forme</h2>
             <div class="element2">
-                <img class="image2" src="../imgs/Animazione/download (2).jpg" alt="Steven Universe Star Eyes">
-                <p>
-                    In <em>Steven Universe</em>, tutto si basa sulla "Shape Language". I personaggi buoni sono disegnati
-                    con cerchi e curve morbide
-                    (sicurezza, innocenza), mentre i nemici hanno punte e triangoli. Gli "occhi a stella" che vedi
-                    nell'immagine sono un omaggio
-                    diretto agli anime anni '90 (come Sailor Moon), usati qui per rompere la semplicità del volto
-                    occidentale con un dettaglio
-                    iper-espressivo tipicamente giapponese.
-                </p>
+                <figure>
+                    <img class="image2" src="../imgs/Animazione/download (2).jpg" alt="Steven Universe Star Eyes">
+                    <figcaption style="text-align: center;">
+                        Steven Universe: Espressività e Shape Language
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/download (2).jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
+                <p>In <em>Steven Universe</em>, tutto si basa sulla "Shape Language". I personaggi buoni usano curve morbide, mentre i nemici hanno punte e triangoli. Gli "occhi a stella" sono un omaggio diretto agli anime anni '90, usati per un dettaglio iper-espressivo.</p>
             </div>
 
             <h2>Il Mixed Media</h2>
             <div class="element1">
-                <img class="image1" src="../imgs/Animazione/Gumball (The Wonderfully World of Gumball).jpg"
-                    alt="Gumball Watterson">
-                <p>
-                    <em>Gumball</em> è un miracolo tecnico perché gestisce l'illuminazione in modo impossibile. Il
-                    personaggio è un disegno piatto
-                    in 2D, ma si muove su fondali fotografici reali. La sfida per i disegnatori è far sì che la luce
-                    "reale" della fotografia
-                    colpisca il personaggio disegnato in modo credibile. Spesso usano ombre proiettate digitalmente per
-                    "incollare" il disegno
-                    al pavimento, creando uno stile ibrido unico.
-                </p>
+                <figure>
+                    <img class="image1" src="../imgs/Animazione/Gumball (The Wonderfully World of Gumball).jpg" alt="Gumball Watterson">
+                    <figcaption style="text-align: center;">
+                        Gumball: L'integrazione tra 2D e realtà
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/Gumball (The Wonderfully World of Gumball).jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
+                <p><em>Gumball</em> è un miracolo tecnico: personaggi 2D piatti che si muovono su fondali fotografici reali. La sfida è far sì che la luce reale colpisca il disegno in modo credibile, creando uno stile ibrido unico al mondo.</p>
             </div>
 
             <h2 style="text-align: right;">Il Ritorno del Rubber Hose</h2>
             <div class="element2">
-                <img class="image2" src="../imgs/Animazione/onepiece.jpg" alt="Luffy Gear 5">
-                <p>
-                    Con il Gear 5, gli animatori hanno recuperato lo stile "Rubber Hose" degli anni '30 (tipico di
-                    Topolino o Popeye).
-                    Nel disegno anatomico, questo significa rimuovere le ossa: il corpo diventa un tubo flessibile.
-                    L'immagine mostra come la prospettiva venga distorta volutamente (la mano gigante, il corpo piccolo)
-                    per trasmettere
-                    un senso di libertà assoluta e di rottura della logica fisica.
-                </p>
+                <figure>
+                    <img class="image2" src="../imgs/Animazione/onepiece.jpg" alt="Luffy Gear 5">
+                    <figcaption style="text-align: center;">
+                        Luffy Gear 5: La rottura della logica fisica
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/onepiece.jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
+                <p>Con il Gear 5, <em>One Piece</em> recupera lo stile "Rubber Hose" degli anni '30. Il corpo diventa un tubo flessibile e la prospettiva viene distorta volutamente per trasmettere un senso di libertà assoluta.</p>
             </div>
 
             <h2>Storytelling Senza Parole</h2>
             <div class="element1">
-                <img class="image1" src="../imgs/Animazione/download (7).jpg" alt="Stickman Animation">
-                <p>
-                    Come si disegna un'emozione senza occhi o bocca? Questa immagine rappresenta la pura "Line of
-                    Action".
-                    Ogni posa degli stickman è costruita su una linea curva immaginaria che attraversa il corpo.
-                    Anche senza volto, capiamo chi è l'eroe e chi è il nemico solo dalla postura e dal colore.
-                    È la prova che il design minimalista, se animato con i giusti principi di peso e timing, può essere
-                    epico quanto un film realistico.
-                </p>
+                <figure>
+                    <img class="image1" src="../imgs/Animazione/download (7).jpg" alt="Stickman Animation">
+                    <figcaption style="text-align: center;">
+                        Stickman: La potenza della Line of Action
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/download (7).jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
+                <p>Questa immagine rappresenta la pura "Line of Action". Anche senza volto, capiamo l'emozione e il ruolo del personaggio solo dalla postura. È la prova che il design minimalista può essere epico quanto un film realistico.</p>
             </div>
 
             <h2 style="text-align: right;">Linee Sottili e Colori Saturi</h2>
             <div class="element2">
-                <img class="image2" src="../imgs/Animazione/hazbin.jpg" alt="Hazbin Hotel Cast">
-                <p>
-                    Lo stile di <em>Hazbin Hotel</em> è l'opposto del minimalismo: è denso, caotico e dominato da linee
-                    verticali sottilissime.
-                    Il character design è pieno di dettagli (denti aguzzi, papillon, motivi sui vestiti) che rendono
-                    l'animazione difficilissima.
-                    L'uso predominante del rosso e del rosa saturo appiattisce la profondità, facendo sembrare ogni
-                    fotogramma la copertina
-                    di una rivista di moda gotica, distaccandosi totalmente dallo stile "rotondo" della Disney.
-                </p>
+                <figure>
+                    <img class="image2" src="../imgs/Animazione/hazbin.jpg" alt="Hazbin Hotel Cast">
+                    <figcaption style="text-align: center;">
+                        Hazbin Hotel: Uno stile denso e gotico
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/hazbin.jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
+                <p>Lo stile di <em>Hazbin Hotel</em> è denso e dominato da linee verticali sottilissime. L'uso del rosso e del rosa saturo appiattisce la profondità, creando l'effetto di una rivista di moda gotica.</p>
             </div>
 
             <h2>Luce e Colore senza Contorni</h2>
             <div class="element1">
-                <img class="image1"
-                    src="../imgs/Animazione/Dreamy Pastel Paintings Capture the Lazy Lives of Leisurely Sunbathing Cats.jpg"
-                    alt="Digital Painting Cat">
-                <p>
-                    Non solo linee: l'animazione è anche "Color Script". In questa illustrazione "lineless" (senza
-                    contorni neri),
-                    tutto è definito dalle forme di colore. L'artista usa pennellate dure e geometriche per suggerire il
-                    pelo del gatto
-                    senza disegnarlo pelo per pelo. È una tecnica pittorica digitale fondamentale per i concept artist
-                    che devono creare
-                    il "mood" (l'atmosfera emotiva) di un film prima ancora che inizi la produzione vera e propria.
-                </p>
+                <figure>
+                    <img class="image1" src="../imgs/Animazione/Dreamy Pastel Paintings Capture the Lazy Lives of Leisurely Sunbathing Cats.jpg" alt="Digital Painting Cat">
+                    <figcaption style="text-align: center;">
+                        Lineless Art: Definire i volumi col colore
+                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/Dreamy Pastel Paintings Capture the Lazy Lives of Leisurely Sunbathing Cats.jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        </button>
+                    </figcaption>
+                </figure>
+                <p>In questa illustrazione "lineless", tutto è definito dalle forme di colore e dalla luce. È una tecnica pittorica fondamentale per i concept artist che devono creare l'atmosfera emotiva di un'opera.</p>
             </div>
-
         </div>
 
         <div class="sidebar">
@@ -299,8 +292,7 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                 </div>
                 <div class="menu-itme">
                     <img src="../imgs/Home/Icone/icons8-forum-100.png" alt="forum">
-                    
-                     <a href="forum.php">FORUM</a>
+                    <a href="forum.php">FORUM</a>
                 </div>
             </nav>
         </div>
@@ -329,7 +321,7 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                 <a href="https://discord.gg/TpwZh35J">Discord</a>
             </div>
         </div>
-        <p>© <?php echo date('Y')?> TERA. All rights reserved.</p>
+        <p>© <?php echo date('Y') ?> TERA. All rights reserved.</p>
     </div>
 </body>
 
