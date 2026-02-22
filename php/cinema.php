@@ -120,8 +120,8 @@
                             <img class="image1" src="../imgs/Cinema/c1.jpg" alt="Cinema Linguaggio">
                             <figcaption style="text-align: center;">
                                 L'esperienza sensoriale del cinema
-                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/c1.jpg')" title="Aggiungi ai preferiti">
-                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                <button type="button" class="fav-btn" data-path="../imgs/Home/home4.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                                 </button>
                             </figcaption>
                         </figure>
@@ -137,8 +137,8 @@
                             <img class="image1" src="../imgs/Cinema/c2.jpg" alt="Regia">
                             <figcaption style="text-align: center;">
                                 Il tocco del regista
-                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/c2.jpg')" title="Aggiungi ai preferiti">
-                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                <button type="button" class="fav-btn" data-path="../imgs/Cinema/c2.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                                 </button>
                             </figcaption>
                         </figure>
@@ -154,8 +154,8 @@
                             <img class="image1" src="../imgs/Cinema/c3.jpg" alt="Recitazione">
                             <figcaption style="text-align: center;">
                                 L'incarnazione del personaggio
-                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/c3.jpg')" title="Aggiungi ai preferiti">
-                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                <button type="button" class="fav-btn" data-path="../imgs/Cinema/c3.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                                 </button>
                             </figcaption>
                         </figure>
@@ -172,8 +172,8 @@
                             <img class="image1" src="../imgs/Cinema/c4.jpg" alt="Sceneggiatura">
                             <figcaption style="text-align: center;">
                                 Lo scheletro del racconto
-                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/c4.jpg')" title="Aggiungi ai preferiti">
-                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                <button type="button" class="fav-btn" data-path="../imgs/Cinema/c4.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                                 </button>
                             </figcaption>
                         </figure>
@@ -189,8 +189,8 @@
                             <img class="image1" src="../imgs/Cinema/c5.jpg" alt="Messaggi">
                             <figcaption style="text-align: center;">
                                 Riflessione e sottotesto
-                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/c5.jpg')" title="Aggiungi ai preferiti">
-                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                <button type="button" class="fav-btn" data-path="../imgs/Cinema/c5.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                                 </button>
                             </figcaption>
                         </figure>
@@ -206,8 +206,8 @@
                             <img class="image1" src="../imgs/Cinema/c6.jpg" alt="Costumi">
                             <figcaption style="text-align: center;">
                                 Peaky Blinders: Identità visiva
-                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/c6.jpg')" title="Aggiungi ai preferiti">
-                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                <button type="button" class="fav-btn" data-path="../imgs/Cinema/c6.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                                 </button>
                             </figcaption>
                         </figure>
@@ -223,8 +223,8 @@
                             <img class="image1" src="../imgs/Cinema/c7.jpg" alt="Illuminazione">
                             <figcaption style="text-align: center;">
                                 Barry Lyndon: La luce naturale
-                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/c7.jpg')" title="Aggiungi ai preferiti">
-                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                <button type="button" class="fav-btn" data-path="../imgs/Cinema/c7.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                                 </button>
                             </figcaption>
                         </figure>
@@ -240,8 +240,8 @@
                             <img class="image1" src="../imgs/Cinema/c8.jpg" alt="Audio">
                             <figcaption style="text-align: center;">
                                 Dunkirk: L'immersione sonora
-                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/c8.jpg')" title="Aggiungi ai preferiti">
-                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                <button type="button" class="fav-btn" data-path="../imgs/Cinema/c8.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                                 </button>
                             </figcaption>
                         </figure>
@@ -260,8 +260,8 @@
                             <img class="image1" src="../imgs/Cinema/grandbudapest.jpg" alt="Grand Budapest">
                             <figcaption style="text-align: center;">
                                 L’estetica come mondo chiuso
-                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/grandbudapest.jpg')" title="Aggiungi ai preferiti">
-                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                <button type="button" class="fav-btn" data-path="../imgs/Cinema/grandbudapest.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                                 </button>
                             </figcaption>
                             <a href="https://youtu.be/G1jG8HUY4zI" target="_blank">Guarda il Trailer</a>
@@ -278,8 +278,8 @@
                             <img class="image2" src="../imgs/Cinema/seven.jpg" alt="Seven">
                             <figcaption style="text-align: center;">
                                 Il male come sistema logico
-                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/seven.jpg')" title="Aggiungi ai preferiti">
-                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                <button type="button" class="fav-btn" data-path="../imgs/Cinema/seven.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                                 </button>
                             </figcaption>
                             <a href="https://youtu.be/hKUABU9uPmw" target="_blank">Guarda il Trailer</a>
@@ -296,8 +296,8 @@
                             <img class="image1" src="../imgs/Cinema/donniedarko.jpg" alt="Donnie Darko">
                             <figcaption style="text-align: center;">
                                 Identità e ambiguità
-                                <button class="fav-btn" onclick="toggleFavorite('../imgs/Cinema/donniedarko.jpg')" title="Aggiungi ai preferiti">
-                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                <button type="button" class="fav-btn" data-path="../imgs/Cinema/donniedarko.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                                 </button>
                             </figcaption>
                             <a href="https://youtu.be/Uab7LYrAiqM" target="_blank">Guarda il Trailer</a>

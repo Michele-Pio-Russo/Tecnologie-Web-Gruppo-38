@@ -56,7 +56,9 @@
 
                                     fetch('../php/salva_posizione.php', {
                                         method: 'POST',
-                                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                                        headers: {
+                                            'Content-Type': 'application/x-www-form-urlencoded'
+                                        },
                                         body: `lat=${lat}&lon=${lon}&city=${encodeURIComponent(citta)}`
                                     });
                                 })
@@ -107,9 +109,9 @@
                     <img class="image1" src="../imgs/Home/home1.jpg" alt="Chi siamo">
                     <figcaption style="text-align: center;">
                         La nostra visione
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Home/home1.jpg')" title="Aggiungi/Rimuovi dai preferiti">
-                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
-                        </button>
+                        <button type="button" class="fav-btn" data-path="../imgs/Home/home1.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                        <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                    </button>
                     </figcaption>
                 </figure>
                 <p>Siamo tre ragazzi con un’idea: creare una community per chi, come noi, va oltre la superficie.
@@ -124,14 +126,14 @@
                     <img class="image1" src="../imgs/Home/home2.jpg" alt="Partecipa">
                     <figcaption style="text-align: center;">
                         Confronto e Passione
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Home/home2.jpg')" title="Aggiungi/Rimuovi dai preferiti">
-                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
-                        </button>
+                        <button type="button" class="fav-btn" data-path="../imgs/Home/home2.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                        <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                    </button>
                     </figcaption>
                 </figure>
                 <p>Partecipare attivamente al nostro progetto vuol dire portare, proprio come abbiamo fatto noi,
                     la propria visione su ciò che più gli appassiona. Ognuno di noi ha una propria visione, e Tera è
-                    fatto per concretizzarla. Si tratta di raccontare perché qualcosa ti colpisce, di confrontarsi senza 
+                    fatto per concretizzarla. Si tratta di raccontare perché qualcosa ti colpisce, di confrontarsi senza
                     paura di essere giudicati e di costruire un dialogo autentico attorno alle proprie passioni.</p>
             </div>
 
@@ -141,13 +143,13 @@
                     <img class="image1" src="../imgs/Home/home3.jpg" alt="Contenuti">
                     <figcaption style="text-align: center;">
                         Esplora e Approfondisci
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Home/home3.jpg')" title="Aggiungi/Rimuovi dai preferiti">
-                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Home/home3.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                         </button>
                     </figcaption>
                 </figure>
                 <p>Tera non è un semplice sito web: è un progetto che vuole crescere, creare community e far scoprire
-                    nuove prospettive. Qui puoi leggere analisi, scoprire contenuti, confrontarti con altri e approfondire 
+                    nuove prospettive. Qui puoi leggere analisi, scoprire contenuti, confrontarti con altri e approfondire
                     tutto ciò che riguarda arte, cultura e creatività, in modo accessibile ma profondo.</p>
             </div>
 
@@ -157,8 +159,8 @@
                     <img class="image1" src="../imgs/Home/home4.jpg" alt="Regolamento">
                     <figcaption style="text-align: center;">
                         Le nostre regole
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Home/home4.jpg')" title="Aggiungi/Rimuovi dai preferiti">
-                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Home/home4.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                         </button>
                     </figcaption>
                 </figure>
@@ -227,7 +229,7 @@
                 <a href="https://discord.gg/TpwZh35J">Discord</a>
             </div>
         </div>
-        <p>© <?php echo date('Y')?> TERA. All rights reserved.</p>
+        <p>© <?php echo date('Y') ?> TERA. All rights reserved.</p>
     </div>
 </body>
 
