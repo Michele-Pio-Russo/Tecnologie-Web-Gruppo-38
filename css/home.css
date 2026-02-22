@@ -329,10 +329,9 @@ hr {
 .menu {
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: clamp(10px, 1vw, 30px);
     align-items: center;
     justify-content: space-evenly;
-    margin-right:10px;
     width:80px;
     overflow: hidden;
     transition: width 0.2s linear;
@@ -340,13 +339,14 @@ hr {
 }
 
 .sidebar .menu .menu-itme:nth-of-type(1) img {
-    padding: 5px;
+    padding: 3px;
     border: 3px solid white;
     border-radius: 20px;
 }
 
 .menu .menu-itme {
     padding: 10px;
+    gap: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -356,7 +356,6 @@ hr {
 .menu .menu-itme img {
     width: clamp(20px, 2.5vw, 60px); 
     height: clamp(20px, 2.5vw, 60px); 
-    margin-right: 10px;
     flex-shrink: 0;
 }
 
