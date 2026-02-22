@@ -27,7 +27,7 @@ function register($u, $e, $p, $db) {
 }
 //registriamo l'utente nel database
 if (register($username, $email, $password, $db)) {
-    header("Location: ../html/login.html?success=1");
+    header("Location: ../php/login.php?success=1");
     exit;
 } else {
     echo "Errore durante la registrazione: " . pg_last_error($db);

@@ -85,9 +85,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <img src="../imgs/Login/pass_yes.png" alt="password" id="PassIcon">
             </div>  
             <button type="submit">Accedi</button>
-            <div class="forget">
-                <a href="#">Hai dimenticato la password?</a>
-            </div>
             <div class="question">
                 <p>Non sei registrato? <a href="../html/signup.html">Registrati qui</a></p>
             </div>
