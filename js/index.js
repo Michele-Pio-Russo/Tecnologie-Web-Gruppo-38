@@ -35,14 +35,14 @@ themeToggleButton.addEventListener('click', () => {
 //gestione preferiti
 
 document.addEventListener('click', function (event) {
-    // Cerchiamo se il click è avvenuto su un bottone preferiti (o su un suo figlio come l'icona)
+    //Cerchiamo se il click è avvenuto su un bottone preferiti (o su un suo figlio come l'icona)
     const btn = event.target.closest('.fav-btn');
     
     if (btn) {
         event.preventDefault();
         const imgPath = btn.getAttribute('data-path');
         
-        // Debug: controlla se il percorso viene letto
+        //Debug: controlla se il percorso viene letto
         console.log("Cliccato su:", imgPath);
 
         if (!imgPath) {
