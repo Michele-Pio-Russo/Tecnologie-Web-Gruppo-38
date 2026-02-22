@@ -115,7 +115,12 @@
             <hr>
             <h2>World Building</h2>
             <div class="element1">
-                <img class="image2" src="../imgs/Videogiochi/zelda.jpg" alt="zelda breath of the wild">
+                <figure>
+                <img class="image2" src="../imgs/Videogiochi/zelda.jpg" alt="zelda">
+                <button type="button" class="fav-btn" data-path="../imgs/Videogiochi/zelda.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                                </button>
+                </figure>
                 <p>Il World Building è l'architettura invisibile che sostiene l'intera esperienza di gioco.
                     Può essere la distinzione fra mappe aperte (open world) o a livelli, ma
                     anche la fisica di gioco, fino ad arrivare alla storia della civiltà del mondo di gioco.
@@ -156,7 +161,12 @@
             </div>
             <h2 style="text-align: right;">Level Design</h2>
             <div class="element2">
+                <figure>
                 <img class="image1" src="../imgs/Videogiochi/eldenring.jpg" alt="mappa elden ring">
+                <button type="button" class="fav-btn" data-path="../imgs/Videogiochi/eldenring.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                                </button>
+                </figure>
                 <p>In maniera complementare al world building, il level design rappresenta tutta la componente
                     strutturale del gioco, ovvero la distribuzione dei nemici, ostacoli e ricompense, che sia
                     lineare o meno. Un buon regista si avvale di elementi come la luce, i colori e in generale
@@ -186,7 +196,12 @@
             </div>
             <h2 style="text-align: right;">Pixel Art</h2>
             <div class="element2">
+                <figure>
                 <img class="image1" src="../imgs/Videogiochi/citta.jpg" alt="città pixel">
+                <button type="button" class="fav-btn" data-path="../imgs/Videogiochi/citta.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                                </button>
+                </figure>
                 <p>La Pixel Art non è solo un richiamo nostalgico al passato, ma una scelta stilistica
                     sofisticata e senza tempo. Attraverso la gestione precisa di ogni singolo pixel, questa
                     forma d'arte digitale riesce a creare mondi vibranti e personaggi espressivi, dimostrando
@@ -206,14 +221,24 @@
             </div>
             <h2>Super Mario Bros (1985)</h2>
             <div class="element1">
+                <figure>
                 <img class="image1" src="../imgs/Videogiochi/mario.jpg" alt="super mario">
+                <button type="button" class="fav-btn" data-path="../imgs/Videogiochi/mario.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                                </button>
+                </figure>
                 <p>Il titolo che ha salvato l'industria e definito le regole dei platform,
                     senza di lui probabilmente questo genere avrebbe preso una piega completamente diversa.
                 </p>
             </div>
             <h2>The Legend of Zelda: Ocarina of Time (1998)</h2>
             <div class="element1">
+                <figure>
                 <img class="image1" src="../imgs/Videogiochi/zeldaoot.jpg" alt="zelda ocarina of time">
+                <button type="button" class="fav-btn" data-path="../imgs/Videogiochi/zeldaoot.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                                </button>
+                </figure>
                 <p> Citato nella sezione delle colonne sonore, questo
                     titolo oltre ad essere il gioco con il voto più alto della storia ha introdotto una grande novità,
                     ossia il sistema di puntamento dei nemici, regola replicata in qualsiasi altro gioco di azione
@@ -221,7 +246,12 @@
             </div>
             <h2 style="text-align: right;">DOOM (1993)</h2>
             <div class="element2">
+                <figure>
                 <img class="image1" src="../imgs/Videogiochi/doom.jpg" alt="doom">
+                <button type="button" class="fav-btn" data-path="../imgs/Videogiochi/doom.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                                </button>
+                </figure>
                 <p>Non solo il padre degli sparatutto in prima persona (First Person Shooter), ma un esempio magistrale
                     di
                     come la tecnologia e il ritmo frenetico possano creare un genere culturale globale.
@@ -229,13 +259,23 @@
             </div>
             <h2 style="text-align: right;">Tetris (1984)</h2>
             <div class="element2">
+                <figure>
                 <img class="image2" src="../imgs/Videogiochi/tetris.jpg" alt="tetris">
+                <button type="button" class="fav-btn" data-path="../imgs/Videogiochi/tetris.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                                </button>
+                </figure>
                 <p> La prova suprema di come il puro Game Design, seppur non abbia una grafica
                     complessa è proprio la semplicità il suo punto di forza, ha creato un'esperienza universale e senza tempo.</p>
             </div>
             <h2 style="text-align: center;">Metal Gear Solid (1998)</h2>
             <div class="element3">
+                <figure>
                 <img class="image2" src="../imgs/Videogiochi/mgs.jpg" alt="metal gear solid">
+                <button type="button" class="fav-btn" data-path="../imgs/Videogiochi/mgs.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                                </button>
+                </figure>
                 <br>
                 <p> Il gioco che ha elevato la narrativa videoludica a livelli
                     cinematografici,
