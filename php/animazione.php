@@ -115,8 +115,8 @@
                     <img class="image1" src="../imgs/Animazione/DANDADAN.jpg" alt="Dandadan Okarun">
                     <figcaption style="text-align: center;">
                         Dandadan: Okarun in azione
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/DANDADAN.jpg')" title="Aggiungi/Rimuovi dai preferiti">
-                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Animazione/DANDADAN.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                         </button>
                     </figcaption>
                 </figure>
@@ -129,8 +129,8 @@
                     <img class="image2" src="../imgs/Animazione/download (5).jpg" alt="Looney Tunes End Card">
                     <figcaption style="text-align: center;">
                         Looney Tunes: L'immortale "That's all Folks!"
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/download (5).jpg')" title="Aggiungi/Rimuovi dai preferiti">
-                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Animazione/download (5).jpg" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                         </button>
                     </figcaption>
                 </figure>
@@ -143,8 +143,8 @@
                     <img class="image1" src="../imgs/Animazione/download (4).jpg" alt="Studio Ghibli Mashup">
                     <figcaption style="text-align: center;">
                         L'arte dei fondali dello Studio Ghibli
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/download (4).jpg')" title="Aggiungi/Rimuovi dai preferiti">
-                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Animazione/download (4).jpg" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                         </button>
                     </figcaption>
                 </figure>
@@ -157,8 +157,8 @@
                     <img class="image2" src="../imgs/Animazione/download (3).jpg" alt="Adventure Time Campfire">
                     <figcaption style="text-align: center;">
                         Adventure Time: Un design semplice per storie profonde
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/download (3).jpg')" title="Aggiungi/Rimuovi dai preferiti">
-                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Animazione/download (3).jpg" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                         </button>
                     </figcaption>
                 </figure>
@@ -171,8 +171,8 @@
                     <img class="image1" src="../imgs/Animazione/download (6).jpg" alt="Gachiakuta Urban Style">
                     <figcaption style="text-align: center;">
                         Gachiakuta: L'estetica urban e ruvida
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/download (6).jpg')" title="Aggiungi/Rimuovi dai preferiti">
-                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Animazione/download (6).jpg" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                         </button>
                     </figcaption>
                 </figure>
@@ -185,8 +185,8 @@
                     <img class="image2" src="../imgs/Animazione/download (2).jpg" alt="Steven Universe Star Eyes">
                     <figcaption style="text-align: center;">
                         Steven Universe: Espressività e Shape Language
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/download (2).jpg')" title="Aggiungi/Rimuovi dai preferiti">
-                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Animazione/download (2).jpg" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                         </button>
                     </figcaption>
                 </figure>
@@ -199,8 +199,8 @@
                     <img class="image1" src="../imgs/Animazione/Gumball (The Wonderfully World of Gumball).jpg" alt="Gumball Watterson">
                     <figcaption style="text-align: center;">
                         Gumball: L'integrazione tra 2D e realtà
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/Gumball (The Wonderfully World of Gumball).jpg')" title="Aggiungi/Rimuovi dai preferiti">
-                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Animazione/Gumball (The Wonderfully World of Gumball).jpg" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                         </button>
                     </figcaption>
                 </figure>
@@ -213,7 +213,7 @@
                     <img class="image2" src="../imgs/Animazione/onepiece.jpg" alt="Luffy Gear 5">
                     <figcaption style="text-align: center;">
                         Luffy Gear 5: La rottura della logica fisica
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/onepiece.jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Animazione/onepiece.jpg" title="Aggiungi/Rimuovi dai preferiti">
                             <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
                         </button>
                     </figcaption>
@@ -227,7 +227,7 @@
                     <img class="image1" src="../imgs/Animazione/download (7).jpg" alt="Stickman Animation">
                     <figcaption style="text-align: center;">
                         Stickman: La potenza della Line of Action
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/download (7).jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Animazione/download (7).jpg" title="Aggiungi/Rimuovi dai preferiti">
                             <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
                         </button>
                     </figcaption>
@@ -241,7 +241,7 @@
                     <img class="image2" src="../imgs/Animazione/hazbin.jpg" alt="Hazbin Hotel Cast">
                     <figcaption style="text-align: center;">
                         Hazbin Hotel: Uno stile denso e gotico
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/hazbin.jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Animazione/hazbin.jpg" title="Aggiungi/Rimuovi dai preferiti">
                             <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
                         </button>
                     </figcaption>
@@ -255,7 +255,7 @@
                     <img class="image1" src="../imgs/Animazione/Dreamy Pastel Paintings Capture the Lazy Lives of Leisurely Sunbathing Cats.jpg" alt="Digital Painting Cat">
                     <figcaption style="text-align: center;">
                         Lineless Art: Definire i volumi col colore
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Animazione/Dreamy Pastel Paintings Capture the Lazy Lives of Leisurely Sunbathing Cats.jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Animazione/Dreamy Pastel Paintings Capture the Lazy Lives of Leisurely Sunbathing Cats.jpg" title="Aggiungi/Rimuovi dai preferiti">
                             <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
                         </button>
                     </figcaption>

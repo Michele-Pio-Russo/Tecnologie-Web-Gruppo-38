@@ -113,8 +113,8 @@
                     <img class="image2" src="../imgs/Menzioni Onorevoli/Fotografia.jpg" alt="fotografia">
                     <figcaption>
                         L'arte dello scatto consapevole
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Menzioni Onorevoli/Fotografia.jpg')" title="Aggiungi ai preferiti">
-                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Menzioni Onorevoli/Fotografia.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                         </button>
                     </figcaption>
                 </figure>
@@ -127,8 +127,8 @@
                     <img class="image1" src="../imgs/Menzioni Onorevoli/StreetPhotograpy.jpg" alt="street photography">
                     <figcaption>
                         La vita che accade in strada
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Menzioni Onorevoli/StreetPhotograpy.jpg')" title="Aggiungi ai preferiti">
-                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Menzioni Onorevoli/StreetPhotograpy.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                         </button>
                     </figcaption>
                 </figure>
@@ -143,8 +143,8 @@
                     <img class="image1" src="../imgs/Menzioni Onorevoli/carte.jpg" alt="carte">
                     <figcaption>
                         Design e collezionismo
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Menzioni Onorevoli/carte.jpg')" title="Aggiungi ai preferiti">
-                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Menzioni Onorevoli/carte.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                         </button>
                     </figcaption>
                 </figure>
@@ -157,8 +157,8 @@
                     <img class="image1" src="../imgs/Menzioni Onorevoli/pokemon.jpg" alt="pokemon">
                     <figcaption>
                         L'immediatezza del Character Design
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Menzioni Onorevoli/pokemon.jpg')" title="Aggiungi ai preferiti">
-                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Menzioni Onorevoli/pokemon.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                         </button>
                     </figcaption>
                 </figure>
@@ -171,8 +171,8 @@
                     <img class="image1" src="../imgs/Menzioni Onorevoli/Exploding kittens.jpg" alt="exploding kittens">
                     <figcaption>
                         Ironia e stile diretto
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Menzioni Onorevoli/Exploding kittens.jpg')" title="Aggiungi ai preferiti">
-                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Menzioni Onorevoli/Exploding kittens.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                         </button>
                     </figcaption>
                 </figure>
@@ -185,8 +185,8 @@
                     <img class="image1" src="../imgs/Menzioni Onorevoli/magic.jpg" alt="magic">
                     <figcaption>
                         L'apice dell'illustrazione fantasy
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Menzioni Onorevoli/magic.jpg')" title="Aggiungi ai preferiti">
-                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Menzioni Onorevoli/magic.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                         </button>
                     </figcaption>
                 </figure>
@@ -199,8 +199,8 @@
                     <img class="image1" src="../imgs/Menzioni Onorevoli/Lorcana.jpg" alt="lorcana">
                     <figcaption>
                         Reinterpretazione dei classici
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Menzioni Onorevoli/Lorcana.jpg')" title="Aggiungi ai preferiti">
-                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Menzioni Onorevoli/Lorcana.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                         </button>
                     </figcaption>
                 </figure>
@@ -213,8 +213,8 @@
                     <img class="image1" src="../imgs/Menzioni Onorevoli/Tarocchi.jpg" alt="tarocchi">
                     <figcaption>
                         Simbologia e introspezione
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Menzioni Onorevoli/Tarocchi.jpg')" title="Aggiungi ai preferiti">
-                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Menzioni Onorevoli/Tarocchi.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                         </button>
                     </figcaption>
                 </figure>
@@ -231,8 +231,8 @@
                     <img class="image1" src="../imgs/Menzioni Onorevoli/Cucina.jpg" alt="cucina">
                     <figcaption>
                         L'estetica del gusto
-                        <button class="fav-btn" onclick="toggleFavorite('../imgs/Menzioni Onorevoli/Cucina.jpg')" title="Aggiungi ai preferiti">
-                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                        <button type="button" class="fav-btn" data-path="../imgs/Menzioni Onorevoli/Cucina.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                            <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
                         </button>
                     </figcaption>
                 </figure>
