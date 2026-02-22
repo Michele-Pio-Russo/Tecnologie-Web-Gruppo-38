@@ -45,6 +45,47 @@ body {
     min-height: 100vh;
 }
 
+/*stile per il canvas*/
+canvas {
+      border: 2px solid black;
+      background: white;
+      cursor: crosshair;
+      width: 100%;
+      border-radius: 20px;
+    }
+/*stile per il color picker*/
+#colorPicker {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  background: none;
+  padding: 0;
+  margin-right: 10px;
+  transition: transform 0.2s ease;
+}
+
+#colorPicker:hover {
+  transform: scale(1.1);
+}
+
+#colorPicker::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+#colorPicker::-webkit-color-swatch {
+  border: 3px solid #333;
+  border-radius: 50%;
+}
+
+#colorPicker::-moz-color-swatch {
+  border: 3px solid #333;
+  border-radius: 50%;
+}
+
 /*preferiti*/
 .fav-btn {
     background: none;
@@ -335,6 +376,23 @@ hr {
         transition: background-color 0.3s ease;
         margin-bottom:15px
     }
+}
+.clean{
+    padding: 10px;
+        width:auto;
+        height: clamp(30px, 5vh, 60px);
+        border: none;
+        border-radius: 25px;
+        background-color: var(--colore-bottone);
+        color: var(--colore-testo);
+        font-size: clamp(20px, 1.7vw, 40px);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-bottom:15px
+}
+.clean:hover
+{
+    background-color: #390F61;
 }
 /*hovering sui bottoni e link*/
 .element1 button:hover {

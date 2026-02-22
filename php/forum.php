@@ -226,7 +226,7 @@ if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) {
             <h3>Lascia una valutazione alle sezioni</h3>
             <?php if (isset($_SESSION['autorizzato'])): ?>
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-                    
+
                     <img src="../imgs/Form/Ringraziamenti.jpg" alt="Ringraziamenti" align="right" class="image1">
 
                     <h3>Quali sezioni hai preferito di più?</h3>
@@ -340,10 +340,17 @@ if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) {
                 <?php endif; ?>
 
                 <hr>
+                <h3>Disegna la tua arte</h3>
+                <input type="color" id="colorPicker">
+                <br>
+                <canvas id="canvas"></canvas>
+                <br>
+                <button onclick="clearCanvas()" class="clean">Pulisci</button>
+                <hr>
 
                 <h3>Discussioni della Community</h3>
 
-                <div class="lista-commenti">
+                <div class="lista-commenti">    
                     <?php if (!empty($commenti)): ?>
                         <?php foreach ($commenti as $comm): ?>
                             <div class="comment-card">
@@ -442,6 +449,7 @@ if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) {
         </div>
         <p>© <?php echo date('Y') ?> TERA. All rights reserved.</p>
     </div>
+
 </body>
 
 </html>
