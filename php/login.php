@@ -22,10 +22,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $hash = $row['password'];
             $username = $row['username'];
             
-            //impostiamo la sessione come attiva e prendiamo il nome dell'utente che faremo vedere nelle pagine del sito
+            //impostiamo la sessione come attiva e prendiamo il nome dell'utente e l'email che faremo vedere nelle pagine del sito
             if (password_verify($password, $hash)) {
                 $_SESSION['autorizzato'] = true;
                 $_SESSION['nome_utente'] = $username;
+                $_SESSION['email'] = $email;
                 echo "<script>
                         alert('Benvenuto $username, ci sei mancato :)');
                         window.location.href = '../php/home.php';

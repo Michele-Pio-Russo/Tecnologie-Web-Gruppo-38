@@ -32,3 +32,48 @@ themeToggleButton.addEventListener('click', () => {
     }
 });
 
+//gestione preferiti
+
+document.addEventListener('click', function (event) {
+    // Cerchiamo se il click è avvenuto su un bottone preferiti (o su un suo figlio come l'icona)
+    const btn = event.target.closest('.fav-btn');
+    
+    if (btn) {
+        event.preventDefault();
+        const imgPath = btn.getAttribute('data-path');
+        
+        // Debug: controlla se il percorso viene letto
+        console.log("Cliccato su:", imgPath);
+
+        if (!imgPath) {
+            alert("Errore: Percorso immagine non trovato!");
+            return;
+        }
+
+        const params = new URLSearchParams();
+        params.append('img_path', imgPath);
+
+        fetch('../php/toggle_preferiti.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
+        })
+        .then(res => res.text())
+        .then(result => {
+            const status = result.trim();
+            if (status === 'added') {
+                alert("Immagine aggiunta ai preferiti! ❤️");
+            } else if (status === 'removed') {
+                alert("Immagine rimossa dai preferiti.");
+            } else if (status === 'unauthorized') {
+                alert("Devi effettuare il login!");
+            } else {
+                alert("Errore del server: " + status);
+            }
+        })
+        .catch(err => {
+            console.error("Errore Fetch:", err);
+            alert("Errore di connessione.");
+        });
+    }
+});

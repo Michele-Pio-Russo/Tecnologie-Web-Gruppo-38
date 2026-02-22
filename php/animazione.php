@@ -83,6 +83,11 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
     </div>
     <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
         <p><?php echo htmlspecialchars($_SESSION['nome_utente']); ?></p>
+        <div class="pref-icon" title="Vai ai preferiti">
+            <a href="preferiti.php">
+                <img src="../imgs/Altro/preferiti.gif" alt="Preferiti" class="preferiti-icon" />
+            </a>
+        </div>
         <a href="../php/logout.php" title="Logout">
             <img src="../imgs/Login/logout.png" alt="User" class="login-icon" />
         </a>

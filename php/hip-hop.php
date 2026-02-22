@@ -4,21 +4,17 @@
 
 <head>
     <title>Tera ➔ Hip-Hop</title>
-    <!DOCTYPE html>
-    <html lang="it">
     <link rel="icon" href="../imgs/Logo/T.png" type="image/x-icon">
     <meta name="description" content="homepage">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/hip-hop.css" />
     <script type="text/javascript" src="../js/index.js" defer></script>
+
 </head>
 
 <body>
 
-    <!-- ========================= -->
-    <!-- HEADER -->
-    <!-- ========================= -->
     <div class="header">
         <div class="logo">
             <div class="immagine-logo"></div>
@@ -26,92 +22,91 @@
         </div>
         <div class="login">
             <div class="pos" title="Informazioni sulla posizione">
-    <button type="button" id="get-pos-btn" >
-        <img src="../imgs/Altro/position.png" alt="Posizione" class="position-icon" />
-    </button>
-        </div>
+                <button type="button" id="get-pos-btn">
+                    <img src="../imgs/Altro/position.png" alt="Posizione" class="position-icon" />
+                </button>
+            </div>
 
-<script>
-document.getElementById('get-pos-btn').addEventListener('click', function() {
-    const isLogged = <?php echo (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) ? 'true' : 'false'; ?>;
+            <script>
+                document.getElementById('get-pos-btn').addEventListener('click', function() {
+                    const isLogged = <?php echo (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) ? 'true' : 'false'; ?>;
 
-    if (!isLogged) {
-        alert("Attenzione: Devi essere loggato per visualizzare la tua posizione.");
-        return;
-    }
+                    if (!isLogged) {
+                        alert("Attenzione: Devi essere loggato per visualizzare la tua posizione.");
+                        return;
+                    }
 
-    if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
+                    if ("geolocation" in navigator) {
+                        navigator.geolocation.getCurrentPosition(function(position) {
+                            const lat = position.coords.latitude;
+                            const lon = position.coords.longitude;
 
-            // Utilizziamo un servizio di Reverse Geocoding gratuito (BigDataCloud o Nominatim)
-            // Questo trasforma le coordinate in Città e Paese reali
-            const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=it`;
+                            const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=it`;
 
-            fetch(geoApiUrl)
-            .then(res => res.json())
-            .then(data => {
-                const citta = data.city || data.locality || "Sconosciuta";
-                const regione = data.principalSubdivision || "Sconosciuta";
-                const paese = data.countryName || "Scono    sciuto";
+                            fetch(geoApiUrl)
+                                .then(res => res.json())
+                                .then(data => {
+                                    const citta = data.city || data.locality || "Sconosciuta";
+                                    const regione = data.principalSubdivision || "Sconosciuta";
+                                    const paese = data.countryName || "Sconosciuto";
 
-                const msg = `📍 La tua posizione attuale:\n` +
-                            `   Città: ${citta}\n` +
-                            `   Regione: ${regione}\n` +
-                            `   Paese: ${paese}\n` +
-                            `   Coordinate: ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+                                    const msg = `📍 La tua posizione attuale:\n` +
+                                        `   Città: ${citta}\n` +
+                                        `   Regione: ${regione}\n` +
+                                        `   Paese: ${paese}\n` +
+                                        `   Coordinate: ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
 
-                alert(msg);
+                                    alert(msg);
 
-                // Opzionale: invia al server per salvarlo in sessione
-                fetch('../php/salva_posizione.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: `lat=${lat}&lon=${lon}&city=${encodeURIComponent(citta)}`
+                                    fetch('../php/salva_posizione.php', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/x-www-form-urlencoded'
+                                        },
+                                        body: `lat=${lat}&lon=${lon}&city=${encodeURIComponent(citta)}`
+                                    });
+                                })
+                                .catch(() => {
+                                    alert("Errore nel recupero dei dettagli dell'indirizzo.");
+                                });
+
+                        }, function() {
+                            alert("Errore: Attiva il GPS o consenti l'accesso alla posizione.");
+                        });
+                    } else {
+                        alert("Il tuo browser non supporta la geolocalizzazione.");
+                    }
                 });
-            })
-            .catch(() => {
-                alert("Errore nel recupero dei dettagli dell'indirizzo.");
-            });
+            </script>
 
-        }, function() {
-            alert("Errore: Attiva il GPS o consenti l'accesso alla posizione.");
-        });
-    } else {
-        alert("Il tuo browser non supporta la geolocalizzazione.");
-    }
-});
-</script>
-    <div class="theme-icon" title="Cambia al tema Chiaro">
-        <button id="theme-button">
-            <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Solare" />
-            <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Lunare" />
-        </button>
-    </div>
-    <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
-        <p><?php echo htmlspecialchars($_SESSION['nome_utente']); ?></p>
-        <a href="../php/logout.php" title="Logout">
-            <img src="../imgs/Login/logout.png" alt="User" class="login-icon" />
-        </a>
-    <?php else: ?>
-        <p>Login</p>
-        <a href="login.php" title="Vai alla pagina di accesso">
-            <img src="../imgs/Login/login1.png"
-                 alt="Immagine Login" class="login-icon" />
-        </a>
-    <?php endif; ?>
-</div>
+            <div class="theme-icon" title="Cambia al tema Chiaro">
+                <button id="theme-button">
+                    <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Solare" />
+                    <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Lunare" />
+                </button>
+            </div>
+
+            <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
+                <p><?php echo htmlspecialchars($_SESSION['nome_utente']); ?></p>
+                <div class="pref-icon" title="Vai ai preferiti">
+                    <a href="preferiti.php">
+                        <img src="../imgs/Altro/preferiti.gif" alt="Preferiti" class="preferiti-icon" />
+                    </a>
+                </div>
+                <a href="../php/logout.php" title="Logout">
+                    <img src="../imgs/Login/logout.png" alt="User" class="login-icon" />
+                </a>
+            <?php else: ?>
+                <p>Login</p>
+                <a href="login.php" title="Vai alla pagina di accesso">
+                    <img src="../imgs/Login/login1.png" alt="Immagine Login" class="login-icon" />
+                </a>
+            <?php endif; ?>
+        </div>
     </div>
 
-    <!-- ========================= -->
-    <!-- MAIN CONTENT -->
-    <!-- ========================= -->
     <div class="main-content">
         <div class="content-wrapper">
-            <!-- ========================= -->
-            <!-- CONTENT 1 - SEZIONE LIGHT -->
-            <!-- ========================= -->
             <div class="content">
                 <div class="sectionlight">
                     <h2 style="text-align: center;">Hip-Hop</h2>
@@ -124,28 +119,25 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     </div>
                     <hr>
 
-                    <!-- ------------------------- -->
-                    <!-- SEZIONE INTRO -->
-                    <!-- ------------------------- -->
                     <br><br>
-
                     <h2>La Voce che Nasce dal Margine</h2>
 
                     <div class="element1">
                         <figure>
-                            <img class="image1" src="../imgs/HipHop/hh3.jpg" alt="Errore di caricamento">
-                            <figcaption style="text-align: center;">L'hip-hop nasce per dare voce a chi non ha voce
+                            <img src="../imgs/HipHop/hh3.jpg" class="image1">
+                            <figcaption>
+                                L'hip-hop nasce per dare voce a chi non ha voce
+                                <button type="button" class="fav-btn" data-path="../imgs/HipHop/hh3.jpg"title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                                </button>
                             </figcaption>
                         </figure>
                         <p>
                             È ormai noto che la musica sia una forma d'arte a tutti gli effetti.
                             Ma cosa accade quando l'arte musicale diventa anche uno strumento di ricerca identitaria,
                             di affermazione e di conquista del proprio spazio? L'hip-hop assume questo ruolo proprio
-                            perché
-                            nasce
-                            come linguaggio di necessità: una voce che emerge da contesti marginali per raccontare ciò
-                            che
-                            spesso resta invisibile.
+                            perché nasce come linguaggio di necessità: una voce che emerge da contesti marginali per raccontare ciò
+                            che spesso resta invisibile.
                         </p>
                     </div>
 
@@ -155,14 +147,18 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     <div class="element2">
                         <figure>
                             <img class="image2" src="../imgs/HipHop/hh2.jpg" alt="Errore di caricamento">
-                            <figcaption style="text-align: center;">Un movimento culturale che unisce</figcaption>
+                            <figcaption style="text-align: center;">
+                                Un movimento culturale che unisce
+                                <button type="button" class="fav-btn" data-path="../imgs/HipHop/hh2.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                                </button>
+                            </figcaption>
                         </figure>
                         <br>
                         <p>
                             Per comprendere questa forza espressiva è fondamentale chiarire una distinzione chiave:
                             l'hip-hop non è un genere musicale, ma un movimento culturale. Nato nei quartieri popolari
-                            di
-                            New York negli anni '70,
+                            di New York negli anni '70,
                             si sviluppa come un insieme di pratiche artistiche e sociali — DJing, breakdance,
                             writing e rap — unite da un'esigenza comune: dare forma e dignità a una realtà esclusa dai
                             canali ufficiali.
@@ -175,14 +171,18 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     <div class="element1">
                         <figure>
                             <img class="image1" src="../imgs/HipHop/ritmoepoesia.jpg" alt="Errore di caricamento">
-                            <figcaption style="text-align: center;">Rap è un acronimo: Rhythm and Poetry</figcaption>
+                            <figcaption style="text-align: center;">
+                                Rap è un acronimo: Rhythm and Poetry
+                                    <button type="button" class="fav-btn" data-path="../imgs/HipHop/ritmoepoesia.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                        <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                                    </button>
+                            </figcaption>
                         </figure>
                         <br>
                         <p>
                             Il rap, in questo contesto, è il linguaggio musicale dell'hip-hop.
                             Non è costruito attorno alla melodia, ma alla parola. Ritmo e metrica diventano strumenti
-                            per
-                            rafforzare il messaggio,
+                            per rafforzare il messaggio,
                             trasformando il racconto personale in testimonianza collettiva.
                             È una musica che parla prima di suonare.
                         </p>
@@ -194,19 +194,19 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     <div class="element2">
                         <figure>
                             <img class="image2" src="../imgs/HipHop/naytMood.jpg" alt="Mood">
-                            <figcaption style="text-align: center;">Mood, album di Nayt è uno dei molteplici esempi
+                            <figcaption style="text-align: center;">
+                                Mood, album di Nayt è uno dei molteplici esempi
+                                <button type="button" class="fav-btn" data-path="../imgs/HipHop/naytMood.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                                </button>
                             </figcaption>
                         </figure>
                         <p>
                             Nel tempo, l'hip-hop si è trasformato in una costellazione di stili e sottogeneri.
                             Questa evoluzione non nasce da un semplice gusto estetico, ma come risposta diretta
-                            a
-                            mutamenti
-                            sociali,
+                            a mutamenti sociali,
                             culturali e storici. Ogni fase del rap riflette il contesto in cui prende forma:
-                            dalla lotta
-                            per
-                            i diritti civili, alla tensione delle periferie urbane,
+                            dalla lotta per i diritti civili, alla tensione delle periferie urbane,
                             fino all'impatto dei media e dell'industria musicale.
                         </p>
                     </div>
@@ -217,13 +217,17 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     <div class="element1">
                         <figure>
                             <img class="image1" src="../imgs/HipHop/hh100.jpg" alt="Errore di caricamento">
+                            <figcaption style="text-align: center;">
+                                <button type="button" class="fav-btn" data-path="../imgs/HipHop/hh100.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                                </button>
+                            </figcaption>
                         </figure>
                         <p>
                             L'hip-hop cresce insieme alla sua comunità. Le sue trasformazioni raccontano
                             aspirazioni,
                             contraddizioni e condizioni di vita di chi lo produce, rendendolo una cronaca
-                            culturale in
-                            costante aggiornamento.
+                            culturale in costante aggiornamento.
                         </p>
                     </div>
 
@@ -231,24 +235,24 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     <br><br><br>
 
                 </div>
-            </div> <!-- END CONTENT 1 -->
-
-            <!-- ------------------------- -->
-            <!-- LE QUATTRO ARTI -->
-            <!-- ------------------------- -->
+            </div>
             <div class="content2">
                 <div class="sectiondark">
                     <h2>Le Quattro Discipline dell'Espressione</h2>
                     <div class="element1">
                         <figure>
                             <img class="image1" src="../imgs/HipHop/hh200.jpg" alt="Errore di caricamento">
+                            <figcaption style="text-align: center;">
+                                <button type="button" class="fav-btn" data-path="../imgs/HipHop/hh200.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                                </button>
+                            </figcaption>
                         </figure>
                         <p>L'hip-hop si struttura come un linguaggio
                             collettivo composto da quattro arti fondamentali, ognuna con una funzione specifica ma
-                            interconnessa
-                            alle altre.
+                            interconnessa alle altre.
+                        </p>
                     </div>
-                    </p>
 
                     <br><br><br>
                     <hr><br><br><br>
@@ -257,17 +261,19 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     <div class="element2">
                         <figure>
                             <img class="image2" src="../imgs/HipHop/sara.jpg" alt="Sara Socas">
-                            <figcaption style="text-align: center;">Minuto in freestyle si una freestyler spagnola:
-                                SaraSocas</figcaption>
+                            <figcaption style="text-align: center;">
+                                Minuto in freestyle di una freestyler spagnola: SaraSocas
+                                <button type="button" class="fav-btn" data-path="../imgs/HipHop/sara.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                                </button>
+                            </figcaption>
                             <a href="https://youtu.be/o-YAFE5NkJU?si=WeVK3mZ4pPWKMdca" target="_blank">
                                 Clicca qui per aprire il video
                             </a>
-
                         </figure>
                         <p>
                             Il rap è l'arte della parola in movimento. La sua identità risiede nella capacità di dare
-                            voce a
-                            chi spesso non ne ha,
+                            voce a chi spesso non ne ha,
                             trasformando l'esperienza individuale in racconto condiviso.
                             Flow, metrica e contenuto non sono semplici tecniche, ma strumenti per rendere il messaggio
                             centrale e incisivo.
@@ -281,7 +287,11 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     <div class="element1">
                         <figure>
                             <img class="image1" src="../imgs/HipHop/miles.jpg" alt="Young Miles">
-                            <figcaption style="text-align: center;">Young Miles improvvisa un dj set a One Take
+                            <figcaption style="text-align: center;">
+                                Young Miles improvvisa un dj set a One Take
+                                <button type="button" class="fav-btn" data-path="../imgs/HipHop/miles.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                                </button>
                             </figcaption>
                             <a href="https://youtu.be/aHuZ99bcaCg?si=_1S34TDY7tVCiB6D" target="_blank">
                                 Clicca qui per aprire il video
@@ -292,8 +302,7 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                             mixaggio,
                             costruisce lo spazio su cui gli altri possono esprimersi.
                             È colui che trasforma la musica in ambiente, creando un paesaggio emotivo e ritmico che
-                            sostiene
-                            l'intero movimento.
+                            sostiene l'intero movimento.
                         </p>
                     </div>
 
@@ -304,7 +313,12 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     <div class="element2">
                         <figure>
                             <img class="image2" src="../imgs/HipHop/bc.jpg" alt="Errore di caricamento">
-                            <figcaption style="text-align: center;">Contest di breakdance targato RedBull </figcaption>
+                            <figcaption style="text-align: center;">
+                                Contest di breakdance targato RedBull
+                                <button type="button" class="fav-btn" data-path="../imgs/HipHop/bc.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                                </button>
+                            </figcaption>
                             <a href="https://www.youtube.com/live/IsEtCB2UlmM?si=ym82uY0eqOQnDlQN" target="_blank">
                                 Clicca qui per aprire il video
                             </a>
@@ -324,7 +338,12 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     <div class="element1">
                         <figure>
                             <img class="image2" src="../imgs/HipHop/primo.jpg" alt="Graffito in memoria di Primo">
-                            <figcaption style="text-align: center;">Graffito in memoria di Primo Brown </figcaption>
+                            <figcaption style="text-align: center;">
+                                Graffito in memoria di Primo Brown
+                                <button type="button" class="fav-btn" data-path="../imgs/HipHop/primo.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
                             <a href="https://youtu.be/LDtmpf4LMF0?si=lmquzMvTT7hGainu" target="_blank">
                                 Clicca qui per aprire il video
                             </a>
@@ -345,7 +364,12 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     <div class="element2">
                         <figure>
                             <img class="image2" src="../imgs/HipHop/ban1.jpg" alt="Ragazza con il Palloncino Rosso">
-                            <figcaption style="text-align: center;">Banksy: Ragazza con il Palloncino Rosso</figcaption>
+                            <figcaption style="text-align: center;">
+                                Banksy: Ragazza con il Palloncino Rosso
+                                <button type="button" class="fav-btn" data-path="../imgs/HipHop/ban1.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
                         </figure>
                         <p>
                             In questa tradizione si inserisce anche Banksy, figura emblematica della street art
@@ -362,15 +386,19 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     <div class="element1">
                         <figure>
                             <img class="image2" src="../imgs/HipHop/ban2.png" alt="Il Lanciatore di Fiori">
-                            <figcaption style="text-align: center;">Banksy: Rabbia, il Lanciatore di Fiori</figcaption>
+                            <figcaption style="text-align: center;">
+                                Banksy: Rabbia, il Lanciatore di Fiori
+                                <button type="button" class="fav-btn" data-path="../imgs/HipHop/ban2.png" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
                         </figure>
-                        <P>
+                        <p>
                             A differenza del writing classico, dove il nome dell'autore è centrale,
                             Banksy sceglie l'anonimato. Non afferma l'ego, ma il messaggio. Il gesto, però,
                             resta lo stesso: occupare lo spazio pubblico per rompere il silenzio e sovvertire l'ordine
                             visivo imposto.
-
-                        </P>
+                        </p>
                     </div>
 
                     <br><br><br>
@@ -380,7 +408,12 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     <div class="element2">
                         <figure>
                             <img class="image2" src="../imgs/HipHop/bbox.jpg" alt="Battke di beatbox">
-                            <figcaption style="text-align: center;">Battle di beatbox</figcaption>
+                            <figcaption style="text-align: center;">
+                                Battle di beatbox
+                                <button type="button" class="fav-btn" data-path="../imgs/HipHop/bbox.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
                             <a href="https://youtu.be/5cGbMr7EBlE?si=pe1tT2Kq27J_ojz3" target="_blank">
                                 Clicca qui per aprire il video
                             </a>
@@ -396,28 +429,38 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     <hr><br><br><br>
 
                     <div class="element1">
-                        <img class="image2" src="../imgs/HipHop/bb2.jpg" alt="Errore di caricamento">
-                        <P>
+                        <figure>
+                            <img class="image2" src="../imgs/HipHop/bb2.jpg" alt="Errore di caricamento">
+                            <figcaption style="text-align: center;">
+                                <button type="button" class="fav-btn" data-path="../imgs/HipHop/bb2.jpg" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
+                        </figure>
+                        <p>
                             Ritmo, imitazione delle percussioni e
                             improvvisazione rendono il beatbox una dimostrazione pura del principio hip-hop:
                             l'arte nasce dal talento e dalla presenza, non dalle risorse materiali.
-                        </P>
+                        </p>
                     </div>
 
                     <br><br><br>
                     <br><br><br>
 
                 </div>
-            </div> <!-- END CONTENT2 -->
-
-            <!-- ------------------------- -->
-            <!-- VESTIRE IDENTITÀ -->
-            <!-- ------------------------- -->
+            </div>
             <div class="content">
                 <div class="sectionlight">
                     <h2>Vestire un'Identità</h2>
                     <div class="element1">
-                        <img class="image1" src="../imgs/HipHop/hh10.jpg" alt="Errore di caricamento">
+                        <figure>
+                            <img class="image1" src="../imgs/HipHop/hh10.jpg" alt="Errore di caricamento">
+                            <figcaption style="text-align: center;">
+                                <button class="fav-btn" onclick="toggleFavorite('../imgs/HipHop/hh10.jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
+                        </figure>
                         <p>
                             L'hip-hop non comunica solo attraverso musica e movimento,
                             ma anche tramite l'immagine. Il vestiario diventa un linguaggio non verbale,
@@ -429,13 +472,20 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     <hr><br><br><br>
 
                     <div class="element2">
-                        <img class="image1" src="../imgs/HipHop/hh1.jpg" alt="Errore di caricamento">
-                        <P>
+                        <figure>
+                            <img class="image1" src="../imgs/HipHop/hh1.jpg" alt="Errore di caricamento">
+                            <figcaption style="text-align: center;">
+                                <button class="fav-btn" onclick="toggleFavorite('../imgs/HipHop/hh1.jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
+                        </figure>
+                        <p>
                             Capi oversize, felpe con cappuccio, sneakers, jeans larghi, cappellini e accessori
                             vistosi nascono da esigenze pratiche e dalla cultura di strada,
                             ma assumono un valore simbolico. Il look hip-hop rende visibile una presenza spesso
                             ignorata, comunicando forza, autonomia e creatività.
-                        </P>
+                        </p>
                     </div>
 
                     <br><br><br>
@@ -445,9 +495,14 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     <div class="element1">
                         <figure>
                             <img class="image1" src="../imgs/HipHop/Salmo.jpg" alt="Sparare alla Luna">
-                            <figcaption style="text-align: center;">Salmo & Coez: Sparare alla luna</figcaption>
+                            <figcaption style="text-align: center;">
+                                Salmo & Coez: Sparare alla luna
+                                <button class="fav-btn" onclick="toggleFavorite('../imgs/HipHop/Salmo.jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
                             <a href="https://youtu.be/6H4j8svFD-A?si=tk08t1BtJPuJLRNa" target="_blank"
-                                style="text-align: center;">
+                                style="text-align: center; display: block; margin-top: 5px;">
                                 Clicca qui per aprire il video
                             </a>
                         </figure>
@@ -455,12 +510,8 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                         <p>
                             L'hip-hop è una cultura espansiva, capace di intrecciarsi con cinema, letteratura,
                             illustrazione e performance.
-                            Nel cinema diventa narrazione visiva e testimonianza sociale; nei videoclip evolve
-                            in
-                            forma cinematografica,
-                            come dimostrano le produzioni di artisti come Salmo, capaci di fondere musica, regia
-                            e
-                            storytelling.
+                            Nel cinema diventa narrazione visiva e testimonianza sociale; nei videoclip evolve in forma cinematografica,
+                            come dimostrano le produzioni di artisti come Salmo, capaci di fondere musica, regia e storytelling.
                         </p>
                     </div>
 
@@ -470,14 +521,17 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     <div class="element2">
                         <figure>
                             <img class="image2" src="../imgs/HipHop/hh13.jpg" alt="Habitat Live">
-                            <figcaption style="text-align: center;">Nayt: Habitat Live</figcaption>
+                            <figcaption style="text-align: center;">
+                                Nayt: Habitat Live
+                                <button class="fav-btn" onclick="toggleFavorite('../imgs/HipHop/hh13.jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
                         </figure>
                         <p>
                             Nella scrittura, il rap dialoga con poesia e letteratura. In Italia, artisti come
-                            Murubutu,
-                            Rancore, Nayt e Mezzosangue utilizzano il testo rap come strumento narrativo,
-                            esplorando
-                            memoria, identità e conflitto interiore.
+                            Murubutu, Rancore, Nayt e Mezzosangue utilizzano il testo rap come strumento narrativo,
+                            esplorando memoria, identità e conflitto interiore.
                         </p>
                     </div>
 
@@ -487,15 +541,17 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     <div class="element1">
                         <figure>
                             <img class="image2" src="../imgs/HipHop/tyson.jpg" alt="Mic Tyson">
-                            <figcaption style="text-align: center;">Mic Tyson: "La champions league del freestyle"
+                            <figcaption style="text-align: center;">
+                                Mic Tyson: "La champions league del freestyle"
+                                <button class="fav-btn" onclick="toggleFavorite('../imgs/HipHop/tyson.jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
                             </figcaption>
                         </figure>
                         <p>
                             Quando la produzione si estende a live complessi, serie, animazioni o eventi
                             competitivi,
-                            l'hip-hop si afferma come linguaggio totale: un'esperienza che unisce suono,
-                            parola,
-                            immagine e
+                            l'hip-hop si afferma come linguaggio totale: un'esperienza che unisce suono, parola, immagine e
                             corpo in un'unica forma espressiva.
                         </p>
                     </div>
@@ -505,16 +561,19 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
 
                     <h3 style="text-align: right;">Ribellione come atto di esistenza</h3>
                     <div class="element2">
-                        <img class="image2" src="../imgs/HipHop/hh00.jpg" alt="Errore di caricamento">
+                        <figure>
+                            <img class="image2" src="../imgs/HipHop/hh00.jpg" alt="Errore di caricamento">
+                            <figcaption style="text-align: center;">
+                                <button class="fav-btn" onclick="toggleFavorite('../imgs/HipHop/hh00.jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
+                        </figure>
                         <br>
                         <p> L'hip-hop nasce come risposta diretta a condizioni di esclusione e marginalità.
                             Non è solo musica, ma protesta e visibilità. Nei quartieri popolari di New York
-                            degli
-                            anni '70,
-                            diventa uno strumento per raccontare una realtà segnata da povertà,
-                            discriminazione
-                            e
-                            assenza di opportunità.
+                            degli anni '70, diventa uno strumento per raccontare una realtà segnata da povertà,
+                            discriminazione e assenza di opportunità.
                         </p>
                     </div>
 
@@ -522,32 +581,30 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     <hr><br><br><br>
 
                     <div class="element1">
-                        <img class="image1" src="../imgs/HipHop/hh6.jpg" alt="Errore di caricamento">
+                        <figure>
+                            <img class="image1" src="../imgs/HipHop/hh6.jpg" alt="Errore di caricamento">
+                            <figcaption style="text-align: center;">
+                                <button class="fav-btn" onclick="toggleFavorite('../imgs/HipHop/hh6.jpg')" title="Aggiungi/Rimuovi dai preferiti">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon" alt="Preferiti">
+                                </button>
+                            </figcaption>
+                        </figure>
                         <br>
                         <p>
-                            Il rap, in particolare, assume il ruolo di denuncia senza filtri. È una
-                            ribellione
-                            che
-                            non si limita all'estetica, ma si fa politica:
+                            Il rap, in particolare, assume il ruolo di denuncia senza filtri. È una ribellione
+                            che non si limita all'estetica, ma si fa politica:
                             rivendicare il diritto di esistere, di raccontarsi e di costruire un'identità,
-                            anche
-                            quando il sistema tenta di cancellarla.
+                            anche quando il sistema tenta di cancellarla.
                         </p>
                     </div>
 
                     <br><br><br>
 
                 </div>
-            </div> <!-- END CONTENT 3 -->
-
-        </div> <!-- END CONTENT-WRAPPER -->
-
-        <!-- ========================= -->
-        <!-- SIDEBAR -->
-        <!-- ========================= -->
+            </div>
+        </div>
         <div class="sidebar">
             <nav class="menu">
-                <!-- voci menu -->
                 <div class="menu-itme">
                     <img src="../imgs/Home/Icone/icons8-home-100.png" alt="home icon">
                     <a href="home.php">HOME</a>
@@ -577,13 +634,8 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     <a href="forum.php">FORUM</a>
                 </div>
             </nav>
-        </div> <!-- END SIDEBAR -->
-
-    </div> <!-- END MAIN CONTENT -->
-
-    <!-- ========================= -->
-    <!-- FOOTER -->
-    <!-- ========================= -->
+        </div>
+    </div>
     <div class="footer">
         <div class="contacts">
             <div class="contact whatsapp">
@@ -607,9 +659,8 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                 <a href="#">Discord</a>
             </div>
         </div>
-        <p>© <?php echo date('Y')?> TERA. All rights reserved.</p>
+        <p>© <?php echo date('Y') ?> TERA. All rights reserved.</p>
     </div>
-
 </body>
 
 </html>

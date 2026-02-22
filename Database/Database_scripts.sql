@@ -56,6 +56,17 @@ CREATE TABLE commenti_sezioni (
     data_creazione TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- CREAZIONE TABELLA DELLE IMMAGINI PREFERITE
+
+CREATE TABLE preferiti (
+    id SERIAL PRIMARY KEY,
+    email_utente VARCHAR(255) NOT NULL,
+    percorso_immagine TEXT NOT NULL,
+    data_aggiunta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    -- Questo vincolo permette immagini diverse per lo stesso utente
+    UNIQUE(email_utente, percorso_immagine) 
+);
+
 -- INSERIMENTO TABELLA
 
 INSERT INTO utente (username, email, password)

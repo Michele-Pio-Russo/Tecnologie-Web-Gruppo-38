@@ -97,6 +97,11 @@ if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) {
             </div>
             <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
                 <p><?php echo htmlspecialchars($_SESSION['nome_utente']); ?></p>
+                <div class="pref-icon" title="Vai ai preferiti">
+                    <a href="preferiti.php">
+                        <img src="../imgs/Altro/preferiti.gif" alt="Preferiti" class="preferiti-icon" />
+                    </a>
+                </div>
                 <a href="../php/logout.php" title="Logout">
                     <img src="../imgs/Login/logout.png" alt="User" class="login-icon" />
                 </a>
@@ -218,59 +223,63 @@ if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) {
                 <p>Chi ha fatto l'accesso al nostro sito può compilare un breve questionario, aiutandoci a capire quali sezioni migliorare.</p>
             </div>
             <hr>
+            <h3>Lascia una valutazione alle sezioni</h3>
+            <?php if (isset($_SESSION['autorizzato'])): ?>
+                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                    <img src="../imgs/Form/Ringraziamenti.jpg" alt="Ringraziamenti" align="right" class="image1">
 
-            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-                <img src="../imgs/Form/Ringraziamenti.jpg" alt="Ringraziamenti" align="right" class="image1">
+                    <h3>Quali sezioni hai preferito di più?</h3>
+                    <p>Animazione e Disegno <input type="checkbox" name="sez_pref[]" value="Animazione" /></p>
+                    <p>Videogiochi <input type="checkbox" name="sez_pref[]" value="Videogiochi" /></p>
+                    <p>Hip-Hop <input type="checkbox" name="sez_pref[]" value="HipHop" /></p>
+                    <p>Cinema <input type="checkbox" name="sez_pref[]" value="Cinema" /></p>
+                    <p>Menzioni Onorevoli <input type="checkbox" name="sez_pref[]" value="Menzioni" /></p>
 
-                <h3>Quali sezioni hai preferito di più?</h3>
-                <p>Animazione e Disegno <input type="checkbox" name="sez_pref[]" value="Animazione" /></p>
-                <p>Videogiochi <input type="checkbox" name="sez_pref[]" value="Videogiochi" /></p>
-                <p>Hip-Hop <input type="checkbox" name="sez_pref[]" value="HipHop" /></p>
-                <p>Cinema <input type="checkbox" name="sez_pref[]" value="Cinema" /></p>
-                <p>Menzioni Onorevoli <input type="checkbox" name="sez_pref[]" value="Menzioni" /></p>
+                    <br>
+                    <h3>Sezione Preferita</h3>
+                    <div class="container">
+                        <div class="drop-zone" id="sezioni-disponibili">
+                            <h3>Sezioni Disponibili</h3>
+                            <div class="item" draggable="true" id="animazione">✏️ Animazione</div>
+                            <div class="item" draggable="true" id="videogiochi">🎮 Videogiochi</div>
+                            <div class="item" draggable="true" id="hip-hop">🎧 Hip-Hop</div>
+                            <div class="item" draggable="true" id="cinema">📽️ Cinema</div>
+                            <div class="item" draggable="true" id="menzioni-onorevoli">⭐ Menzioni Onorevoli</div>
+                        </div>
 
-                <br>
-                <h3>Sezione Preferita</h3>
-                <div class="container">
-                    <div class="drop-zone" id="sezioni-disponibili">
-                        <h3>Sezioni Disponibili</h3>
-                        <div class="item" draggable="true" id="animazione">✏️ Animazione</div>
-                        <div class="item" draggable="true" id="videogiochi">🎮 Videogiochi</div>
-                        <div class="item" draggable="true" id="hip-hop">🎧 Hip-Hop</div>
-                        <div class="item" draggable="true" id="cinema">📽️ Cinema</div>
-                        <div class="item" draggable="true" id="menzioni-onorevoli">⭐ Menzioni Onorevoli</div>
+                        <div class="drop-zone" id="sezione-preferita">
+                            <h3>Trascina qui la tua sezione preferita</h3>
+                        </div>
                     </div>
 
-                    <div class="drop-zone" id="sezione-preferita">
-                        <h3>Trascina qui la tua sezione preferita</h3>
+
+                    <br>
+                    <h3>Dai un voto alle varie sezioni</h3>
+                    <div class="domande">
+                        <h4>Animazione e Disegno:</h4>
+                        <p>1 <input type="radio" name="votoanimazione" value="1" /> 2 <input type="radio" name="votoanimazione" value="2" /> 3 <input type="radio" name="votoanimazione" value="3" /> 4 <input type="radio" name="votoanimazione" value="4" /> 5 <input type="radio" name="votoanimazione" value="5" /></p>
+
+                        <h4>Videogiochi:</h4>
+                        <p>1 <input type="radio" name="votogiochi" value="1" /> 2 <input type="radio" name="votogiochi" value="2" /> 3 <input type="radio" name="votogiochi" value="3" /> 4 <input type="radio" name="votogiochi" value="4" /> 5 <input type="radio" name="votogiochi" value="5" /></p>
+
+                        <h4>Hip-Hop:</h4>
+                        <p>1 <input type="radio" name="votohiphop" value="1" /> 2 <input type="radio" name="votohiphop" value="2" /> 3 <input type="radio" name="votohiphop" value="3" /> 4 <input type="radio" name="votohiphop" value="4" /> 5 <input type="radio" name="votohiphop" value="5" /></p>
+
+                        <h4>Cinema:</h4>
+                        <p>1 <input type="radio" name="votocinema" value="1" /> 2 <input type="radio" name="votocinema" value="2" /> 3 <input type="radio" name="votocinema" value="3" /> 4 <input type="radio" name="votocinema" value="4" /> 5 <input type="radio" name="votocinema" value="5" /></p>
+
+                        <h4>Menzioni Onorevoli:</h4>
+                        <p>1 <input type="radio" name="votomenzioni" value="1" /> 2 <input type="radio" name="votomenzioni" value="2" /> 3 <input type="radio" name="votomenzioni" value="3" /> 4 <input type="radio" name="votomenzioni" value="4" /> 5 <input type="radio" name="votomenzioni" value="5" /></p>
                     </div>
-                </div>
 
-
-                <br>
-                <h3>Dai un voto alle varie sezioni</h3>
-                <div class="domande">
-                    <h4>Animazione e Disegno:</h4>
-                    <p>1 <input type="radio" name="votoanimazione" value="1" /> 2 <input type="radio" name="votoanimazione" value="2" /> 3 <input type="radio" name="votoanimazione" value="3" /> 4 <input type="radio" name="votoanimazione" value="4" /> 5 <input type="radio" name="votoanimazione" value="5" /></p>
-
-                    <h4>Videogiochi:</h4>
-                    <p>1 <input type="radio" name="votogiochi" value="1" /> 2 <input type="radio" name="votogiochi" value="2" /> 3 <input type="radio" name="votogiochi" value="3" /> 4 <input type="radio" name="votogiochi" value="4" /> 5 <input type="radio" name="votogiochi" value="5" /></p>
-
-                    <h4>Hip-Hop:</h4>
-                    <p>1 <input type="radio" name="votohiphop" value="1" /> 2 <input type="radio" name="votohiphop" value="2" /> 3 <input type="radio" name="votohiphop" value="3" /> 4 <input type="radio" name="votohiphop" value="4" /> 5 <input type="radio" name="votohiphop" value="5" /></p>
-
-                    <h4>Cinema:</h4>
-                    <p>1 <input type="radio" name="votocinema" value="1" /> 2 <input type="radio" name="votocinema" value="2" /> 3 <input type="radio" name="votocinema" value="3" /> 4 <input type="radio" name="votocinema" value="4" /> 5 <input type="radio" name="votocinema" value="5" /></p>
-
-                    <h4>Menzioni Onorevoli:</h4>
-                    <p>1 <input type="radio" name="votomenzioni" value="1" /> 2 <input type="radio" name="votomenzioni" value="2" /> 3 <input type="radio" name="votomenzioni" value="3" /> 4 <input type="radio" name="votomenzioni" value="4" /> 5 <input type="radio" name="votomenzioni" value="5" /></p>
-                </div>
-
-                <div class="element1" style="margin-top:20px;">
-                    <button type="submit" name="invia_questionario" id="submit">Conferma Voti</button>
-                    <button type="reset" id="reset">Reimposta</button>
-                </div>
-            </form>
+                    <div class="element1" style="margin-top:20px;">
+                        <button type="submit" name="invia_questionario" id="submit">Conferma Voti</button>
+                        <button type="reset" id="reset">Reimposta</button>
+                    </div>
+                </form>
+            <?php else: ?>
+                <p style="color: #ff4444; margin-bottom: 20px;"><b>Devi effettuare il login per poter dare una valutazione alle sezioni.</b></p>
+            <?php endif; ?>
 
             <hr>
 
@@ -316,7 +325,7 @@ if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) {
             <hr>
 
             <div class="sezione-commenti">
-                <h2>Lascia un commento alla community</h2>
+                <h3>Lascia un commento alla community</h3>
 
                 <?php if (isset($_SESSION['autorizzato'])): ?>
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" class="comment-form">
@@ -328,6 +337,8 @@ if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) {
                 <?php else: ?>
                     <p style="color: #ff4444; margin-bottom: 20px;"><b>Devi effettuare il login per poter scrivere nella bacheca.</b></p>
                 <?php endif; ?>
+
+                <hr>
 
                 <h3>Discussioni della Community</h3>
 

@@ -30,6 +30,32 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
+/*preferiti*/
+.fav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    vertical-align: middle;
+    transition: transform 0.2s ease;
+}
+
+.fav-btn:hover {
+    transform: scale(1.2);
+}
+
+.fav-icon {
+    width: 25px;
+    height: 25px;
+}
+
+/* Evita che il testo vada sotto il bottone */
+figcaption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
 
 /*stili per tag a, li, figure e hr*/
 a {

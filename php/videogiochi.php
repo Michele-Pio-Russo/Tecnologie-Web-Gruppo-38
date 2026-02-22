@@ -18,82 +18,89 @@
         </div>
         <div class="login">
             <div class="pos" title="Informazioni sulla posizione">
-    <button type="button" id="get-pos-btn" >
-        <img src="../imgs/Altro/position.png" alt="Posizione" class="position-icon" />
-    </button>
- </div>
+                <button type="button" id="get-pos-btn">
+                    <img src="../imgs/Altro/position.png" alt="Posizione" class="position-icon" />
+                </button>
+            </div>
 
-<script>
-document.getElementById('get-pos-btn').addEventListener('click', function() {
-    const isLogged = <?php echo (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) ? 'true' : 'false'; ?>;
+            <script>
+                document.getElementById('get-pos-btn').addEventListener('click', function() {
+                    const isLogged = <?php echo (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true) ? 'true' : 'false'; ?>;
 
-    if (!isLogged) {
-        alert("Attenzione: Devi essere loggato per visualizzare la tua posizione.");
-        return;
-    }
+                    if (!isLogged) {
+                        alert("Attenzione: Devi essere loggato per visualizzare la tua posizione.");
+                        return;
+                    }
 
-    if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
+                    if ("geolocation" in navigator) {
+                        navigator.geolocation.getCurrentPosition(function(position) {
+                            const lat = position.coords.latitude;
+                            const lon = position.coords.longitude;
 
-            // Utilizziamo un servizio di Reverse Geocoding gratuito (BigDataCloud o Nominatim)
-            // Questo trasforma le coordinate in Città e Paese reali
-            const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=it`;
+                            // Utilizziamo un servizio di Reverse Geocoding gratuito (BigDataCloud o Nominatim)
+                            // Questo trasforma le coordinate in Città e Paese reali
+                            const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=it`;
 
-            fetch(geoApiUrl)
-            .then(res => res.json())
-            .then(data => {
-                const citta = data.city || data.locality || "Sconosciuta";
-                const regione = data.principalSubdivision || "Sconosciuta";
-                const paese = data.countryName || "Scono    sciuto";
+                            fetch(geoApiUrl)
+                                .then(res => res.json())
+                                .then(data => {
+                                    const citta = data.city || data.locality || "Sconosciuta";
+                                    const regione = data.principalSubdivision || "Sconosciuta";
+                                    const paese = data.countryName || "Scono    sciuto";
 
-                const msg = `📍 La tua posizione attuale:\n` +
-                            `   Città: ${citta}\n` +
-                            `   Regione: ${regione}\n` +
-                            `   Paese: ${paese}\n` +
-                            `   Coordinate: ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+                                    const msg = `📍 La tua posizione attuale:\n` +
+                                        `   Città: ${citta}\n` +
+                                        `   Regione: ${regione}\n` +
+                                        `   Paese: ${paese}\n` +
+                                        `   Coordinate: ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
 
-                alert(msg);
+                                    alert(msg);
 
-                // Opzionale: invia al server per salvarlo in sessione
-                fetch('../php/salva_posizione.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: `lat=${lat}&lon=${lon}&city=${encodeURIComponent(citta)}`
+                                    // Opzionale: invia al server per salvarlo in sessione
+                                    fetch('../php/salva_posizione.php', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/x-www-form-urlencoded'
+                                        },
+                                        body: `lat=${lat}&lon=${lon}&city=${encodeURIComponent(citta)}`
+                                    });
+                                })
+                                .catch(() => {
+                                    alert("Errore nel recupero dei dettagli dell'indirizzo.");
+                                });
+
+                        }, function() {
+                            alert("Errore: Attiva il GPS o consenti l'accesso alla posizione.");
+                        });
+                    } else {
+                        alert("Il tuo browser non supporta la geolocalizzazione.");
+                    }
                 });
-            })
-            .catch(() => {
-                alert("Errore nel recupero dei dettagli dell'indirizzo.");
-            });
-
-        }, function() {
-            alert("Errore: Attiva il GPS o consenti l'accesso alla posizione.");
-        });
-    } else {
-        alert("Il tuo browser non supporta la geolocalizzazione.");
-    }
-});
-</script>
-    <div class="theme-icon" title="Cambia al tema Chiaro">
-        <button id="theme-button">
-            <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Solare" />
-            <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Lunare" />
-        </button>
-    </div>
-    <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
-        <p><?php echo htmlspecialchars($_SESSION['nome_utente']); ?></p>
-        <a href="../php/logout.php" title="Logout">
-            <img src="../imgs/Login/logout.png" alt="User" class="login-icon" />
-        </a>
-    <?php else: ?>
-        <p>Login</p>
-        <a href="login.php" title="Vai alla pagina di accesso">
-            <img src="../imgs/Login/login1.png"
-                 alt="Immagine Login" class="login-icon" />
-        </a>
-    <?php endif; ?>
-</div>
+            </script>
+            <div class="theme-icon" title="Cambia al tema Chiaro">
+                <button id="theme-button">
+                    <img src="../imgs/Tema/light_mode.png" alt="Immagine Tema Solare" />
+                    <img src="../imgs/Tema/dark_mode.png" alt="Immagine Tema Lunare" />
+                </button>
+            </div>
+            <?php if (isset($_SESSION['autorizzato']) && $_SESSION['autorizzato'] === true): ?>
+                <p><?php echo htmlspecialchars($_SESSION['nome_utente']); ?></p>
+                <div class="pref-icon" title="Vai ai preferiti">
+                    <a href="preferiti.php">
+                        <img src="../imgs/Altro/preferiti.gif" alt="Preferiti" class="preferiti-icon" />
+                    </a>
+                </div>
+                <a href="../php/logout.php" title="Logout">
+                    <img src="../imgs/Login/logout.png" alt="User" class="login-icon" />
+                </a>
+            <?php else: ?>
+                <p>Login</p>
+                <a href="login.php" title="Vai alla pagina di accesso">
+                    <img src="../imgs/Login/login1.png"
+                        alt="Immagine Login" class="login-icon" />
+                </a>
+            <?php endif; ?>
+        </div>
     </div>
     <div class="main-content">
         <div class="content">
@@ -120,13 +127,18 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
             </div>
             <h2 style="text-align: right;">Character Design</h2>
             <div class="element2">
+                <figure>
                 <img class="image2" src="../imgs/Videogiochi/ff.jpg" alt="cloud e aerith">
+                <button type="button" class="fav-btn" data-path="../imgs/Videogiochi/ff.jpg">
+                                    <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                                </button>
+                </figure>
                 <p>Il Character Design determina la componente estetica e psicologica dei personaggi
                     che agiscono nel gioco, dal protagonista, all’antagonista fino ad arrivare ai personaggi secondari.
                     Un buon designer deve rendere questi personaggi riconoscibili e iconici oppure no, in base a quanto
                     sono importanti nella storia, tutto ciò per far si che il giocatore instauri un rapporto con loro.
                     Anche la dinamicità di questi personaggi, ovvero il cambio della loro indole durante lo sviluppo
-                    della trama, è un concetto chiave e ricorrente. 
+                    della trama, è un concetto chiave e ricorrente.
                 </p>
             </div>
             <h2>Game Design</h2>
@@ -160,6 +172,9 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                     <img class="image1" src="../imgs/Videogiochi/zelda4.jpg" alt="link ocarina">
                     <audio src="../audio/oot.mp3" controls></audio>
                     <figcaption>Title theme - The Legend of Zelda: Ocarina Of Time </figcaption>
+                    <button type="button" class="fav-btn" data-path="../imgs/Videogiochi/zelda4.jpg">
+                        <img src="../imgs/Altro/preferiti.gif" class="fav-icon">
+                    </button>
                 </figure>
                 <p>La Colonna Sonora è lo strumento principale per veicolare l'emozione. Che sia vivace o cupa
                     è uno dei pilastri portanti del gioco, avverte il giocatore di un pericolo imminente, spesso
@@ -200,7 +215,7 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
             <div class="element1">
                 <img class="image1" src="../imgs/Videogiochi/zeldaoot.jpg" alt="zelda ocarina of time">
                 <p> Citato nella sezione delle colonne sonore, questo
-                    titolo oltre ad essere il gioco con il voto più alto della storia ha introdotto una grande novità, 
+                    titolo oltre ad essere il gioco con il voto più alto della storia ha introdotto una grande novità,
                     ossia il sistema di puntamento dei nemici, regola replicata in qualsiasi altro gioco di azione
                     creato in seguito.</p>
             </div>
@@ -215,16 +230,16 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
             <h2 style="text-align: right;">Tetris (1984)</h2>
             <div class="element2">
                 <img class="image2" src="../imgs/Videogiochi/tetris.jpg" alt="tetris">
-                <p> La prova suprema di come il puro Game Design, seppur non abbia una grafica 
+                <p> La prova suprema di come il puro Game Design, seppur non abbia una grafica
                     complessa è proprio la semplicità il suo punto di forza, ha creato un'esperienza universale e senza tempo.</p>
-                </div>
+            </div>
             <h2 style="text-align: center;">Metal Gear Solid (1998)</h2>
             <div class="element3">
                 <img class="image2" src="../imgs/Videogiochi/mgs.jpg" alt="metal gear solid">
                 <br>
                 <p> Il gioco che ha elevato la narrativa videoludica a livelli
                     cinematografici,
-                    ha introdotto il genere "Stealth" e la rottura della quarta parete, interfacciandosi direttamente 
+                    ha introdotto il genere "Stealth" e la rottura della quarta parete, interfacciandosi direttamente
                     con il giocatore più e più volte, arrivando addirittura a dover staccare il joystick pur di battere un boss
                     in particolare.</p>
             </div>
@@ -285,7 +300,7 @@ document.getElementById('get-pos-btn').addEventListener('click', function() {
                 <a href="#">Discord</a>
             </div>
         </div>
-        <p>© <?php echo date('Y')?> TERA. All rights reserved.</p>
+        <p>© <?php echo date('Y') ?> TERA. All rights reserved.</p>
     </div>
 </body>
 
