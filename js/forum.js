@@ -52,3 +52,46 @@ themeToggleButton.addEventListener('click', () => {
         disableDarkMode();
     }
 });
+
+//script per la sezione Draggable
+const items = document.querySelectorAll('.item');
+const zones = document.querySelectorAll('.drop-zone');
+
+// Gestione degli elementi trascinabili
+items.forEach(item => {
+  item.addEventListener('dragstart', (e) => {
+    // Salviamo l'ID dell'elemento che stiamo trascinando
+    e.dataTransfer.setData('text/plain', e.target.id);
+    // Effetto visivo durante il trascinamento
+    setTimeout(() => e.target.classList.add('hide'), 0);
+  });
+
+  item.addEventListener('dragend', (e) => {
+    e.target.classList.remove('hide');
+  });
+});
+
+// Gestione delle zone di rilascio
+zones.forEach(zone => {
+  // Necessario per consentire il "drop" (per default i browser lo bloccano)
+  zone.addEventListener('dragover', (e) => {
+    e.preventDefault(); 
+  });
+
+  zone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    
+    // Recuperiamo l'ID dell'elemento trascinato
+    const id = e.dataTransfer.getData('text/plain');
+    const draggable = document.getElementById(id);
+    
+    // Assicuriamoci di appendere l'elemento alla drop-zone corretta
+    if (e.target.classList.contains('drop-zone')) {
+      e.target.appendChild(draggable);
+    } else {
+      // Se l'utente rilascia sopra un altro elemento già presente, 
+      // lo agganciamo comunque al contenitore padre
+      e.target.closest('.drop-zone').appendChild(draggable);
+    }
+  });
+});

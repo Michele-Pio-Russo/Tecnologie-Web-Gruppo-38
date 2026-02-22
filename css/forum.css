@@ -327,7 +327,47 @@ hr {
     width: 100%;
 }
 
+/* Sezione Draggable */
+.container {
+  display: flex;
+  width: 40%;
+  flex-direction: column;
+  gap: 20px;
+  font-family: sans-serif;
+}
 
+.drop-zone {
+  background-color: #f4f4f4;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  min-height: 200px;
+}
+
+.drop-zone h3 {
+  margin-top: 0;
+  text-align: center;
+  color: #333;
+}
+
+.item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  cursor: grab; /* Cambia il cursore per indicare che è trascinabile */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: background-color 0.2s;
+}
+
+.item:active {
+  cursor: grabbing;
+}
+
+.hide {
+  opacity: 0.5; /* Rende semi-trasparente l'elemento originale mentre lo si trascina */
+}
 
 
 /*classe questionario, che gestisce partr del form*/
@@ -432,7 +472,7 @@ input[type="checkbox"] {
     
 }
 
-.sidebar .menu .menu-itme:nth-of-type(1) img {
+.sidebar .menu .menu-itme:nth-of-type(7) img {
     padding: 3px;
     border: 3px solid white;
     border-radius: 20px;
