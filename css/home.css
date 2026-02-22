@@ -354,8 +354,8 @@ hr {
 }
 
 .menu .menu-itme img {
-    width: 70px;
-    height: 70px;
+    width: clamp(40px, 2.5vw, 80px); 
+    height: clamp(40px, 2.5vw, 80px); 
     margin-right: 10px;
     flex-shrink: 0;
 }
