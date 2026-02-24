@@ -60,6 +60,68 @@ if (themeToggleButton) {
   });
 }
 
+
+//script per la sezione Draggable
+document.addEventListener('DOMContentLoaded', () => {
+    
+    const items = document.querySelectorAll('.item');
+    const zonaDisponibili = document.getElementById('sezioni-disponibili');
+    const zonaPreferita = document.getElementById('sezione-preferita');
+
+    //Rendiamo gli elementi trascinabili
+    items.forEach(item => {
+      item.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', e.target.id);
+        setTimeout(() => e.target.classList.add('hide'), 0);
+      });
+
+      item.addEventListener('dragend', (e) => {
+        e.target.classList.remove('hide');
+      });
+    });
+
+    //Le due zone in cui possiamo rilasciare gli elementi
+    const dropZones = [zonaDisponibili, zonaPreferita];
+
+    dropZones.forEach(zone => {
+      zone.addEventListener('dragover', (e) => {
+        e.preventDefault(); 
+      });
+
+      zone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        
+        //Recuperiamo l'elemento che stiamo trascinando
+        const draggedId = e.dataTransfer.getData('text/plain');
+        const draggedElement = document.getElementById(draggedId);
+        
+        if (!draggedElement) return;
+
+        //Troviamo la zona esatta su cui stiamo rilasciando
+        const targetZone = e.target.closest('.drop-zone');
+
+        //Sostituzione
+        if (targetZone === zonaPreferita) {
+          //Controlliamo se c'è già un elemento dentro "La tua Preferita"
+          const elementoGiaPresente = zonaPreferita.querySelector('.item');
+
+          //Se c'è già un elemento, e NON è quello che stiamo attualmente trascinando
+          if (elementoGiaPresente && elementoGiaPresente !== draggedElement) {
+            //lo rimandiamo nella lista delle sezioni disponibili
+            zonaDisponibili.appendChild(elementoGiaPresente);
+          }
+          
+          //Inseriamo il nuovo elemento nei preferiti
+          zonaPreferita.appendChild(draggedElement);
+        } 
+        else if (targetZone === zonaDisponibili) {
+          //Se stiamo riportando un elemento indietro, lo aggiungiamo semplicemente alla lista
+          zonaDisponibili.appendChild(draggedElement);
+        }
+      });
+    });
+  });
+  
 //canvas
 document.addEventListener("DOMContentLoaded", function () {
 
